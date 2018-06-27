@@ -1,0 +1,3 @@
+cable_type;price_per_meter;max_dist_meter;max_connected_heliostats
+copper;2.7;100;2
+glass fiber;4;NA;128

@@ -1,0 +1,7 @@
+lcu_type;price;lower_copper;upper_copper;lower_glass_fiber;upper_glass_fiber
+endpoint;10;1;1;0;0
+conductor;100;0;0;1;2
+8 port copper;800;0;7;1;2
+8 port glass fiber;800;0;0;1;9
+16 port copper;800;0;15;1;2
+16 port glass fiber;800;0;0;1;17

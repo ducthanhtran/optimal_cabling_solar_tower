@@ -1,0 +1,8 @@
+cable_type;price_per_meter;max_dist;max_connected_heliostats
+2.5RE;0.58;38.36;56
+4RE;0.87;47.08;73
+6RE;1.24;56.04;92
+10RE;1.95;69.3;124
+16RE;3.13;84.87;162
+25RM;5,19;102.79;209
+35RM;6.9;120.31;250
