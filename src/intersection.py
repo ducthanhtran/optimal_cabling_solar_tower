@@ -1,4 +1,9 @@
+#!/usr/bin/env python3
+# UTF-8 encoding
+from typing import List
+
 import numpy as np
+
 
 def equal_coords(M, start_l, end_l, start_r, end_r):
     return np.all(M[:, start_l:end_l] == M[:,start_r:end_r], axis=1)
@@ -22,11 +27,17 @@ def on_segment(M, px, py, qx, qy, rx, ry) -> np.ndarray:
                                   M[:,qy] >= np.minimum(M[:,py], M[:,ry])))
 
 
-def do_intersect(edge: np.ndarray, edge_set: np.ndarray):
+def is_edge_intersecting(edge: np.ndarray, edge_set: List[np.ndarray], partition_indices: List[bool] = []) -> bool:
     """
     :param edge: array of size (1,4)
     :param edge_set: array of shape (N,4)
+    :param partition_indices: boolean list that selects subset of edge_set
     """
+    if not partition_indices:
+        edge_set = np.vstack(edge_set)
+    else:
+        edge_set = np.vstack(compress(edge_set, partition_indices))
+
     # NOTE: ugly hack
     if len(edge_set) == 0:
         return False
