@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# UTF-8 encoding
 import argparse
 from pathlib import Path
 
@@ -53,5 +55,5 @@ if __name__ == '__main__':
     if not check_file_existence(args.input):
         raise argparse.ArgumentTypeError("Cannot open file {}".format(args.input))
 
-    coordinates = np.loadtxt(args.input)
+    coordinates = np.loadtxt(args.input, delimiter=';')
     coordinates = np.vstack((np.array([0,0]), coordinates))
