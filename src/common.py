@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # UTF-8 encoding
-from typing import Dict, List, NamedTuple
+from typing import List, NamedTuple
 
 import numpy as np
 
@@ -17,6 +17,9 @@ def compute_partitions(coordinates: np.ndarray, partitions: int) -> List[np.ndar
     :param partitions: number of partitions
     :return: list of arrays that contain indices of heliostats with regards to the coordinates array
     """
+    if partitions > len(coordinates) - 1: # not enough heliostats
+        return []
+
     degrees = np.degrees(np.arctan2(coordinates[1:,1], coordinates[1:,0]))
     indices = degrees.argsort()
     padding = (-len(indices))%partitions
