@@ -1,4 +1,8 @@
-from typing import Dict, NamedTuple
+#!/usr/bin/env python3
+# UTF-8 encoding
+from typing import Dict, List, NamedTuple
+
+import numpy as np
 
 
 Edge = NamedTuple('Edge', [('v', int), ('w', int)]) # edge contains two indices to coordinates-array
@@ -13,7 +17,7 @@ def compute_partitions(coordinates: np.ndarray, partitions: int) -> List[np.ndar
     :param partitions: number of partitions
     :return: list of arrays that contain indices of heliostats with regards to the coordinates array
     """
-    degrees = np.degrees(np.arctan2(coordinates[1:,1], self.coordinates.iloc[1:,0]))
+    degrees = np.degrees(np.arctan2(coordinates[1:,1], coordinates[1:,0]))
     indices = degrees.argsort()
     padding = (-len(indices))%partitions
     L = np.split(np.concatenate((indices,np.ones(padding)*-1)),partitions) # padding value: -1
