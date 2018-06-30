@@ -4,7 +4,6 @@ from typing import Dict, List, Set, NamedTuple
 
 import numpy as np
 from recordclass import RecordClass
-from scipy.ndimage.interpolation import shift
 from scipy.spatial.distance import cdist
 
 from ..common import compute_partitions, Edge
