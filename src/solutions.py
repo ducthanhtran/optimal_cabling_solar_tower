@@ -46,7 +46,7 @@ class EdgeSolution:
         return sum(distances[e.v,e.w]*self.edge_costs[e] for e in chain.from_iterable(self.edges))
 
 
-class EdgeVertexSolution(EdgeSolution):
+class DataCableSolution(EdgeSolution):
     def __init__(self, n: int, partitions: int):
         super().__init__(partitions)
         self.degrees = {i:0 for i in range(n)} # type: Dict[int,int]

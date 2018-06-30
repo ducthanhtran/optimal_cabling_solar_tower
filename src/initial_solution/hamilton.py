@@ -7,7 +7,7 @@ from recordclass import RecordClass
 from scipy.spatial.distance import cdist
 
 from ..common import compute_partitions, Edge
-from ..solutions import EdgeVertexSolution
+from ..solutions import DataCableSolution
 
 
 # TODO: document these NamedTuples
@@ -43,7 +43,7 @@ class Hamilton:
         self.cable_cost = cable_cost
         self.edge_costs = cdist(self.coordinates, self.coordinates) * cable_cost # only consider glass fiber cables!
         self.partitions = partitions
-        self.solution = EdgeVertexSolution(self.coordinates.shape[0], partitions)
+        self.solution = DataCableSolution(self.coordinates.shape[0], partitions)
         self.current_state = HamiltonState(None, None)
 
     def compute(self) -> None:
