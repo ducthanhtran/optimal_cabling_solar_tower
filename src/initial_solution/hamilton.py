@@ -20,12 +20,18 @@ HamiltonState = RecordClass('HamiltonState', [('permutation', List[int]),
                                               ('unvisited', Set[int])])
 
 
+def shift_left(L: List[int]):
+    """
+    Works faster than np.roll(L, -1)
+    """
+    return L[1:] + L[:1]
+
+
 class Hamilton:
     """
     We compute Hamiltonian paths for each partition that are initial solutions for the
     data cabling.
     """
-
     __slots__ = ('coordinates', 'cable_cost', 'edge_costs', 'partitions', 'solution', 'current_state')
 
     def __init__(self, coordinates: np.ndarray, cable_cost: float, partitions: int) -> None:
@@ -39,8 +45,7 @@ class Hamilton:
         self.edge_costs = cdist(self.coordinates, self.coordinates) * cable_cost # only consider glass fiber cables!
         self.partitions = partitions
         self.solution = EdgeVertexSolution(self.coordinates.shape[0], partitions)
-
-        self.current_state = HamiltonState(None, None) # type: HamiltonState
+        self.current_state = HamiltonState(None, None)
 
     def compute(self) -> None:
         """
@@ -60,13 +65,13 @@ class Hamilton:
         self.current_state._replace(unvisited_heliostats=set(partition_indices.astype(int).flat))
 
         while len(self.solution.edges[partition]) < partition_indices.shape[0]:
-            candidate = self._next_best_candidate()
-            if len(candidate.edges) == 2:
-                self._insert_between(candidate, partition)
+            best_candidate = min(self._compute_candidates())
+            if len(best_candidate.edges) == 2:
+                self._insert_between(best_candidate, partition)
             else:
-                self._insert_last(candidate, partition)
+                self._insert_last(best_candidate, partition)
 
-    def _compute_candidate(self, vertex: int) -> Candidate:
+    def _compute_candidates(self) -> Candidate:
         """
         Compute cost and edges for a vertex and index position of permutation. In other words
         for a vertex v we compute its minimum cost of insertion into the current permutation
@@ -75,28 +80,28 @@ class Hamilton:
         :param vertex: vertex to be added to permutation
         :param index: index of insertion/appending
         """
-        costs = self.edge_costs[ [vertex]*len(self.current_state.permutation), self.current_state.permutation]
-        new_costs = costs + shift(costs, -1)
-        new_costs = new_costs - self.edge_costs[ self.current_state.permutation, shift(self.current_state.permutation, -1)]
+        for vertex in self.current_state.unvisited_heliostats:
+            shifted_perm = shift_left(self.current_state.permutation)
+            unvisited = [vertex]*len(self.current_state.permutation)
 
-        index = np.argmin(new_costs)
-        if index < len(self.current_state.permutation)-1:
-            e1 = Edge(self.current_state.permutation[index], vertex)
-            e2 = Edge(vertex, self.current_state.permutation[index+1])
-            d = Edge(self.current_state.permutation[index], self.current_state.permutation[index+1])
+            costs_edge_two = self.edge_costs[ unvisited, shifted_perm]
+            costs_edge_two[-1] = 0
+            adding_costs = self.edge_costs[ unvisited, self.current_state.permutation] + costs_edge_two
 
-            cost = self.edge_costs[e1.v, e1.w] + self.edge_costs[e2.v, e2.w] - self.edge_costs[d.v, d.w]
-            return Candidate(cost=cost, edges=[e1,e2], vertex=vertex, index=index)
-        else:
-            e = Edge(self.current_state.permutation[index], vertex)
-            return Candidate(cost=self.edge_costs[e.v, e.w], edges=[e], vertex=vertex, index=index)
+            cost_permutation_edges = self.edge_costs[self.current_state.permutation, shifted_perm]
+            cost_permutation_edges[-1] = 0
+            index = np.argmin(adding_costs - cost_permutation_edges)
 
-    def _next_best_candidate(self) -> Candidate:
-        candidates = []
-        for h in self.current_state.unvisited_heliostats:
-            candidates.append(self._compute_candidate(h))
-        candidates.sort()
-        return candidates[0]
+            if index < len(self.current_state.permutation)-1:
+                e1 = Edge(self.current_state.permutation[index], vertex)
+                e2 = Edge(vertex, self.current_state.permutation[index+1])
+                d = Edge(self.current_state.permutation[index], self.current_state.permutation[index+1])
+
+                cost = self.edge_costs[e1.v, e1.w] + self.edge_costs[e2.v, e2.w] - self.edge_costs[d.v, d.w]
+                yield Candidate(cost=cost, edges=[e1,e2], vertex=vertex, index=index)
+            else:
+                e = Edge(self.current_state.permutation[index], vertex)
+                yield Candidate(cost=self.edge_costs[e.v, e.w], edges=[e], vertex=vertex, index=index)
 
     def _insert_edge(self, edge: Edge, partition: int) -> None:
         """
