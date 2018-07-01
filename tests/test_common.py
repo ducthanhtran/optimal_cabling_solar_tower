@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# UTF-8 encoding
 import pytest
 import numpy as np
 from src.common import compute_partitions
