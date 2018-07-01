@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # UTF-8 encoding
+from typing import Generator
+
 from .common import Edge
 from .intersection import is_edge_intersecting
 
@@ -77,3 +79,34 @@ class DataCableSolution(EdgeSolution):
             return 1500
         else:
             raise ValueError('Degree is too high. No cost found.')
+
+
+class PowerCableSolution(EdgeSolution):
+    def __init__(self, n: int, partitions: int):
+        super().__init__(partitions)
+        self.predecessor = {} # type: Dict[int,int]
+        self.successors = {i:[] for i in range(n)} # type: Dict[int,List[int]]
+        self.connected_children = {i:0 for i in range(n)} # type: Dict[int,int]
+        self.heliostat_parents = {i:[] for i in range(n)} # type: Dict[int,List[int]]
+
+    def add_edge(self, edge: Edge, edge_cost: float, partition: int, coordinates: np.ndarray):
+        super().add_edge(edge, edge_cost, partition, coordinates)
+        if not self.predecessor[edge.w]:
+            self.predecessor[edge.w] = edge.v
+        else:
+            raise ValueError('{} has already a predecessor connection to {}'.format(edge.v, self.predecessors[edge.v]))
+        self.successors[edge.v].append(edge.w)
+
+    def remove_edge(self, edge: Edge, partition: int, coordinates: np.ndarray):
+        super().remove_edge(edge, partition, coordinates)
+        del self.predecessor[edge.w]
+        self.successors[edge.v].remove(edge.w)
+
+    def cost(self, distances: np.ndarray):
+        cost = super().cost(distances)
+
+    def heliostat_parents(self, vertex: int) -> Generator[int,None,None]:
+        pred = self.predecessor[vertex]
+        while pred != 0:
+            yield pred
+            pred = self.predecessors[pred]
