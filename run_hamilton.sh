@@ -3,7 +3,7 @@
 #  2. trench cost
 #  3. partitions
 
-source /home/duc/virtualenvs/all/bin/activate
+source ~/virtualenvs/all/bin/activate
 
 python ./src/main.py --input ./data/instances/PS10.csv \
                      --edge-cost-data 54 \

@@ -61,7 +61,6 @@ if __name__ == '__main__':
     coordinates = np.loadtxt(args.input, delimiter=';')
     coordinates = np.vstack((np.array([0,0]), coordinates))
 
-    coordinates = coordinates[:100]
 
     distances = cdist(coordinates,coordinates)
 
