@@ -1,45 +1,92 @@
 \begin{frame}[t]
- \vspace*{-20.5mm}   
- \hspace*{-\beamerleftmargin}%
-    \includegraphics[trim=0pt 80pt 0pt 0pt, clip,width=\paperwidth]{./figs/solartower}
     \titlepage
+\end{frame}
+
+\begin{frame}{Motivation}
+\begin{center}
+\begin{figure}
+   \includegraphics[width=0.6\paperwidth, trim=0pt 80pt 0pt 0pt, clip]{./figs/solartower}
+   \caption{Solar tower power plant. Heliostats reflect onto a receiver in order to heat up a medium for energy conversion.}
+\end{figure}
+\end{center}
+Sun's position changes continuously, thus for effective energy conversion we need to rotate the heliostats. \\
+\hspace{1cm}$\Rightarrow$ each heliostat requires a data and power cable
 \end{frame}
 
 \begin{frame}\frametitle{Problem}
 \begin{itemize}
   \item Consider a complete and undirected graph $G=(V,E)$ with $V:=\{T\} \cup V_H$, where $T$ is the designated solar tower and $V_H$ is the set of heliostats.
-  \item Goal: Find a subgraphs $H_{\text{data}},H_{\text{power}}\subseteq G$ with minimal total costs that connects all heliostats with the solar tower.
   
-  \visible<2->{\vspace*{1cm}\item Constraints:
+  \visible<2->{\vspace*{0.3cm}
+  \item Goal: Find subgraphs $H_{\text{data}},H_{\text{power}}\subseteq G$ with minimal total costs that both connect all heliostats with the solar tower.
+    \begin{itemize}
+      \item data cable: cable and switch costs
+      \item power cable: cable costs
+    \end{itemize}
+  }
+  
+  \visible<3->{\vspace*{0.2cm}\item Constraints:
   \begin{itemize}
     \item no intersecting edges
-    \item Data cable:
-    \begin{itemize}
-      \item 
-    \end{itemize}
-    \item Power cable:
+    \item cables have capacity and length constraints
+    \item switches limit connectivity at heliostats for data cables
   \end{itemize}
   }
 \end{itemize}
 \end{frame}
 
-\begin{frame}[t]{Motivation}
+\begin{frame}\frametitle{Problem: Data cable}
+\begin{table}
+  \caption{Data cables with their limitations and costs.}
+  \begin{tabular}{l|cc|c}
+    Cable & Max. capacity & Max. length [m] & Price [\euro/m] \\
+    \toprule
+    Copper & 2 & 100 & 0.7 \\
+    Fiberglass & - & - & 2
+  \end{tabular}
+\end{table}
+\begin{itemize}
+  \item additionally: protective foil (+2\euro/m)
+\end{itemize}
+\visible<2->{
+  \begin{table}
+    \caption{Switch prices, for 8-/16-port switches we can either use copper or fiber-glass output. Endpoints are only used for copper cables.}
+    \begin{tabular}{l|cc}
+      Switch & Max. degree & Price [\euro/p. piece] \\
+      \toprule
+      Endpoint & 1 & 10 \\
+      Conductor & 2 & 100 \\
+      8-port copper/fiberglass switch & 9 & 800 \\
+      16-port copper/fiberglass switch & 17 & 1500
+    \end{tabular}
+  \end{table}
+}
+\end{frame}
 
-\uncover<1-1>{\textbf{What factors need to be considered for the HWP?} }\\
+\begin{frame}\frametitle{Problem: Power cable}
+\begin{table}
+  \caption{Power cables with their limitations and prices.}
+  \begin{tabular}{l|cc|c}
+    Cable & Max. capacity & Max. length [m] & Price [\euro/m] \\
+    \toprule
+    NYY-J 3x2.5 RE & 56 & 38.36 & 0.58 \\
+    NYY-J 3x4 RE & 73 & 47.08 & 0.87 \\
+    NYY-J 3x6 RE & 92 & 56.04 & 1.24 \\
+    NYY-J 3x10 RE & 124 & 69.3 & 1.95 \\
+    NYY-J 3x16 RE & 162 & 84.87 & 3.13 \\
+    \midrule
+    NYY-J 3x25 RM & 209 & 102.79 & 5.19 \\
+    NYY-J 3x35 RM & 250 & 120.31 & 6.90
+  \end{tabular}
+\end{table}
+\end{frame}
 
-\uncover<2-> {\textbf{Local Control Units} \\
-Multi-port or Conductor? } \vspace{0.5cm}
-
-\uncover<3->{\textbf{Location}\\
-Australia vs South Africa } \vspace{0.5cm}
-
-\uncover<4->{\textbf{Partitioning} \\
-Partition structure? How many partitions? } \vspace{0.5cm}
-
-\uncover<5->{\textbf{Planarity}\\
-How does the planarity constraint influence the algorithm?}
-
-
+\begin{frame}[t]{Challenges}
+\begin{itemize}
+  \item How are heliostats partitioned?
+  \item Data cable: use expensive switches that allow branching or consider paths
+  \item How does the location affect solutions?
+\end{itemize}
 \end{frame}
 
 \begin{frame}[t]{Initial solutions}

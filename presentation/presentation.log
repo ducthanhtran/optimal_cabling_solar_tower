@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.6.28)  7 JUL 2018 11:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.6.28)  7 JUL 2018 15:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -411,7 +411,6 @@ File: pd1enc.def 2018/02/06 v6.86b Hyperref: PDFDocEncoding definition (HO)
 (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/hyperref.cfg
 File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
 )
-Package hyperref Info: Option `draft' set `true' on input line 4383.
 Package hyperref Info: Option `bookmarks' set `true' on input line 4383.
 Package hyperref Info: Option `bookmarksopen' set `true' on input line 4383.
 Package hyperref Info: Option `implicit' set `false' on input line 4383.
@@ -1213,31 +1212,30 @@ Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\new@ifnextchar' on input line 63.
+(hyperref)                removing `\new@ifnextchar' on input line 64.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\new@ifnextchar' on input line 66.
+(hyperref)                removing `\new@ifnextchar' on input line 67.
 
 (./presentation.aux (./Intro.aux) (./definitions.aux) (./partitions.aux)
-(./hamilton.aux) (./mst.aux) (./lazy.aux) (./Cost_comp.aux) (./Conclusion.aux)
-(./algorithms.aux))
+(./hamilton.aux) (./Conclusion.aux) (./algorithms.aux))
 \openout1 = `presentation.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 66.
-LaTeX Font Info:    ... okay on input line 66.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 66.
-LaTeX Font Info:    ... okay on input line 66.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 66.
-LaTeX Font Info:    ... okay on input line 66.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 66.
-LaTeX Font Info:    ... okay on input line 66.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 66.
-LaTeX Font Info:    ... okay on input line 66.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 66.
-LaTeX Font Info:    ... okay on input line 66.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 66.
-LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1305,11 +1303,8 @@ e
 ))
 ABD: EveryShipout initializing macros
 \AtBeginShipoutBox=\box70
+Package hyperref Info: Link coloring OFF on input line 67.
 
-
-Package hyperref Warning: Draft mode on.
-
-Package hyperref Info: Link coloring OFF on input line 66.
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 
@@ -1318,51 +1313,56 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count298
 )
-LaTeX Info: Redefining \ref on input line 66.
-LaTeX Info: Redefining \pageref on input line 66.
-LaTeX Info: Redefining \nameref on input line 66.
+LaTeX Info: Redefining \ref on input line 67.
+LaTeX Info: Redefining \pageref on input line 67.
+LaTeX Info: Redefining \nameref on input line 67.
+
+(./presentation.out) (./presentation.out)
+\@outlinefile=\write5
+\openout5 = `presentation.out'.
+
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 66.
+(Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 67.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> OT1/cmss/bx/n on input line 66.
+(Font)                  OT1/cmr/bx/n --> OT1/cmss/bx/n on input line 67.
 \symnumbers=\mathgroup6
 \sympureletters=\mathgroup7
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  OT1/cmss/m/n --> OT1/cmr/m/n on input line 66.
-LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 66.
+(Font)                  OT1/cmss/m/n --> OT1/cmr/m/n on input line 67.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 67.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/cmr/bx/n --> OT1/cmss/bx/n on input line 66.
+(Font)                  OT1/cmr/bx/n --> OT1/cmss/bx/n on input line 67.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/cmr/bx/n --> OT1/cmss/bx/n on input line 66.
-LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 66.
+(Font)                  OT1/cmr/bx/n --> OT1/cmss/bx/n on input line 67.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 67.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> OT1/cmss/m/n on input line 66.
+(Font)                  OT1/cmss/m/n --> OT1/cmss/m/n on input line 67.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> OT1/cmss/m/n on input line 66.
-LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 66.
+(Font)                  OT1/cmss/bx/n --> OT1/cmss/m/n on input line 67.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 67.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> OT1/cmss/m/it on input line 66.
+(Font)                  OT1/cmr/m/it --> OT1/cmss/m/it on input line 67.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> OT1/cmss/m/it on input line 66.
-LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 66.
+(Font)                  OT1/cmr/bx/it --> OT1/cmss/m/it on input line 67.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 67.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 66.
+(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 67.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 66.
+(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 67.
 LaTeX Font Info:    Overwriting symbol font `numbers' in version `bold'
-(Font)                  OT1/cmss/m/n --> OT1/cmss/bx/n on input line 66.
+(Font)                  OT1/cmss/m/n --> OT1/cmss/bx/n on input line 67.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  OT1/cmss/m/it --> OT1/cmss/bx/it on input line 66.
+(Font)                  OT1/cmss/m/it --> OT1/cmss/bx/it on input line 67.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
-(Font)                  OT1/cmss/bx/n --> OT1/cmr/bx/n on input line 66.
+(Font)                  OT1/cmss/bx/n --> OT1/cmr/bx/n on input line 67.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> OT1/cmss/bx/n on input line 66.
+(Font)                  OT1/cmss/bx/n --> OT1/cmss/bx/n on input line 67.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/m/n --> OT1/cmss/bx/n on input line 66.
+(Font)                  OT1/cmss/m/n --> OT1/cmss/bx/n on input line 67.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmss/m/it --> OT1/cmss/bx/it on input line 66.
+(Font)                  OT1/cmss/m/it --> OT1/cmss/bx/it on input line 67.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> OT1/cmtt/bx/n on input line 66.
+(Font)                  OT1/cmtt/m/n --> OT1/cmtt/bx/n on input line 67.
 
 (/usr/share/texlive/texmf-dist/tex/latex/translator/translator-basic-dictionary
 -English.dict
@@ -1392,51 +1392,64 @@ Dictionary: translator-theorem-dictionary, Language: English
 Package pgfplots Warning: running in backwards compatibility mode (unsuitable t
 ick labels; missing features). Consider writing \pgfplotsset{compat=1.15} into 
 your preamble.
- on input line 66.
+ on input line 67.
 
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 (./presentation.nav)
 \openout2 = `Intro.aux'.
 
- (./Intro.tex
-<./figs/solartower.jpg, id=10, 564.60938pt x 376.40625pt>
-
-Overfull \hbox (28.45274pt too wide) in paragraph at lines 6--6
-[]| [] 
- []
-
-[1
+ (./Intro.tex [1
 
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Try loading font information for U+msa on input line 24.
-
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+<./figs/solartower.jpg, id=44, 564.60938pt x 376.40625pt>
+File: ./figs/solartower.jpg Graphic file (type jpg)
+<use ./figs/solartower.jpg>
+Package pdftex.def Info: ./figs/solartower.jpg  used on input line 14.
+(pdftex.def)             Requested size: 218.51942pt x 114.71602pt.
+LaTeX Font Info:    Try loading font information for U+msa on input line 14.
+ (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 24.
+LaTeX Font Info:    Try loading font information for U+msb on input line 14.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [2
 
-] [3
+ <./figs/solartower.jpg>] [3
 
 ] [4
 
 ] [5
 
 ]
+Overfull \hbox (17.05756pt too wide) in paragraph at lines 64--64
+ [] 
+ []
+
 [6
 
-] [7
+]
+Overfull \hbox (17.05756pt too wide) in paragraph at lines 64--64
+ [] 
+ []
 
-] [8
+[7
+
+]
+Overfull \hbox (13.04785pt too wide) in paragraph at lines 82--82
+ [] 
+ []
+
+[8
+
+] [9
 
 ]
 Missing character: There is no ] in font nullfont!
- [9
+ [10
 
 ])
 \openout2 = `definitions.aux'.
@@ -1446,26 +1459,26 @@ Overfull \hbox (5.3295pt too wide) in paragraph at lines 20--20
 [][]  
  []
 
-[10
+[11
 
 
 
 ])
 \openout2 = `partitions.aux'.
 
- (./partitions.tex [11
+ (./partitions.tex [12
 
 
 
 ] (./tikz/angle.tex
 Missing character: There is no ; in font nullfont!
- [12
+ [13
 
 ]
 Missing character: There is no ; in font nullfont!
- [13
+ [14
 
-] [14
+] [15
 
 ]))
 \openout2 = `hamilton.aux'.
@@ -1473,214 +1486,90 @@ Missing character: There is no ; in font nullfont!
  (./hamilton.tex (./tikz/hamilton_initial.tex
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
- [15
+ [16
 
 
 
 ]) (./tikz/hamilton_local.tex
 Missing character: There is no ; in font nullfont!
- [16
-
-]
-Missing character: There is no ; in font nullfont!
  [17
 
 ]
 Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-
-[18
-
-])
-<./figs/init_output_hamilton_14_5_-1__SELECTION.png, id=83, 100.6962pt x 62.874
-9pt>
-<./figs/output_hamilton_14_5_-1__SELECTION.png, id=85, 100.6962pt x 62.8749pt>
- [19
+ [18
 
 ]
-<./figs/init_output_hamilton_14_5_-1.png, id=90, 810.6285pt x 836.1639pt>
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+
+[19
+
+])
+<./figs/init_output_hamilton_14_5_-1__SELECTION.png, id=514, 100.6962pt x 62.87
+49pt>
+File: ./figs/init_output_hamilton_14_5_-1__SELECTION.png Graphic file (type png
+)
+<use ./figs/init_output_hamilton_14_5_-1__SELECTION.png>
+Package pdftex.def Info: ./figs/init_output_hamilton_14_5_-1__SELECTION.png  us
+ed on input line 35.
+(pdftex.def)             Requested size: 103.70961pt x 64.75609pt.
+<./figs/output_hamilton_14_5_-1__SELECTION.png, id=516, 100.6962pt x 62.8749pt>
+
+File: ./figs/output_hamilton_14_5_-1__SELECTION.png Graphic file (type png)
+<use ./figs/output_hamilton_14_5_-1__SELECTION.png>
+Package pdftex.def Info: ./figs/output_hamilton_14_5_-1__SELECTION.png  used on
+ input line 35.
+(pdftex.def)             Requested size: 103.70961pt x 64.75609pt.
+ [20
+
+ <./figs/init_output_hamilton_14_5_-1__SELECTION.png> <./figs/output_hamilton_1
+4_5_-1__SELECTION.png>]
+<./figs/init_output_hamilton_14_5_-1.png, id=544, 810.6285pt x 836.1639pt>
+File: ./figs/init_output_hamilton_14_5_-1.png Graphic file (type png)
+<use ./figs/init_output_hamilton_14_5_-1.png>
+Package pdftex.def Info: ./figs/init_output_hamilton_14_5_-1.png  used on input
+ line 42.
+(pdftex.def)             Requested size: 230.46739pt x 237.72227pt.
 
 Overfull \vbox (7.57565pt too high) detected at line 42
  []
 
-[20
+[21
 
-]
-<./figs/output_hamilton_14_5_-1.png, id=95, 810.6285pt x 836.1639pt>
+ <./figs/init_output_hamilton_14_5_-1.png>]
+<./figs/output_hamilton_14_5_-1.png, id=572, 810.6285pt x 836.1639pt>
+File: ./figs/output_hamilton_14_5_-1.png Graphic file (type png)
+<use ./figs/output_hamilton_14_5_-1.png>
+Package pdftex.def Info: ./figs/output_hamilton_14_5_-1.png  used on input line
+ 50.
+(pdftex.def)             Requested size: 230.46739pt x 237.72227pt.
 
 Overfull \vbox (19.57565pt too high) detected at line 50
  []
 
-[21
+[22
 
-])
-\openout2 = `mst.aux'.
-
- (./mst.tex [22
-
-
-
-] (./tikz/mst_initial.tex
-Missing character: There is no ; in font nullfont!
- [23
-
-]) (./tikz/mst_local.tex
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-
-[24
-
-])
-<./figs/init_output_mst_14_6.png, id=108, 810.6285pt x 836.1639pt>
-
-Overfull \vbox (7.57565pt too high) detected at line 33
- []
-
-[25
-
-]
-<./figs/init_output_mst_14_6__SELECTION.png, id=113, 66.0066pt x 44.3256pt>
-<./figs/output_mst_14_6_SELECTION.png, id=114, 67.9338pt x 41.1939pt>
- [26
-
-]
-<./figs/output_mst_14_6.png, id=118, 810.6285pt x 836.1639pt>
-
-Overfull \vbox (7.57565pt too high) detected at line 54
- []
-
-[27
-
-])
-\openout2 = `lazy.aux'.
-
- (./lazy.tex [28
-
-
-
-] (./tikz/lazy.tex
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
- [29
-
-])
-<./figs/init_output_lazy-branching_14_6.png, id=128, 810.6285pt x 836.1639pt>
-
-Overfull \vbox (7.57565pt too high) detected at line 21
- []
-
-[30
-
-]
-<./figs/output_lazy-branching_14_6.png, id=132, 810.6285pt x 836.1639pt>
-
-Overfull \vbox (19.57565pt too high) detected at line 29
- []
-
-[31
-
-])
-\openout2 = `Cost_comp.aux'.
-
- (./Cost_comp.tex [32
-
-
-
-]
-Overfull \hbox (2.5748pt too wide) in paragraph at lines 39--39
- [] 
- []
-
-[33
-
-]
-Overfull \hbox (2.5748pt too wide) in paragraph at lines 39--39
- [] 
- []
-
-[34
-
-]
-Overfull \hbox (2.5748pt too wide) in paragraph at lines 73--73
- [] 
- []
-
-[35
-
-]
-Overfull \hbox (2.5748pt too wide) in paragraph at lines 73--73
- [] 
- []
-
-[36
-
-]
-Overfull \hbox (2.5748pt too wide) in paragraph at lines 107--107
- [] 
- []
-
-[37
-
-]
-Overfull \hbox (2.5748pt too wide) in paragraph at lines 107--107
- [] 
- []
-
-[38
-
-]
-Underfull \hbox (badness 10000) in paragraph at lines 128--128
-[]|\OT1/cmss/m/n/9 Hamiltonian
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 128--128
-[]|\OT1/cmss/m/n/9 Lazy-
- []
-
-
-Overfull \hbox (13.39407pt too wide) in paragraph at lines 128--128
- [] 
- []
-
-[39
-
-]
-Underfull \hbox (badness 10000) in paragraph at lines 149--149
-[]|\OT1/cmss/m/n/9 Hamiltonian
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 149--149
-[]|\OT1/cmss/m/n/9 Lazy-
- []
-
-
-Overfull \hbox (14.78879pt too wide) in paragraph at lines 149--149
- [] 
- []
-
-[40
-
-] [41
-
-])
+ <./figs/output_hamilton_14_5_-1.png>])
 \openout2 = `Conclusion.aux'.
 
- (./Conclusion.tex [42
+ (./Conclusion.tex [23
 
 
 
-] [43
+] [24
 
 ]
-<./figs/recipes.png, id=178, 563.706pt x 303.534pt>
- [44
+<./figs/recipes.png, id=650, 563.706pt x 303.534pt>
+File: ./figs/recipes.png Graphic file (type png)
+<use ./figs/recipes.png>
+Package pdftex.def Info: ./figs/recipes.png  used on input line 17.
+(pdftex.def)             Requested size: 281.85231pt x 141.76665pt.
+ [25
 
-])
+ <./figs/recipes.png (PNG copy)>])
 \openout2 = `algorithms.aux'.
 
- (./algorithms.tex [45
+ (./algorithms.tex [26
 
 
 
@@ -1689,13 +1578,13 @@ Overfull \hbox (14.78879pt too wide) in paragraph at lines 149--149
 LaTeX Font Warning: Font shape `OT1/cmss/m/sc' in size <10> not available
 (Font)              Font shape `OT1/cmr/m/sc' tried instead on input line 27.
 
-[46
+[27
 
 ]
 Overfull \vbox (9.56013pt too high) detected at line 56
  []
 
-[47
+[28
 
 ]
 Underfull \hbox (badness 2717) in paragraph at lines 81--81
@@ -1707,7 +1596,7 @@ ad-di-tional intersecting-
 LaTeX Font Warning: Font shape `OT1/cmss/m/sc' in size <10.95> not available
 (Font)              Font shape `OT1/cmr/m/sc' tried instead on input line 81.
 
-[48
+[29
 
 ]
 
@@ -1718,40 +1607,41 @@ LaTeX Font Warning: Font shape `OT1/cmss/m/sc' in size <9> not available
 Overfull \vbox (2.13092pt too high) detected at line 110
  []
 
-[49
+[30
 
 ]
 Overfull \vbox (13.51009pt too high) detected at line 141
  []
 
-[50
+[31
 
 ])
-\tf@nav=\write5
-\openout5 = `presentation.nav'.
+\tf@nav=\write6
+\openout6 = `presentation.nav'.
 
-\tf@toc=\write6
-\openout6 = `presentation.toc'.
+\tf@toc=\write7
+\openout7 = `presentation.toc'.
 
-\tf@snm=\write7
-\openout7 = `presentation.snm'.
+\tf@snm=\write8
+\openout8 = `presentation.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 78.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 78.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 79.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 79.
  (./presentation.aux (./Intro.aux) (./definitions.aux) (./partitions.aux)
-(./hamilton.aux) (./mst.aux) (./lazy.aux) (./Cost_comp.aux) (./Conclusion.aux)
-(./algorithms.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 78.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 78.
+(./hamilton.aux) (./Conclusion.aux) (./algorithms.aux))
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 79.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 79.
+Package rerunfilecheck Info: File `presentation.out' has not changed.
+(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 36833 strings out of 494798
- 866287 string characters out of 6176800
- 1110197 words of memory out of 5000000
- 39295 multiletter control sequences out of 15000+600000
- 20646 words of font info for 78 fonts, out of 8000000 for 9000
+ 36241 strings out of 494798
+ 850120 string characters out of 6176800
+ 1069085 words of memory out of 5000000
+ 38670 multiletter control sequences out of 15000+600000
+ 20361 words of font info for 76 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
- 69i,18n,98p,779b,2446s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 69i,14n,98p,779b,1177s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></u
 sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/sha
 re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texl
@@ -1768,13 +1658,12 @@ pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></u
 sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texli
 ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/eurosym/feymr10.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/symbols/msam10.pfb>
-Output written on presentation.pdf (50 pages, 258981 bytes).
+f-dist/fonts/type1/public/eurosym/feymr10.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/symbols/msam10.pfb>
+Output written on presentation.pdf (31 pages, 2282541 bytes).
 PDF statistics:
- 273 PDF objects out of 1000 (max. 8388607)
- 177 compressed objects within 2 object streams
- 0 named destinations out of 1000 (max. 500000)
- 117 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 915 PDF objects out of 1000 (max. 8388607)
+ 835 compressed objects within 9 object streams
+ 64 named destinations out of 1000 (max. 500000)
+ 91 words of extra memory for PDF output out of 10000 (max. 10000000)
 
