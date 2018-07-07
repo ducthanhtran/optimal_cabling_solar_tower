@@ -3,7 +3,7 @@
 from typing import Dict, List, Set, NamedTuple
 
 import numpy as np
-from recordclass import RecordClass
+from recordclass import recordclass
 from scipy.spatial.distance import cdist
 
 from common import compute_partitions, Edge
@@ -11,11 +11,11 @@ from solutions import DataCableSolution
 
 
 # TODO: document these NamedTuples
-Candidate = RecordClass('Candidate', [('cost', float),
+Candidate = recordclass('Candidate', [('cost', float),
                                       ('edges', List[Edge]),
                                       ('vertex', int),
                                       ('index', int)])
-HamiltonState = RecordClass('HamiltonState', [('permutation', List[int]),
+HamiltonState = recordclass('HamiltonState', [('permutation', List[int]),
                                               ('unvisited', Set[int])])
 
 
