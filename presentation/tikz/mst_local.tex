@@ -1,0 +1,21 @@
+\begin{frame}
+\frametitle{Local Search: Cycle Neighborhood}
+\begin{figure}
+\begin{adjustbox}{max width=0.9\paperwidth,center}
+	\begin{tikzpicture}[node distance=1cm]
+	\tikzstyle{vertex}=[draw,shape=circle, minimum size=1cm];
+	\tikzstyle{partition}=[draw, minimum width=4cm, minimum height=1.5cm, shape=rectangle];
+	\node[vertex] (T){T};
+	\node[partition] (P1) [above=of T] {$P_1$};
+	\node[partition] (P2) [above=of P1] {$P_2$};
+	
+	\draw[line width=0.55mm,black] (T) -- (P1);
+	\draw[line width=0.55mm,black, transform canvas={xshift=-1cm}] (P1) -- node[strike out,draw, red]{} node[right] {\small e} (P2);
+	\draw[line width=0.55mm,blue, transform canvas={xshift=1cm}] (P1) -- node[right] {\small f} (P2);
+	\end{tikzpicture}
+\end{adjustbox}
+\caption{Consider the cycle neighborhood, that is, delete edge $e$ and reconnect the resulting partitions $P_1$ and $P_2$ by adding an edge $f$ with $c(f) < c(e)$.}
+\end{figure}
+\end{frame}
+
+

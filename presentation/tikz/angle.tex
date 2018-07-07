@@ -1,0 +1,88 @@
+\begin{frame}
+\frametitle{Partitioning}
+\begin{figure}
+\begin{adjustbox}{max width=0.9\paperwidth,center}
+	\begin{tikzpicture}
+	\tikzstyle{vertex}=[draw,shape=circle, fill, inner sep=0pt, minimum size=0.2cm];
+	\node[vertex,label=below:T, purple] (tower){};
+	\node[node distance=2cm] (x) [right= of tower]{};
+	\node[node distance=2cm] (y) [left= of tower]{};
+	\node[vertex,label= above left:$h$] (a) [above right=1cm and 2cm of tower]{};
+	\node[vertex] (b) [above right=2cm and 0.5cm of a]{};
+	\node[vertex] (c) [below left=0.5cm and 2cm of b]{};
+	\node[vertex] (d) [below left=1cm and 1.5cm of c]{};
+	\node[vertex] (e) [above left=2cm and 0.2cm of d]{};
+	
+	\draw pic[draw, fill=green!30, angle radius=2cm, "$\alpha$"] {angle=x--tower--a};
+	\draw[shorten >= -3cm, line width=0.55mm, black] (tower.center) -- (x);
+	\draw[shorten >= -3cm, line width=0.55mm, black] (tower.center) -- (y);
+	\draw[shorten >= -2cm, line width=0.33mm, black] (tower.center) -- (a.center);
+	
+	\node[vertex, purple] (fill) {};
+	\end{tikzpicture}
+\end{adjustbox}
+\caption{Compute angle between x-axis and $line(T,h)$, $h\in V_H$.}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Partitioning}
+\begin{figure}
+\begin{adjustbox}{max width=0.9\paperwidth,center}
+	\begin{tikzpicture}
+	\tikzstyle{vertex}=[draw,shape=circle, fill, inner sep=0pt, minimum size=0.2cm];
+	\node[vertex, label=below:T, purple] (tower){};
+	\node[node distance=2cm] (x) [right= of tower]{};
+	\node[node distance=2cm] (y) [left= of tower]{};
+	\node[vertex] (a) [above right=1cm and 2cm of tower]{};
+	\node[vertex] (b) [above right=2cm and 0.5cm of a]{};
+	\node[vertex] (c) [below left=0.5cm and 2cm of b]{};
+	\node[vertex] (d) [below left=1cm and 1.5cm of c]{};
+	\node[vertex] (e) [above left=2cm and 0.2cm of d]{};
+	
+	\draw pic[ fill=blue!30, angle radius=1.75cm] {angle=x--tower--c};
+	\draw[shorten >= -2cm, line width=0.33mm, black] (tower.center) -- (c.center);
+	
+	\draw pic[ fill=green!30, angle radius=1.5cm] {angle=x--tower--b};
+	\draw[shorten >= -2cm, line width=0.33mm, black] (tower.center) -- (b.center);
+	
+	\draw pic[ fill=red!30, angle radius=1.25cm] {angle=x--tower--a};
+	\draw[shorten >= -2cm, line width=0.33mm, black] (tower.center) -- (a.center);
+	
+	\draw[shorten >= -3cm, line width=0.55mm, black] (tower.center) -- (x);
+	\draw[shorten >= -3cm, line width=0.55mm, black] (tower.center) -- (y);
+	
+	\node[vertex, purple] (fill) {};
+	\end{tikzpicture}
+\end{adjustbox}
+\caption{Sort heliostats by computed angles.}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+  \begin{center}
+    \LARGE Heuristic: Hamiltonian Path
+  \end{center}
+\end{frame}
+
+%\begin{frame}
+%\frametitle{Angle Calculation}
+%\begin{adjustbox}{max width=0.9\paperwidth,center}
+%	\begin{tikzpicture}
+%	\tikzstyle{vertex}=[draw,shape=circle, fill, inner sep=0pt, minimum size=0.2cm];
+%	\node[vertex, label=below:T, purple] (tower){};
+%	\node[node distance=2cm] (x) [right= of tower]{};
+%	\node[node distance=2cm] (y) [left= of tower]{};
+%	\node[vertex, label=below left:$1$] (a) [above right=1cm and 2cm of tower]{};
+%	\node[vertex, label=below left:$2$] (b) [above right=2cm and 0.5cm of a]{};
+%	\node[vertex, label=below left:$3$] (c) [below left=0.5cm and 2cm of b]{};
+%	\node[vertex, label=below left:$5$] (d) [below left=1cm and 1.5cm of c]{};
+%	\node[vertex, label=below left:$4$] (e) [above left=2cm and 0.2cm of d]{};
+%	
+%	\draw[shorten >= -3cm, line width=0.55mm, black] (tower.center) -- (x);
+%	\draw[shorten >= -3cm, line width=0.55mm, black] (tower.center) -- (y);
+%	
+%	\node[vertex, purple] (fill) {};
+%	\end{tikzpicture}
+%\end{adjustbox}
+%\end{frame}

@@ -1,0 +1,20 @@
+\begin{frame}{Our approach}
+  \begin{tikzpicture}
+  \node[draw] (A) {Partitioning};
+  \node (ghost) [below=1.5cm of A] {};
+  \node[draw, align=left, minimum width=3.3cm, minimum height=1.2cm] (B) [right= of A]{MST\\ Lazy-Branching};
+  \node[draw, align=left, minimum width=3.5cm, minimum height=1.2cm] (C) [right= of B]{Cycle Neighborhood};
+  \node[draw, align=left, minimum width=3.3cm, minimum height=1.2cm] (D) [right=1.95cm of ghost] {Hamiltonian Path};
+  \node[draw, align=left, minimum width=3.5cm, minimum height=1.2cm] (E) [right=of D] {Triangulation};
+  \node [above=0.5cm of B] {\Large \underline{Initial Solution}};
+  \node [above=0.5cm of C] {\Large \underline{Local Search}};
+  
+  \draw[-{Latex[length=5mm, width=2mm]}] (A) -- (B);
+  \draw[-{Latex[length=5mm, width=2mm]}] (B) -- (C);
+  \draw[-{Latex[length=5mm, width=2mm]}] (A) -- (ghost.center) --(D);
+  \draw[-{Latex[length=5mm, width=2mm]}] (B) -- (C);
+  \draw[-{Latex[length=5mm, width=2mm]}] (D) -- (E);
+  
+  \draw[dashed, line width=0.3mm] (B.west) -- (B.east);
+  \end{tikzpicture}
+\end{frame}

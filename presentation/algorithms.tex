@@ -1,0 +1,141 @@
+\begin{frame}
+  \begin{center}
+      \LARGE Appendix: Algorithms
+  \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% Hamilton
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Initial Solution: Hamiltonian Path}
+  \centering
+  \begin{algorithm}[H]
+    \small
+    \caption{Nearest-insertion heuristic for Hamiltonian path construction.}
+    \begin{algorithmic}[1]
+      \Function{Nearest-Insertion-Hamiltonian}{$G=(V,E),c$}
+      \State $Seq := [T]$\Comment{Ordered sequence of vertices}
+      \While{$|Seq|<|V|$}
+      \State $(v,index) := $ \Call{best-candidate}{$Seq,V,c$}
+      \State $Seq[index] := v$
+      \EndWhile
+      \State construct corresponding edges from $Seq$, yielding $E'$
+      \State \Return (V,E')
+      \EndFunction
+    \end{algorithmic}
+  \end{algorithm}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% Local Search: Triangulation (for Hamilton)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Local Search: Triangulation for Hamiltonian Path}
+\begin{algorithm}[H]
+  \small
+  \caption{Local Search: Triangulation}
+  \begin{algorithmic}[1]
+    \Function{Local-Search-Triangulation}{$G=(V,E),c$}
+    \While{not stable}\Comment{No edge can be improved}
+    \For{$vw\in E$}
+    \State \Call{Improve-Edge}{$vw,G,c$}
+    \EndFor
+    \EndWhile
+    \State \Return $G=(V,E)$
+    \EndFunction
+    \State
+    \Function{Improve-Edge}{$vw,G,c$}
+    \State $(xy, xz):= $ \Call{Get-Best-Triangulation}{$vw,G$}
+    \State{\hspace*{0.2cm}\textit{($xz$ may be NULL)}}
+    \If{\Call{Has-Negative-Costs}{$vw,x,G,c$}}
+    \State $E := E\setminus\{vw, xy, xz\}$
+    \State $E := E\cup \{vx, wx\} \cup \{yz\}$\Comment{last edge set can be empty}
+    \EndIf
+    \State \Return
+    \EndFunction
+  \end{algorithmic}
+\end{algorithm}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% MST
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Initial Solution: Minimum Spanning Tree}
+  \centering
+  \footnotesize
+  \begin{algorithm}[H]
+    \caption{Prim's Algorithm with additional intersecting-constraint.}
+    \begin{algorithmic}[1]
+      \Function{MST-Prim}{$G=(V,E),\,c$}
+      \State $E':=\emptyset$
+      \While{$|E'|<|V|$}\label{while-loop}
+      \State $F:=$ \Call{sorted-cut-edges}{$E',c$}\Comment{Consider edges $Tw\in E$ if $E'=\emptyset$}
+      \For{$e\in F$}
+      \If{\Call{not-intersecting}{$e,E'$}}
+      \State $E' := E' \cup e$
+      \State \Goto{while-loop}
+      \EndIf
+      \EndFor
+      \EndWhile
+      \State \Return (V,E')
+      \EndFunction
+    \end{algorithmic}
+  \end{algorithm}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% Lazy Branching
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Initial Solution: Lazy-branching}
+\begin{algorithm}[H]
+  \footnotesize
+  \caption{\footnotesize Hybrid algorithm that computes a spanning tree by extending paths greedily as possible. Otherwise we branch off and install switches.}
+  \begin{algorithmic}[1]
+    \Function{Lazy-Branching}{$G=(V,E),\,c$}
+    \State $last := T$, mark $T$ as visited \Comment{Start from solar tower}
+    \State $E' := \emptyset$
+    \While{$|E'|<|V|$}
+      \State select unvisited vertex $w\in V$ such that $c_e$ is minimized for $e:=\{last,w\}\in E$
+      \If{\Call{not-intersecting}{$e,E'$}}
+        \Comment{\textcolor{red}{Path}}
+        \State $E' := E' \cup e$
+        \State $last := w$, mark $w$ as visited
+      \Else
+        \Comment{\textcolor{red}{Branching}}
+        \State select visited vertex $v\in V$ such that $c_f$ is minimized for $f:=\{v,w\}\in E$
+        \State $E' := E' \cup f$
+        \State $last := w$, mark $w$ as visited
+      \EndIf
+    \EndWhile
+    \State \Return (V,E')
+    \EndFunction
+  \end{algorithmic}
+\end{algorithm}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% Local Search for spanning trees
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Local Search: Cycle Neighborhood}
+  \begin{algorithm}[H]
+    \footnotesize
+    \caption{Local search: Cycle Neighborhood for Spanning Trees}
+    \begin{algorithmic}[1]
+      \Function{Local-Search-Cycle-Neighborhood}{$G=(V,E),c$}
+      \While{not stable}\Comment{No edge can be improved}
+      \For{$e\in E$}
+      \State \Call{Improve-Edge}{$e,G,c$}
+      \EndFor
+      \EndWhile
+      \State \Return $G=(V,E)$
+      \EndFunction
+      \State
+      \Function{Improve-Edge}{$e,G,c$}
+      \State $E := E\setminus\{e\}\Rightarrow$ obtain disjoint partitions $V_1,V_2\subseteq V$
+      \For{$e\in$ \Call{sorted-cut-edges}{$V_1,V_2, c$}}
+      \If{\Call{not-intersecting}{$e,E$}}
+      \State $E:=E\cup\{e\}$
+      \State \Return
+      \EndIf
+      \EndFor
+      \State $E := E\cup \{e\}$\Comment{No improvement by replacing $e$}
+      \State \Return
+      \EndFunction
+    \end{algorithmic}
+  \end{algorithm}
+\end{frame}

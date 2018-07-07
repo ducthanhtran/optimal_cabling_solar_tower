@@ -1,0 +1,64 @@
+\begin{frame}[t]
+ \vspace*{-20.5mm}   
+ \hspace*{-\beamerleftmargin}%
+    \includegraphics[trim=0pt 80pt 0pt 0pt, clip,width=\paperwidth]{./figs/solartower}
+    \titlepage
+\end{frame}
+
+\begin{frame}\frametitle{Problem}
+\begin{itemize}
+  \item Consider a complete and undirected graph $G=(V,E)$ with $V:=\{T\} \cup V_H$, where $T$ is the designated solar tower and $V_H$ is the set of heliostats.
+  \item Goal: Find a subgraphs $H_{\text{data}},H_{\text{Power}}\subseteq G$ with minimal total costs that connects all heliostats with the solar tower.
+  \item Constraints:
+  \begin{itemize}
+    \item no intersecting edges
+    \item Data cable:
+    \begin{itemize}
+      \item 
+    \end{itemize}
+    \item Power cable:
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]{Motivation}
+
+\uncover<1-1>{\textbf{What factors need to be considered for the HWP?} }\\
+
+\uncover<2-> {\textbf{Local Control Units} \\
+Multi-port or Conductor? } \vspace{0.5cm}
+
+\uncover<3->{\textbf{Location}\\
+Australia vs South Africa } \vspace{0.5cm}
+
+\uncover<4->{\textbf{Partitioning} \\
+Partition structure? How many partitions? } \vspace{0.5cm}
+
+\uncover<5->{\textbf{Planarity}\\
+How does the planarity constraint influence the algorithm?}
+
+
+\end{frame}
+
+\begin{frame}[t]{Initial solutions}
+\centering
+\begin{tikzpicture}[scale = 1.5,sibling distance=8em,
+  every node/.style = {shape=rectangle, rounded corners,
+    draw, align=center,
+    top color=white, bottom color=white}]]
+  \node {Cost factors}
+    child { node {Switches} 
+        child { node(e1) {Hamiltonian paths} } }
+    child { node {Cable meters}
+		child { node(e2) {MST} } 
+		};
+\begin{scope} [shift={(0cm,-4.5cm)}]
+\node(e3) {Lazy-Branching};  
+\end{scope}
+\begin{scope}[dashed] 
+\draw (e1)--(e3); 
+\draw (e2)--(e3); 
+\end{scope}
+\end{tikzpicture}
+
+\end{frame}

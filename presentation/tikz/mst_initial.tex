@@ -1,0 +1,44 @@
+%\begin{frame}
+%\frametitle{MST Initial}
+%\begin{adjustbox}{max width=0.9\paperwidth,center}
+%	\begin{tikzpicture}[node distance=2cm]
+%	\tikzstyle{vertex}=[draw,shape=circle, minimum size=1cm];
+%	\node[vertex] (A){A};
+%	\node[node distance=0.5cm] (left)[left=of A]{};
+%	\node[vertex] (B) [right=1.5cm of A] {B};
+%	\node[vertex] (C) [above= 1cm of B] {C};
+%	\node[vertex] (X) [right=4.5cm of B] {X};
+%	
+%	\draw[line width=0.55mm,black] (A) -- (left);
+%	\draw[line width=0.55mm,black] (A) -- (B);
+%	\draw[line width=0.55mm,black] (B) -- (C);
+%	
+%	\end{tikzpicture}
+%\end{adjustbox}
+%\end{frame}
+
+\begin{frame}
+\frametitle{Initial Solution: MST}
+\begin{figure}
+\begin{adjustbox}{max width=0.9\paperwidth,center}
+	\begin{tikzpicture}[node distance=2cm]
+	\tikzstyle{vertex}=[draw,shape=circle, minimum size=1cm];
+	\node[vertex] (A){A};
+	\node[node distance=0.5cm] (left)[left=of A]{};
+	\node[vertex] (B) [right=1.5cm of A] {B};
+	\node[vertex] (C) [above= 1cm of B] {C};
+	\node[vertex] (X) [right=4.5cm of B] {X};
+	
+	\draw[line width=0.55mm,black] (A) -- (left);
+	\draw[line width=0.55mm,black] (A) -- (B);
+	\draw[line width=0.55mm,black] (B) -- (C);
+	
+	\draw[line width=0.30mm,orange,dashed] (B) -- node[below] {\small  Distance \textcolor{black}{$+$} \textcolor{blue}{LOC Costs}} (X);
+	%\draw[line width=0.30mm,blue, transform canvas={yshift=-1cm},shorten >= 1.2cm, shorten <=1.2cm] (B) -- node[below] {\small LOC} (X);
+	\draw[line width=0.30mm, orange,dashed] (C) -- node[above, sloped] {\small Distance} (X);
+	\end{tikzpicture}
+\end{adjustbox}
+\caption{Include switch installation into edge costs.}
+\end{figure}
+\end{frame}
+

@@ -1,0 +1,107 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Author: Thanh Tuan Tran
+%University: RWTH Aachen
+%Seminar Ganzzahlige Optimierung
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass{beamer}
+\let\Tiny=\tiny
+\mode<presentation> { \usetheme{Madrid} }
+%\usecolortheme{whale}
+%\pdfmapfile{+sansmathaccent.map}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%					Packages
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{amsmath,amsthm,amssymb} %Math Packages
+%\usepackage[utf8]{inputenc} %Allows
+%\usepackage[ngerman]{babel}
+\usepackage{xcolor} %tikzcolors
+\usepackage{adjustbox} %figure
+\usepackage{tikz} %Graphen
+\usetikzlibrary{positioning} %allow below of etc
+\usetikzlibrary{calc} %better positioning
+\usetikzlibrary{shapes.misc} %strike out
+\usetikzlibrary{angles} %draw angles
+\usetikzlibrary{quotes} %better labeling for angles
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%					Enviroment
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{caption}{\raggedright\insertcaption\par} %captions
+
+
+%\makeatletter
+%\setbeamertemplate{frametitle continuation}{\gdef\beamer@frametitle{}}
+%\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%					Macros
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\theoremstyle{definition}
+\newtheorem{mydef}{Definition}
+\newtheorem{mycor}[mydef]{Korollar}
+\newtheorem{myrem}[mydef]{Bemerkung}
+\newtheorem{mythm}[mydef]{Satz}
+\newtheorem{mylem}[mydef]{Lemma}
+
+\newenvironment{myprf}{\paragraph{Beweis:}}{\hfill$\square$}
+
+\newcommand{\job}{\mathcal{J}}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\makeatletter
+\g@addto@macro\bfseries{\boldmath}
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%								Title
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title[]{}
+
+\author{Thanh Tuan Tran} 
+\institute[]
+{
+	RWTH Aachen \\ 
+	\medskip
+	\textit{thanh.tuan.tran@rwth-aachen.de} 
+}
+\date{30.01.2018} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%								Document Start
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+	
+%Sort Angles
+\input{angle.tex}
+
+%Lazy Branching
+\input{lazy.tex}
+
+%MST Initial
+\input{mst_initial.tex}	
+
+%MST Local
+\input{mst_local.tex}
+
+%Hamilton Initial
+\input{hamilton_initial.tex}
+
+%Hamilton Local Search Idea
+\input{hamilton_local.tex}
+
+
+
+
+\end{document}

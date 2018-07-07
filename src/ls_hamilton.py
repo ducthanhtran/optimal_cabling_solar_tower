@@ -16,16 +16,19 @@ TriangulationEdges = NamedTuple('TriangulationEdges', [('add', List[Edge]), ('re
 
 
 def perform_local_search_hamilton(initial_solution: DataCableSolution,
+                                  coords,
                                   min_improvement: float,
                                   upper_cap: float):
     # perform local search onto initial Hamilton solution
-    degrees = copy.deepcopy(initial_solution.solution.degrees)
-    edges = copy.deepcopy(initial_solution.solution.edges)
-    edge_coords = copy.deepcopy(initial_solution.solution.edge_coords)
+    degrees = copy.deepcopy(initial_solution.degrees)
+    edges = copy.deepcopy(initial_solution.edges)
+    edge_coords = copy.deepcopy(np.vstack(initial_solution.edges_coords))
     d = obtain_initial_partition(edges)
-    coordinates = initial_solution.coordinates[:]
+    coordinates = coords[:]
     incident = compute_incident_edges(edges,coordinates)
     T = compute_incident_vertices(edges,coordinates)
+
+    distances = cdist(coordinates, coordinates)
 
     solution_edges = []
     solution_edges, degrees = improve(edges, degrees, d, incident, edge_coords, T, coordinates, distances, min_improvement, upper_cap)
@@ -131,8 +134,8 @@ def get_candidates(edges: List[List[Edge]], d, incident, T, coordinates, distanc
 
 
 def get_coords(e: Edge, coordinates):
-    return np.array([[coordinates.iloc[e.v][0], coordinates.iloc[e.v][1],
-                      coordinates.iloc[e.w][0], coordinates.iloc[e.w][1]]])
+    return np.array([[coordinates[e.v][0], coordinates[e.v][1],
+                      coordinates[e.w][0], coordinates[e.w][1]]])
 
 
 def add_edge(e: Edge, partition_index: int, edges, degrees, d, incident, edge_coords, T, coordinates):

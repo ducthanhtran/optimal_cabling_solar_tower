@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # UTF-8 encoding
+from itertools import chain
 from typing import Generator
 
 from common import Edge

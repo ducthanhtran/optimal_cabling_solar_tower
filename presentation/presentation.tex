@@ -1,0 +1,80 @@
+\documentclass[xcolor=dvipsnames,draft]{beamer}
+
+\usetheme{default}
+
+\usepackage{diagbox}
+\usepackage{pgfplotstable}
+\usepackage{eurosym}
+\usepackage{wallpaper}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{algorithm,algpseudocode,algorithmicx}
+\usepackage{geometry}
+\usepackage[pages=some]{background}
+\usepackage[export]{adjustbox}
+\usepackage{xcolor}
+\usepackage{blindtext}
+\usepackage{eurosym} % \euro
+\usetikzlibrary{arrows.meta,
+                calc, chains,
+                quotes,
+                positioning,
+                shapes.geometric, patterns, decorations.markings,
+                decorations.pathmorphing}
+\usepackage{tikz}
+\usetikzlibrary{mindmap,trees}
+
+\usepackage{subcaption}
+\usepackage{caption}
+%%%%%%%%%%%% Tikz Packages %%%%%%%%%%%%%% 
+\usepackage{adjustbox} %figure
+\usetikzlibrary{positioning} %allow below of etc
+\usetikzlibrary{calc} %better positioning
+\usetikzlibrary{shapes.misc} %strike out
+\usetikzlibrary{angles} %draw angles
+\usetikzlibrary{quotes} %better labeling for angles
+
+\usepackage{changepage} % hacking position of table
+\usepackage{makecell}
+\newcommand*{\tb}[1]{\textcolor{blue}{\textbf{#1}}}
+
+\newcommand*{\tib}[1]{\textcolor{blue}{(\textit{-#1\%}})}
+\newcommand*{\tibp}[1]{\textcolor{blue}{(\textit{+#1\%}})}
+\newcommand*{\ti}[1]{(\textit{-#1\%})}
+\newcommand*{\tip}[1]{(\textit{+#1\%})}
+
+
+\fboxsep=0mm%padding thickness
+\fboxrule=4pt%border thickness
+
+\makeatletter
+\newlength\beamerleftmargin
+\setlength\beamerleftmargin{\Gm@lmargin}
+\makeatother
+
+% -- Algorithm stuff  ------------------------%
+% https://tex.stackexchange.com/questions/33784/how-to-typeset-gotos-and-labels-using-latex-pseudocode-environments
+\algnewcommand{\algorithmicgoto}{\textbf{go to}}%
+\algnewcommand{\Goto}[1]{\algorithmicgoto~\ref{#1}}%
+
+\title{\Large Optimal Wiring of Heliostats in Solar Tower Power Plants \vspace*{-0.3cm}}
+\author{\footnotesize Duc Thanh Tran \vspace*{-0.5cm} }
+\date{\footnotesize 27 June 2018}
+	
+\begin{document}
+\include{Intro}
+
+\include{definitions}
+\include{partitions}
+\include{hamilton}
+\include{mst}
+\include{lazy}
+
+\include{Cost_comp}
+\include{Conclusion}
+\include{algorithms}
+\end{document}
+
+

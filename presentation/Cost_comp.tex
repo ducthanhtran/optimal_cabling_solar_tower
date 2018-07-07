@@ -1,0 +1,177 @@
+\begin{frame}
+  \begin{center}
+    \LARGE Evaluations
+  \end{center}
+\end{frame}
+
+\begin{frame}[t]{Australia}
+\begin{figure}[!ht]
+\center
+\begin{tikzpicture}[scale=0.7]
+\begin{axis}[
+    ybar,
+    enlargelimits=0.2,
+     legend style={at={(0.5,-0.4)},anchor=north,legend columns=-1},
+    ylabel={Total costs [\euro]},
+    xlabel={Partitions},
+    symbolic x coords={5,6,7,8,9,10},
+    xtick=data,
+    x=2cm,
+    %bar width=1cm,
+    ybar=4pt,% configures `bar shift'
+    x tick label style={rotate=0,anchor=north},
+    ]
+\addplot[fill={rgb:red,1;green,2;blue,3}]  coordinates {(5,990767.53) (6,992103.73) (7,1002682.93) (8,1007684.97) (9,1016394.69) (10,1026717.30)};
+\addplot[fill={rgb:red,1;green,3;blue,1},    postaction={
+        pattern=north east lines}]  coordinates {(5,983331.91) (6,985083.68) (7,996818.8) (8,1002910.77) (9,1010794.57) (10,1024032.09)};
+\addplot[fill={rgb:red,3;green,1;blue,1},    postaction={
+        pattern=dots}]  coordinates {(5,992267.75) (6,992293.36) (7,1003352.49) (8,1012375.78) (9,1016632.18) (10,1025318.01)};
+\legend{MST Prim \, , Hamilton \, , Lazy-Branching}
+\end{axis}
+    \uncover<2->{\draw[red,ultra thick] (2,0 ) circle (1.1cm);
+        \node[red] at (2.5,-1.5) {983 331.91 \euro};}
+\end{tikzpicture}
+\end{figure} 
+\textbf{Local search improvement:} \\
+MST: 1.8 \% ,
+Hamilton: 3.9 \%,
+Lazy-Branching: 4.1 \%
+\end{frame}
+
+\begin{frame}[t]{Spain}
+\begin{figure}[!ht]
+\center
+\begin{tikzpicture}[scale=0.7]
+\begin{axis}[
+    ybar,
+    enlargelimits=0.2,
+     legend style={at={(0.5,-0.4)},anchor=north,legend columns=-1},
+    ylabel={Total costs [\euro]},
+    xlabel={Partitions},
+    symbolic x coords={5,6,7,8,9,10},
+    xtick=data,
+    x=2cm,
+    %bar width=1cm,
+    ybar=4pt,% configures `bar shift'
+    x tick label style={rotate=0,anchor=north},
+    ]
+\addplot[fill={rgb:red,1;green,2;blue,3}]  coordinates {(5,572931.14) (6,570702.86) (7,579737.26) (8,587727.16) (9,587920.13) (10,591239.89)};
+\addplot[fill={rgb:red,1;green,3;blue,1},    postaction={
+        pattern=north east lines}]  coordinates {(5,557011.38) (6,557639.61) (7,564855.54) (8,568465.21) (9,572842.07) (10,579838.70)};
+        \addplot[fill={rgb:red,3;green,1;blue,1},    postaction={
+        pattern=dots}]  coordinates {(5,572899.70) (6,570650.07) (7,578015.71) (8,587423.77) (9,588084.90) (10,592046.77)};
+\legend{MST Prim \, , Hamilton \, , Lazy-Branching}
+\end{axis}
+\uncover<2->{\draw[red,ultra thick] (2,0 ) circle (1.1cm);
+    \node[red] at (2.5,-1.5) {557 011.38 \euro};}
+\end{tikzpicture}
+\end{figure} 
+\textbf{Local search improvement:} \\
+MST: 1.3 \%,
+Hamilton: 3.9 \%,
+Lazy-Branching: 2.1 \%
+\end{frame}
+
+\begin{frame}[t]{South Africa/UAE}
+\begin{figure}[!ht]
+\center
+\begin{tikzpicture}[scale=0.7]
+\begin{axis}[
+    ybar,
+    enlargelimits=0.2,
+     legend style={at={(0.5,-0.4)},anchor=north,legend columns=-1},
+    ylabel={Total costs [\euro]},
+    xlabel={Partitions},
+    symbolic x coords={5,6,7,8,9,10},
+    xtick=data,
+    x=2cm,
+    %bar width=1cm,
+    ybar=4pt,% configures `bar shift'
+    x tick label style={rotate=0,anchor=north},
+    ]
+\addplot[fill={rgb:red,1;green,2;blue,3}]  coordinates {(5,320199.62) (6,313385.10) (7,322094.44) (8,326844.44) (9,324170.71) (10,326224.88)};
+\addplot[fill={rgb:red,1;green,3;blue,1},    postaction={
+        pattern=north east lines}]  coordinates {(5,301177.91) (6,301481.19) (7,305326.81) (8,307793.55) (9,309544.45) (10,312922.13)};
+        \addplot[fill={rgb:red,3;green,1;blue,1},    postaction={
+        pattern=dots}]  coordinates {(5,317433.40) (6,314415.30) (7,316985.82) (8,322914.17) (9,324425.54) (10,326203.52)};
+\legend{MST Prim \, , Hamilton \, , Lazy-Branching}
+\end{axis}
+ \uncover<2->{\draw[red,ultra thick] (2,0 ) circle (1.1cm);
+      \node[red] at (2.5,-1.5) {301 179.16 \euro};}
+\end{tikzpicture}
+\end{figure} 
+\textbf{Local search improvement:} \\
+MST: 1.2 \%,
+Hamilton: 3.9 \%,
+Lazy-Branching: 2.3 \%
+\end{frame}
+
+\begin{frame}{Comparison for 5 Partitions before Local Search}
+  \begin{adjustwidth}{-0.68cm}{}
+    \begin{table}
+      \begin{center}
+        \caption{Total costs and cable lengths for 5 partitions. We boldfaced the best initial values for each country.}
+        \footnotesize
+        \begin{tabular}{p{1.7cm}|cc|cc|cc}
+          Algorithm & \multicolumn{2}{c|}{Australia} & \multicolumn{2}{c|}{Spain} & \multicolumn{2}{c}{UAE/RSA} \\
+          & Cost[\euro] & Length[m]& Cost[\euro] & Length[m] & Cost[\euro]& Length[m] \\
+          \toprule
+          Hamiltonian Path & 1,022K & 17.78K & \tb{578.1K} & 17.78K & \tb{311.4K} & 17.78K \\
+          \midrule
+          MST & \tb{1,008K} & \tb{16.70K} & 585.4K & \tb{17.05K} & 326.1K & \tb{17.63K} \\
+          \midrule
+          Lazy-Branching & 1,033K & 17.61K & 593.3K & 17.61K & 328.9K & 17.64K
+        \end{tabular}
+      \end{center}
+    \end{table}
+  \end{adjustwidth}
+\end{frame}
+
+\begin{frame}{Comparison for 5 Partitions after Local Search}
+  \begin{adjustwidth}{-0.7cm}{}
+    \begin{table}
+      \begin{center}
+        \caption{Total costs and cable lengths for 5 partitions. We boldfaced the best locally optimal solution values for each country. The difference to the initial solutions are shown in percentages.}
+        \footnotesize
+        \begin{tabular}{p{1.7cm}|cc|cc|cc}
+          Algorithm & \multicolumn{2}{c|}{Australia} & \multicolumn{2}{c|}{Spain} & \multicolumn{2}{c}{UAE/RSA} \\
+          & Cost[\euro] & Length[m]& Cost[\euro] & Length[m] & Cost[\euro]& Length[m] \\
+          \toprule
+          Hamiltonian Path & \makecell{\tb{983.3K} \\ \tib{3.9}} & \makecell{17.04K \\ \ti{4.3}} & \makecell{\tb{557.3K} \\ \tib{3.7}} & \makecell{\tb{17.04K} \\ \tib{4.3}} & \makecell{\tb{301.0K} \\ \tib{3.5}} & \makecell{\tb{17.06K} \\ \tib{4.2}} \\
+          \midrule
+          MST & \makecell{990.8K \\ \ti{1.8}} & \makecell{\tb{16.82K} \\ \tibp{0.7}} & \makecell{572.9K \\ \ti{2.2}} & \makecell{17.17K \\ \tibp{0.7}} & \makecell{320.2K \\ \ti{1.8}} & \makecell{\tb{17.71K} \\ \tip{0.5}} \\
+          \midrule
+          Lazy-Branching & \makecell{992.3K \\ \ti{4.1}} & \makecell{16.88K \\ \ti{4.3}} & \makecell{572.9K \\ \ti{3.6}} & \makecell{17.17K \\ \ti{2.6}} & \makecell{317.4K \\ \ti{3.6}} & \makecell{17.82K \\ \tip{1}}
+        \end{tabular}
+      \end{center}
+    \end{table}
+  \end{adjustwidth}
+\end{frame}
+
+\begin{frame}[t]{Location Comparison}
+\begin{figure}[!ht]
+\center
+\begin{tikzpicture}[scale=0.7]
+\begin{axis}[
+    ybar,
+    enlargelimits=0.2,
+     legend style={at={(0.5,-0.4)},anchor=north,legend columns=-1},
+    ylabel={Cable meters [m]},
+    symbolic x coords={Australia,Spain,RSA/UAE},
+    xtick=data,
+    x=2.5cm,
+    %bar width=1cm,
+    ybar=4pt,% configures `bar shift'
+    x tick label style={rotate=45,anchor=east},
+    ]
+\addplot[fill={rgb:red,1;green,2;blue,3}]  coordinates {(Australia,16 816.07) (Spain,17165.62) (RSA/UAE,17477.51)};
+\addplot[fill={rgb:red,1;green,3;blue,1},    postaction={
+        pattern=north east lines}]  coordinates {(Australia,17054.33) (Spain,17055.56) (RSA/UAE,17055.57)};
+\addplot[fill={rgb:red,3;green,1;blue,1},    postaction={
+        pattern=dots}]  coordinates {(Australia,16882.74) (Spain,17236.21) (RSA/UAE,17551.09)};
+\legend{MST Prim \, , Hamilton \, , Lazy-Branching}
+\end{axis}
+\end{tikzpicture}
+\caption{Cable lengths for 6 partitions.}
+\end{figure} 
+\end{frame}

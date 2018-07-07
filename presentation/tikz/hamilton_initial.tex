@@ -1,0 +1,71 @@
+%\begin{frame}
+%\frametitle{Hamilton Path Initial}
+%\begin{adjustbox}{max width=0.9\paperwidth,center}
+%	\begin{tikzpicture}[node distance=3cm]
+%	\tikzstyle{vertex}=[draw,shape=circle, minimum size=1cm];
+%	\node[vertex] (1){1};
+%	\node[node distance=0.5cm] (left) [left= of 1]{};
+%	\node[vertex] (2) [right=of 1] {2};
+%	\node[vertex] (3) [right=of 2] {3};
+%	\coordinate (center) at ($(1)!0.5!(2)$);
+%	\node[vertex] (v) [below=1cm of center] {v};
+%	\node[vertex] (w) [right=of 3] {w};
+%	
+%	\draw[line width=0.55mm,black] (1) -- (2);
+%	\draw[line width=0.55mm,black] (2) -- (3);
+%	\draw[line width=0.55mm,black] (1) -- (left);
+%	\end{tikzpicture}
+%\end{adjustbox}
+%\end{frame}
+
+\begin{frame}
+\frametitle{Initial Solution: Hamiltonian Path}
+\large i) Append
+\vspace{5pt}
+
+\begin{adjustbox}{max width=0.9\paperwidth,center}
+	\begin{tikzpicture}[node distance=3cm]
+	\tikzstyle{vertex}=[draw,shape=circle, fill, inner sep=0pt, minimum size=0.25cm];
+	\node[vertex] (1){1};
+	\node[node distance=0.5cm] (left) [left= of 1]{};
+	\node[vertex] (2) [right=of 1] {2};
+	\node[vertex] (3) [right=of 2] {3};
+	\coordinate (center) at ($(1)!0.5!(2)$);
+	\node[vertex] (v) [below=1cm of center] {v};
+	\node[vertex] (w) [right=of 3] {w};
+	\node (legend1) [above=0.9cm of w]{};
+	\node (legend2) [left=0.5cm of legend1]{add edge};
+	
+	\draw[line width=0.55mm,blue, dashed] (legend1) -- (legend2);
+	
+	\draw[line width=0.55mm,black] (1) -- (2);
+	\draw[line width=0.55mm,black] (2) -- (3);
+	\draw[line width=0.55mm, dashed, blue] (3) -- (w);
+	\draw[line width=0.55mm,black] (1) -- (left);
+	\end{tikzpicture}
+\end{adjustbox}%
+
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{3pt}}
+\vspace{5pt}
+\large ii) Insert
+\vspace{5pt}
+
+\begin{adjustbox}{max width=0.9\paperwidth,center}
+	\begin{tikzpicture}[node distance=3cm]
+	\tikzstyle{vertex}=[draw,shape=circle, fill, inner sep=0pt, minimum size=0.25cm];
+	\node[vertex] (1){1};
+	\node[node distance=0.5cm] (left) [left= of 1]{};
+	\node[vertex] (2) [right=of 1] {2};
+	\node[vertex] (3) [right=of 2] {3};
+	\coordinate (center) at ($(1)!0.5!(2)$);
+	\node[vertex] (v) [below=1cm of center] {v};
+	\node[vertex] (w) [right=of 3] {w};
+	
+	\draw[line width=0.55mm,black] (1) -- node[strike out,draw, red]{} (2);
+	\draw[line width=0.55mm,black] (2) -- (3);
+	\draw[line width=0.55mm, dashed, blue] (1) -- (v);
+	\draw[line width=0.55mm, dashed, blue] (2) -- (v);
+	\draw[line width=0.55mm,black] (1) -- (left);
+	\end{tikzpicture}
+\end{adjustbox}
+\end{frame}

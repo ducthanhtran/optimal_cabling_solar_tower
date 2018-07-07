@@ -1,0 +1,112 @@
+\begin{frame}
+\frametitle{Local Search: Hamiltonian Path -- Triangulation}
+
+
+\begin{figure}
+	\begin{adjustbox}{max width=0.9\paperwidth,center}
+	\begin{tikzpicture}[node distance=3cm]
+	\tikzstyle{vertex}=[draw,shape=circle, minimum size=1cm];
+	
+	\node[vertex] (w) {w};
+	\node[vertex] (v) [below=3cm of w] {v};
+	\coordinate (center) at ($(w)!0.5!(v)$);
+	\node[vertex] (i) [right=2cm of center] {x};
+	\node[vertex] (i+) [above right=0.5cm and 4cm of i] {y};
+	\node[vertex] (i-) [below right=0.5cm and 4cm of i] {z};
+	\node[node distance=0.5cm] (up) [above= of w]{};
+	\node[node distance=0.5cm] (down) [below= of v]{};
+	\node[node distance=0.5cm] (up_i) [above= of i+]{};
+	\node[node distance=0.5cm] (down_i) [below= of i-]{};
+	
+	\draw[line width=0.55mm,black] (w) -- (up);
+	\draw[line width=0.55mm,black] (v) -- (down);
+	\draw[line width=0.55mm,black] (i+) -- (up_i);
+	\draw[line width=0.55mm,black] (i-) -- (down_i);
+	
+	\draw[line width=0.55mm, black] (w) -- (v);
+	\draw[line width=0.55mm, black] (i) -- (i+);
+	\draw[line width=0.55mm, black] (i) -- (i-);
+	%\draw[line width=0.55mm, dashed, purple] (w) -- (i);
+	%\draw[line width=0.55mm, dashed, purple] (v) -- (i);
+	%\draw[line width=0.55mm, dashed, purple] (i+) -- (i-);
+	\end{tikzpicture}
+	\end{adjustbox}
+	\caption{Starting point.}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Local Search: Hamiltonian Path -- Triangulation}
+\begin{figure}
+\begin{adjustbox}{max width=0.9\paperwidth,center}
+	\begin{tikzpicture}[node distance=3cm]
+	\tikzstyle{vertex}=[draw,shape=circle, minimum size=1cm];
+	\node[vertex] (w) {w};
+	\node[vertex] (v) [below=3cm of w] {v};
+	\coordinate (center) at ($(w)!0.5!(v)$);
+	\node[vertex] (i) [right=2cm of center] {x};
+	\node[vertex] (i+) [above right=0.5cm and 4cm of i] {y};
+	\node[vertex] (i-) [below right=0.5cm and 4cm of i] {z};
+	\node (legend1) [above right=2cm and 1cm of i] {added edges};
+	\node (legend2) [right=1cm of legend1] {};
+	\node (l1) [above=0.1cm of legend1] {deleted edges};
+	\node (l2) [right=1cm of l1] {};
+	
+	\node[node distance=0.5cm] (up) [above= of w]{};
+	\node[node distance=0.5cm] (down) [below= of v]{};
+	\node[node distance=0.5cm] (up_i) [above= of i+]{};
+	\node[node distance=0.5cm] (down_i) [below= of i-]{};
+	
+	\draw[line width=0.55mm,blue, dashed] (legend1) -- (legend2); 
+	\draw[line width=0.55mm,black] (l1) -- node[strike out,draw, red]{} (l2); 
+	
+	\draw[line width=0.55mm,black] (w) -- (up);
+	\draw[line width=0.55mm,black] (v) -- (down);
+	\draw[line width=0.55mm,black] (i+) -- (up_i);
+	\draw[line width=0.55mm,black] (i-) -- (down_i);
+	
+	\draw[line width=0.55mm, black] (w) -- node[strike out,draw, red]{} (v);
+	\draw[line width=0.55mm, black] (i) -- node[sloped, strike out,draw, red]{} (i+);
+	\draw[line width=0.55mm, black] (i) -- node[sloped, strike out,draw, red]{} (i-);
+	\draw[line width=0.55mm, dashed, blue] (w) -- (i);
+	\draw[line width=0.55mm, dashed, blue] (v) -- (i);
+	\draw[line width=0.55mm, dashed, blue] (i+) -- (i-);
+	\end{tikzpicture}
+\end{adjustbox}
+\caption{Check costs of added and deleted edges.}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Local Search: Hamiltonian Path -- Triangulation}
+\begin{figure}
+\begin{adjustbox}{max width=0.9\paperwidth,center}
+	\begin{tikzpicture}[node distance=3cm]
+	\tikzstyle{vertex}=[draw,shape=circle, minimum size=1cm];
+	\tikzstyle{cross}=[draw, shape=cross, red];
+	
+	\node[vertex] (w) {w};
+	\node[vertex] (v) [below=3cm of w] {v};
+	\coordinate (center) at ($(w)!0.5!(v)$);
+	\node[vertex] (i) [right=2cm of center] {x};
+	\node[vertex] (i+) [above right=0.5cm and 4cm of i] {y};
+	\node[vertex] (i-) [below right=0.5cm and 4cm of i] {z};
+	\node[node distance=0.5cm] (up) [above= of w]{};
+	\node[node distance=0.5cm] (down) [below= of v]{};
+	\node[node distance=0.5cm] (up_i) [above= of i+]{};
+	\node[node distance=0.5cm] (down_i) [below= of i-]{};
+	
+	\draw[line width=0.55mm,black] (w) -- (up);
+	\draw[line width=0.55mm,black] (v) -- (down);
+	\draw[line width=0.55mm,black] (i+) -- (up_i);
+	\draw[line width=0.55mm,black] (i-) -- (down_i);
+	
+	\draw[line width=0.55mm, black] (w) -- (i);
+	\draw[line width=0.55mm, black] (v) -- (i);
+	\draw[line width=0.55mm, black] (i+) -- (i-);
+	\end{tikzpicture}
+\end{adjustbox}
+\caption{Added edges have lower costs than deleted ones.}
+\end{figure}
+\end{frame}

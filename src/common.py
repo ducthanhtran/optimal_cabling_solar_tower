@@ -46,3 +46,6 @@ def _switch_cost(degree: int) -> float:
         return 1500
     else:
         raise ValueError('Degree is too high. No cost found.')
+
+def cable_length(edges, distance):
+    return sum(distance[e.v,e.w] for e in chain.from_iterable(edges))

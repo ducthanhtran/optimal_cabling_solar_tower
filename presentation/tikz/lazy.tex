@@ -1,0 +1,52 @@
+\begin{frame}
+\frametitle{Lazy-Branching (= MST + Hamiltonian path)}
+
+\begin{figure}
+\begin{subfigure}{0.45\textwidth}
+	\begin{adjustbox}{max width=0.35\paperwidth,left}
+	\begin{tikzpicture}[node distance=2cm]
+	\tikzstyle{vertex}=[draw,shape=circle, minimum size=1cm];
+	\node[vertex] (A) {A};
+	\node[node distance=0.5cm] (down)[below=of A]{};
+	\node[vertex] (B) [above= of A] {B};
+	\coordinate (center) at ($(A)!0.5!(B)$);
+	\node[vertex] (C) [right=2.2cm of center] {C};
+	\node[vertex] (E) [above left=0.3cm and 2cm of center] {D};
+	\node[vertex] (F) [above=1cm of E] {E};
+	
+	\draw[line width=0.55mm,black] (A) -- (B);
+	\draw[line width=0.55mm,black] (B) -- (C);
+	\draw[line width=0.55mm,blue, decorate,decoration=snake] (C) -- (E);
+	
+	\draw[line width=0.55mm,black] (A) -- (down);
+	\end{tikzpicture}
+	\end{adjustbox}
+\end{subfigure}
+\hspace{0.5cm}
+\begin{subfigure}{0.45\textwidth}
+	\begin{adjustbox}{max width=0.35\paperwidth,right}
+	\begin{tikzpicture}[node distance=2cm]
+	\tikzstyle{vertex}=[draw,shape=circle, minimum size=1cm];
+	\node[vertex] (A) {A};
+	\node[node distance=0.5cm] (down)[below=of A]{};
+	\node[vertex] (B) [above= of A] {B};
+	\coordinate (center) at ($(A)!0.5!(B)$);
+	\node[vertex] (C) [right=2.2cm of center] {C};
+	\node[vertex] (E) [above left=0.3cm and 2cm of center] {D};
+	\node[vertex] (F) [above=1cm of E] {E};
+	
+	\draw[line width=0.55mm,black] (A) -- (B);
+	\draw[line width=0.55mm,black] (B) -- (C);
+	\draw[line width=0.55mm,blue] (B) -- (E);
+	\draw[line width=0.55mm,blue] (E) -- (F);
+	
+	\draw[line width=0.55mm,black] (A) -- (down);
+	\end{tikzpicture}
+	\end{adjustbox}
+\end{subfigure}
+\caption{Edge $CD$ intersects edge $AB$, therefore we install a switch at $B$ and branch out. We continue extending the path from $D$ on.}
+\end{figure}
+\end{frame}
+
+
+

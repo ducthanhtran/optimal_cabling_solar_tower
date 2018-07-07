@@ -1,0 +1,55 @@
+%\begin{frame}
+%\frametitle{Initial Solution: MST}
+%\begin{itemize}
+%	\item Use Prim's Algorithm with transforming edge costs
+%	\item Costs depend on already used edges (8-Port Switches)
+%	\item 
+%\end{itemize}
+%\end{frame}
+
+\begin{frame}
+  \begin{center}
+    \LARGE Heuristic: Minimum Spanning Tree (MST)
+  \end{center}
+\end{frame}
+
+\input{./tikz/mst_initial.tex}
+
+%\begin{frame}
+%\frametitle{Local Search: Spanning Tree}
+%\begin{itemize}
+%	\item Delete Edge
+%	\item x
+%	\item z
+%\end{itemize}
+%\end{frame}
+\input{./tikz/mst_local.tex}
+
+\begin{frame}
+  \begin{figure}
+    \includegraphics[width=0.75\textwidth]{./figs/init_output_mst_14_6.png}
+    \caption{Initial MST solution. Total costs: 317,311.75\euro.}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Cycle Neighborhood Improvement}
+  \begin{figure}
+    \captionsetup[subfigure]{justification=centering}
+    \begin{subfigure}{0.45\textwidth}
+      \includegraphics[width=0.75\textwidth]{./figs/init_output_mst_14_6__SELECTION.png}
+      \caption{Initial solution.}
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+      \includegraphics[width=0.75\textwidth]{./figs/output_mst_14_6_SELECTION.png}
+      \caption{After cycle improvement.}
+    \end{subfigure}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \begin{figure}
+    \includegraphics[width=0.75\textwidth]{./figs/output_mst_14_6.png}
+    \caption{After local search for spanning trees. Total costs: 313,385.10\euro.}
+  \end{figure}
+\end{frame}
+
