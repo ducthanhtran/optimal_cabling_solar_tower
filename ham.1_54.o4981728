@@ -1,0 +1,26 @@
++------- PROLOGUE SCRIPT -----------------------------------------------
+|
+| Job ID ...........: 4981728
+| Started at .......: Sat Jul  7 15:43:43 CEST 2018
+| Execution host ...: cluster-cn-165
+| Cluster queue ....: 24C-64G
+| Script ...........: /var/spool/sge/cluster-cn-165/job_scripts/4981728
+| > ./run_hamilton.sh 54 0 1
+|
++------- PROLOGUE SCRIPT -----------------------------------------------
+Initial solution cost: 990332.2221635139
+Cable length: 17183.930040065097
+After local search, solution cost: 972541.3314662918
+After local search, cable length: 16854.46910122763
+
+Local search improved cost by 17790.890697222087
++------- EPILOGUE SCRIPT -----------------------------------------------
+|
+| Job ID ..............: 4981728
+| Stopped at ..........: Sat Jul  7 17:19:36 CEST 2018
+| Resources requested .: qname=!*GPU*,h_rt=86400,scratch_free=5G,s_core=0,pxe=ubuntu_16.04,num_proc=1,h_vmem=512G,h_fsize=200G,h_rss=16384M
+| Resources used ......: cpu=01:33:02, mem=1231.54346 GB s, io=0.02529 GB, vmem=234.172M, maxvmem=315.363M, last_file_cache=38M, last_rss=2M, max-cache=417M
+| Memory used .........: 455M / 16.000G (2.8%)
+| Total time used .....: 1:35:52
+|
++------- EPILOGUE SCRIPT -----------------------------------------------
