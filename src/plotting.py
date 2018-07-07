@@ -8,10 +8,10 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 import numpy as np
 
-from .common import Edge
+from common import Edge
 
 
-def plot_solution_data(coordinates: pd.DataFrame,
+def plot_solution_data(coordinates: np.ndarray,
                        output: str,
                        edges: List[List[Edge]],
                        value: float,

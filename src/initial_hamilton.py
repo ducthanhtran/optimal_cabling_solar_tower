@@ -6,8 +6,8 @@ import numpy as np
 from recordclass import RecordClass
 from scipy.spatial.distance import cdist
 
-from ..common import compute_partitions, Edge
-from ..solutions import DataCableSolution
+from common import compute_partitions, Edge
+from solutions import DataCableSolution
 
 
 # TODO: document these NamedTuples
@@ -61,7 +61,7 @@ class Hamilton:
         :return: edges and edge_coords that form a Hamiltonian path
         """
         self.current_state._replace(permutation=[0])
-        self.current_state._replace(unvisited_heliostats=set(partition_indices.astype(int).flat))
+        self.current_state._replace(unvisited=set(partition_indices.astype(int).flat))
 
         while len(self.solution.edges[partition]) < partition_indices.shape[0]:
             best_candidate = min(self._compute_candidates())
@@ -79,7 +79,7 @@ class Hamilton:
         :param vertex: vertex to be added to permutation
         :param index: index of insertion/appending
         """
-        for vertex in self.current_state.unvisited_heliostats:
+        for vertex in self.current_state.unvisited:
             shifted_perm = shift_left(self.current_state.permutation)
             unvisited = [vertex]*len(self.current_state.permutation)
 
@@ -112,8 +112,8 @@ class Hamilton:
                                coordinates=self.coordinates)
         # update current unvisited heliostats set
         for vertex in edge:
-            if vertex in self.current_state.unvisited_heliostats:
-                self.current_state.unvisited_heliostats.remove(vertex)
+            if vertex in self.current_state.unvisited:
+                self.current_state.unvisited.remove(vertex)
 
     def _insert_between(self, candidate: Candidate, partition: int) -> None:
         # remove old edge
