@@ -11,12 +11,20 @@ from solutions import DataCableSolution
 
 
 # TODO: document these NamedTuples
-Candidate = recordclass('Candidate', [('cost', float),
-                                      ('edges', List[Edge]),
-                                      ('vertex', int),
-                                      ('index', int)])
-HamiltonState = recordclass('HamiltonState', [('permutation', List[int]),
-                                              ('unvisited', Set[int])])
+# Candidate = RecordClass('Candidate', [('cost', float),
+#                                       ('edges', List[Edge]),
+#                                       ('vertex', int),
+#                                       ('index', int)])
+# HamiltonState = RecordClass('HamiltonState', [('permutation', List[int]),
+#                                               ('unvisited', Set[int])])
+
+# TODO: buggy pip install - RecordClass not in package?? quick hack
+Candidate = recordclass('Candidate', ['cost',
+                                      'edges',
+                                      'vertex',
+                                      'index'])
+HamiltonState = recordclass('HamiltonState', ['permutation',
+                                              'unvisited'])
 
 
 def shift_left(L: List[int]):
