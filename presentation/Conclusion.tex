@@ -1,17 +1,29 @@
 \begin{frame}{Conclusion}
-\center
-\Large
-\textbf{Unanimous result}\\
-\uncover<2->{$\Downarrow$ \\
-\textbf{Hamiltonian path with 5 tours }
-\\
-\textbf{delivers best results}}
-\vspace{3cm}
+\vfill
+\begin{itemize}
+  \item MST local search procedure too restrictive
+  \begin{itemize}
+    \item switch costs eat up a lot of budget!
+    \item for more than 5 partitions we obtain more degrees of freedom, thus local search improvements are much higher
+  \end{itemize}
+  \item[]
+  \item Hamilton local search $\to$ greedy power cable assignment works better
+  \item[]
+  \item considering both as seperate problems might be also beneficial
+  \begin{itemize}
+    \item local search is not too restrictive
+    \item power cabling problem $\equiv$ multilevel capacitated minimum spanning tree\footnote{Gamvros et al.: The multilevel capacitated minimum spanning tree problem, INFORMS Journal on Computing, 2006}
+  \end{itemize}
+\end{itemize}
+\vfill
 \end{frame}
 
 \begin{frame}
 \centering
-\includegraphics[scale=0.5, trim=0pt 20pt 0pt 0pt, clip]{./figs/recipes} 
-\vspace{0.5cm}
-\textbf{\Large Thank you for your attention!} 
+\vfill
+\textbf{\Large Thank you for your attention!} \\
+\vspace*{1cm}
+{\small Duc Thanh Tran} \\
+duc.thanh.tran@rwth-aachen.de
+\vfill
 \end{frame}
