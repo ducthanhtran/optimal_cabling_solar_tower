@@ -8,8 +8,8 @@ import pandas as pd
 import numpy as np
 from scipy.spatial.distance import cdist
 
-from hamilton_approach import run_local_search_hamilton
-from initial_mcmst import MCMST
+# from hamilton_approach import run_local_search_hamilton
+# from initial_mcmst import MCMST
 
 
 def int_greater_or_equal(i: int):

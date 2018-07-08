@@ -6,6 +6,14 @@ from typing import List, NamedTuple
 import numpy as np
 
 
+CABLE_COSTS = np.array([0.58,0.87,1.24,1.95,3.13,5.19,6.9])
+CABLE_LENGTHS = np.array([38.36,47.08,56.04,69.3,84.87,102.79,120.31])
+CABLE_CAPACITIES = np.array([56,73,92,124,162,209,250])
+
+
+Cables = NamedTuple('Cables', [('costs', np.ndarray),
+                               ('lengths', np.ndarray),
+                               ('capacities', np.ndarray)])
 Edge = NamedTuple('Edge', [('v', int), ('w', int)]) # edge contains two indices to coordinates-array
 
 
@@ -49,3 +57,9 @@ def _switch_cost(degree: int) -> float:
 
 def cable_length(edges, distance):
     return sum(distance[e.v,e.w] for e in chain.from_iterable(edges))
+
+def total_cost(edges, degrees, data_cable_cost, power_cable_assignment):
+    data_cost = sum(D[e.v,e.w]*data_cable_cost for e in chain.from_iterable(edges)) #incl trench cost + foil
+    switch_cost = sum(_switch_cost(d) for d in degrees.values()) - _switch_cost(degrees[0])
+    power_cost = sum(2*D[e.v,e.w] * CABLE_COSTS[power_cable_assignment[e.w]] for e in chain.from_iterable(edges))
+    return data_cost + switch_cost + power_cost

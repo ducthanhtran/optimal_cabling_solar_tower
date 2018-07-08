@@ -37,7 +37,7 @@ Sun's position changes continuously, thus for effective energy conversion we nee
 
 \begin{frame}\frametitle{Problem: Data cable}
 \begin{table}
-  \caption{Data cables with their limitations and costs.}
+  \caption{Data cables with their limitations and costs. We can only connect two heliostats with a copper cable.}
   \begin{tabular}{l|cc|c}
     Cable & Max. capacity & Max. length [m] & Price [\euro/m] \\
     \toprule
@@ -45,9 +45,6 @@ Sun's position changes continuously, thus for effective energy conversion we nee
     Fiberglass & - & - & 2
   \end{tabular}
 \end{table}
-\begin{itemize}
-  \item additionally: protective foil (+2\euro/m)
-\end{itemize}
 \visible<2->{
   \begin{table}
     \caption{Switch prices, for 8-/16-port switches we can either use copper or fiber-glass output. Endpoints are only used for copper cables.}
@@ -65,49 +62,82 @@ Sun's position changes continuously, thus for effective energy conversion we nee
 
 \begin{frame}\frametitle{Problem: Power cable}
 \begin{table}
-  \caption{Power cables with their limitations and prices.}
+  \caption{Power cables with their connectivity limitations and prices.}
   \begin{tabular}{l|cc|c}
     Cable & Max. capacity & Max. length [m] & Price [\euro/m] \\
     \toprule
     NYY-J 3x2.5 RE & 56 & 38.36 & 0.58 \\
     NYY-J 3x4 RE & 73 & 47.08 & 0.87 \\
     NYY-J 3x6 RE & 92 & 56.04 & 1.24 \\
-    NYY-J 3x10 RE & 124 & 69.3 & 1.95 \\
+    NYY-J 3x10 RE & 124 & 69.30 & 1.95 \\
     NYY-J 3x16 RE & 162 & 84.87 & 3.13 \\
     \midrule
     NYY-J 3x25 RM & 209 & 102.79 & 5.19 \\
     NYY-J 3x35 RM & 250 & 120.31 & 6.90
   \end{tabular}
 \end{table}
-\end{frame}
-
-\begin{frame}[t]{Challenges}
 \begin{itemize}
-  \item How are heliostats partitioned?
-  \item Data cable: use expensive switches that allow branching or consider paths
-  \item How does the location affect solutions?
+  \item For instances with more than 250 heliostats we need to use more than one outgoing cable from the solar tower \\ $\Rightarrow$ Partitioning problem
 \end{itemize}
 \end{frame}
 
-\begin{frame}[t]{Initial solutions}
-\centering
-\begin{tikzpicture}[scale = 1.5,sibling distance=8em,
-  every node/.style = {shape=rectangle, rounded corners,
-    draw, align=center,
-    top color=white, bottom color=white}]]
-  \node {Cost factors}
-    child { node {Switches} 
-        child { node(e1) {Hamiltonian paths} } }
-    child { node {Cable meters}
-		child { node(e2) {MST} } 
-		};
-\begin{scope} [shift={(0cm,-4.5cm)}]
-\node(e3) {Lazy-Branching};  
-\end{scope}
-\begin{scope}[dashed] 
-\draw (e1)--(e3); 
-\draw (e2)--(e3); 
-\end{scope}
-\end{tikzpicture}
-
+\begin{frame}\frametitle{Problem: Installation cost}
+\begin{table}
+  \caption{Depending on the location we have different installation costs for trenches and working power.}
+  \begin{tabular}{l|c}
+    Country & Price [\euro/m] \\
+    \toprule
+    Australia & 50 \\
+    Spain & 25 \\
+    South Africa & 10 \\
+    United Arab Emirates & 10
+  \end{tabular}
+\end{table}
+\begin{itemize}
+  \item additionally: protective foil (+2\euro/m)
+\end{itemize}
+Thus for a meter of glasfiber in Australia we need to pay
+\begin{tabular}{rl}
+  \phantom{+}50\euro & installation cost \\
+  +2\euro & glasfiber cable \\
+  +2\euro & protective foil \\
+  \cmidrule{0-1} \\
+  54\euro
+\end{tabular}
 \end{frame}
+
+\begin{frame}[t]{Our approach}
+\vfill
+\begin{itemize}
+  \item Consider a precomputed partioning $\Rightarrow$ eases capacity constraint and computation time
+  \item Focus on data cabling due to high switch costs
+  \begin{itemize}
+    \item compute solution only on data cable
+    \item afterwards compute power cable assignment greedily with data cable solution
+  \end{itemize}
+  \end{itemize}
+$\Rightarrow$ consider solution that installs data and power cable together in trenches, that is, we only have one subgraph $H\subseteq G$
+\vfill
+\end{frame}
+
+%\begin{frame}[t]{Initial solutions}
+%\centering
+%\begin{tikzpicture}[scale = 1.5,sibling distance=8em,
+%  every node/.style = {shape=rectangle, rounded corners,
+%    draw, align=center,
+%    top color=white, bottom color=white}]]
+%  \node {Cost factors}
+%    child { node {Switches} 
+%        child { node(e1) {Hamiltonian paths} } }
+%    child { node {Cable meters}
+%		child { node(e2) {MST} } 
+%		};
+%\begin{scope} [shift={(0cm,-4.5cm)}]
+%\node(e3) {Lazy-Branching};  
+%\end{scope}
+%\begin{scope}[dashed] 
+%\draw (e1)--(e3); 
+%\draw (e2)--(e3); 
+%\end{scope}
+%\end{tikzpicture}
+%\end{frame}

@@ -11,12 +11,12 @@ import numpy as np
 from common import Edge
 
 
-def plot_solution_data(coordinates: np.ndarray,
-                       output: str,
-                       edges: List[List[Edge]],
-                       value: float,
-                       edge_cost: float,
-                       partitions: int) -> None:
+def plot_solution(coordinates: np.ndarray,
+                   output: str,
+                   edges: List[List[Edge]],
+                   value: float,
+                   edge_cost: float,
+                   partitions: int) -> None:
     plt.figure(figsize=(16,16), dpi=350)
     plt.axis('equal')
 

@@ -25,31 +25,24 @@
 %\end{frame}
 \input{./tikz/mst_local.tex}
 
-\begin{frame}
-  \begin{figure}
-    \includegraphics[width=0.75\textwidth]{./figs/init_output_mst_14_6.png}
-    \caption{Initial MST solution. Total costs: 317,311.75\euro.}
-  \end{figure}
-\end{frame}
+%\begin{frame}
+%  \begin{figure}
+%    \includegraphics[width=0.75\textwidth]{./figs/init_output_mst_14_6.png}
+%    \caption{Initial MST solution. Total costs: 317,311.75\euro.}
+%  \end{figure}
+%\end{frame}
 
 \begin{frame}{Cycle Neighborhood Improvement}
   \begin{figure}
     \captionsetup[subfigure]{justification=centering}
     \begin{subfigure}{0.45\textwidth}
-      \includegraphics[width=0.75\textwidth]{./figs/init_output_mst_14_6__SELECTION.png}
+      \includegraphics[width=0.75\textwidth]{./figs/mst_ls_1.png}
       \caption{Initial solution.}
     \end{subfigure}
     \begin{subfigure}{0.45\textwidth}
-      \includegraphics[width=0.75\textwidth]{./figs/output_mst_14_6_SELECTION.png}
-      \caption{After cycle improvement.}
+      \includegraphics[width=0.75\textwidth]{./figs/mst_ls_2.png}
+      \caption{After local search improvement. A switch is replaced by a Conductor.}
     \end{subfigure}
-  \end{figure}
-\end{frame}
-
-\begin{frame}
-  \begin{figure}
-    \includegraphics[width=0.75\textwidth]{./figs/output_mst_14_6.png}
-    \caption{After local search for spanning trees. Total costs: 313,385.10\euro.}
   \end{figure}
 \end{frame}
 
