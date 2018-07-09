@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.6.28)  9 JUL 2018 01:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.6.28)  9 JUL 2018 07:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1601,21 +1601,32 @@ Package pdftex.def Info: ./figs/hamilton_big_after_ls.png  used on input line 5
 
 
 
-] [31
+]
+Underfull \hbox (badness 10000) in paragraph at lines 36--36
+[]|\OT1/cmss/m/n/9 Hamiltonian
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 36--36
+[]|\OT1/cmss/m/n/9 Hamiltonian
+ []
+
+[31
 
 ] [32
 
 ] [33
 
+] [34
+
 ])
 \openout2 = `Conclusion.aux'.
 
-
-(./Conclusion.tex [34
-
+ (./Conclusion.tex [35
 
 
-] [35
+
+] [36
 
 ])
 \tf@nav=\write6
@@ -1629,20 +1640,20 @@ Package pdftex.def Info: ./figs/hamilton_big_after_ls.png  used on input line 5
 
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 80.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 80.
- (./presentation.aux (./Intro.aux)
-(./definitions.aux) (./partitions.aux) (./mst.aux) (./hamilton.aux)
-(./Cost_comp.aux) (./Conclusion.aux))
+ (./presentation.aux
+(./Intro.aux) (./definitions.aux) (./partitions.aux) (./mst.aux)
+(./hamilton.aux) (./Cost_comp.aux) (./Conclusion.aux))
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 80.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 80.
 Package rerunfilecheck Info: File `presentation.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 36805 strings out of 494798
- 864697 string characters out of 6176800
- 1116074 words of memory out of 5000000
- 39212 multiletter control sequences out of 15000+600000
- 18870 words of font info for 71 fonts, out of 8000000 for 9000
+ 36813 strings out of 494798
+ 864778 string characters out of 6176800
+ 1116146 words of memory out of 5000000
+ 39218 multiletter control sequences out of 15000+600000
+ 19281 words of font info for 73 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
  69i,18n,98p,779b,2452s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></us
@@ -1659,10 +1670,10 @@ s/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
 msy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/eurosym/feymr10.pfb>
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><
 /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on presentation.pdf (35 pages, 3102770 bytes).
+Output written on presentation.pdf (36 pages, 3107142 bytes).
 PDF statistics:
- 297 PDF objects out of 1000 (max. 8388607)
- 216 compressed objects within 3 object streams
- 71 named destinations out of 1000 (max. 500000)
+ 304 PDF objects out of 1000 (max. 8388607)
+ 222 compressed objects within 3 object streams
+ 73 named destinations out of 1000 (max. 500000)
  102 words of extra memory for PDF output out of 10000 (max. 10000000)
 

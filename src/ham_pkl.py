@@ -130,7 +130,7 @@ def total_cost(edges, degrees, data_cable_cost, power_cable_assignment):
 if __name__ == '__main__':
 
 
-    cost = 54
+    cost = 14
     for i in range(3,7):
         with open('../pkl/after_ls_hamilton_{}_{}.png.pkl'.format(cost,i), 'rb') as o:
             edges,degrees = pickle.load(o)
