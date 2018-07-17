@@ -8,20 +8,20 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 import numpy as np
 
-from common import Edge
+from .common import Edge
 
 
 def plot_solution(coordinates: np.ndarray,
-                   output: str,
-                   edges: List[List[Edge]],
-                   value: float,
-                   edge_cost: float,
-                   partitions: int) -> None:
+                  output: str,
+                  edges: List[List[Edge]],
+                  value: float,
+                  edge_cost: float,
+                  partitions: int) -> None:
     plt.figure(figsize=(16,16), dpi=350)
     plt.axis('equal')
 
     coordinates_arr = np.array([tuple(x) for x in coordinates])
-    for i,all_edges in enumerate(edges):
+    for i, all_edges in enumerate(edges):
         edges_arr = np.array([tuple(list(x)) for x in all_edges])
 
         x = coordinates_arr[:,0].flatten()

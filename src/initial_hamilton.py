@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 # UTF-8 encoding
-from typing import Dict, List, Set, NamedTuple
+from typing import List
 
 import numpy as np
 from recordclass import recordclass
 from scipy.spatial.distance import cdist
 
-from common import compute_partitions, Edge
+from .common import compute_partitions, Edge
 from solutions import DataCableSolution
 
 
@@ -27,11 +27,11 @@ HamiltonState = recordclass('HamiltonState', ['permutation',
                                               'unvisited'])
 
 
-def shift_left(L: List[int]):
+def shift_left(lst: List[int]):
     """
     Works faster than np.roll(L, -1)
     """
-    return L[1:] + L[:1]
+    return lst[1:] + lst[:1]
 
 
 class Hamilton:
