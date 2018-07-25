@@ -5,8 +5,7 @@ import argparse
 import numpy as np
 from scipy.spatial.distance import cdist
 
-# from hamilton_approach import run_local_search_hamilton
-# from initial_mcmst import MCMST
+from local_search_hamilton import run_local_search_hamilton
 
 
 def int_greater_or_equal(i: int):
@@ -21,8 +20,7 @@ def int_greater_or_equal(i: int):
 def create_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('--input', type=str, required=True,
-                        help='Coordinates of heliostats. We assume that the solar tower'
-                             'is at coordinate (0,0).')
+                        help='Coordinates of heliostats.')
     parser.add_argument('--alg', choices=['mst', 'hamilton'], default='hamilton',
                         help='Local search algorithm.')
 
@@ -39,7 +37,7 @@ def create_parser() -> argparse.ArgumentParser:
 
     restrictions = parser.add_argument_group('Size Restrictions')
     restrictions.add_argument('--max-connections-data-subnetwork', type=int_greater_or_equal(1), default=999999,
-                              help='Maximum number of heliostats within one subnetwork.')
+                              help='Maximum number of heliostats within one subnetwork with regards to the data cable.')
     restrictions.add_argument('--partitions', type=int_greater_or_equal(1),
                               help='Number of partitions for data cable.', default=1)
     restrictions.add_argument('--hamilton-min-improvement', type=float, default=-1.0,
@@ -51,18 +49,18 @@ if __name__ == '__main__':
     args = create_parser().parse_args()
 
     coordinates = np.loadtxt(args.input, delimiter=';')
-    coordinates = np.vstack((np.array([0,0]), coordinates))
+    coordinates = np.vstack((np.array([0, 0]), coordinates))  # add solar tower
 
-    distances = cdist(coordinates,coordinates)
+    distances = cdist(coordinates, coordinates)
 
-    # if args.alg == 'hamilton':
-    # run_local_search_hamilton(coordinates=coordinates,
-    #                           edge_cost=args.edge_cost_data,
-    #                           partitions=args.partitions,
-    #                           distances=distances,
-    #                           initial_graph_output=args.output_init_graph,
-    #                           initial_pkl_output=args.output_init_pkl,
-    #                           graph_output=args.output_graph,
-    #                           pkl_output=args.output_pkl,
-    #                           min_improvement=args.hamilton_min_improvement,
-    #                           upper_cap=args.max_connections_data_subnetwork)
+    if args.alg == 'hamilton':
+        run_local_search_hamilton(coordinates=coordinates,
+                                  edge_cost=args.edge_cost_data,
+                                  partitions=args.partitions,
+                                  distances=distances,
+                                  initial_graph_output=args.output_init_graph,
+                                  initial_pkl_output=args.output_init_pkl,
+                                  graph_output=args.output_graph,
+                                  pkl_output=args.output_pkl,
+                                  min_improvement=args.hamilton_min_improvement,
+                                  upper_cap=args.max_connections_data_subnetwork)

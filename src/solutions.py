@@ -3,8 +3,8 @@
 from itertools import chain
 from typing import Dict, List
 
-from .common import Edge, switch_cost
-from .intersection import is_edge_intersecting
+from common import Edge, switch_cost
+from intersection import is_edge_intersecting
 
 import numpy as np
 
@@ -49,7 +49,7 @@ class EdgeSolution:
 class DataCableSolution(EdgeSolution):
     def __init__(self, n: int, partitions: int):
         super().__init__(partitions)
-        self.degrees = {i:0 for i in range(n)}  # type: Dict[int,int]
+        self.degrees = {i: 0 for i in range(n)}  # type: Dict[int,int]
 
     def add_edge(self, edge: Edge, edge_cost: float, partition: int, coordinates: np.ndarray):
         super().add_edge(edge, edge_cost, partition, coordinates)

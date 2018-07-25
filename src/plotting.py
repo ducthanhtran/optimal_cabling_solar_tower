@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 import numpy as np
 
-from .common import Edge
+from common import Edge
 
 
 def plot_solution(coordinates: np.ndarray,
@@ -33,6 +33,6 @@ def plot_solution(coordinates: np.ndarray,
         plt.plot(x[edges_arr.T], y[edges_arr.T], linestyle='-', color=mapper.to_rgba(i),
                  markerfacecolor='red', marker='o')
     plt.title("Cable cost/m: {}€ \nPartitions: {}\nTotal costs: {:0,.2f}€".format(edge_cost, partitions, value))
-    plt.scatter(coordinates_arr[:,0], coordinates_arr[:,1], color='red', marker='o')
+    plt.scatter(coordinates_arr[:, 0], coordinates_arr[:, 1], color='red', marker='o')
     plt.savefig(output, dpi=300)
     plt.close()

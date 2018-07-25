@@ -6,19 +6,18 @@ import numpy as np
 from recordclass import recordclass
 from scipy.spatial.distance import cdist
 
-from .common import compute_partitions, Edge
+from common import compute_partitions, Edge
 from solutions import DataCableSolution
 
 
-# TODO: document these NamedTuples
 # Candidate = RecordClass('Candidate', [('cost', float),
 #                                       ('edges', List[Edge]),
 #                                       ('vertex', int),
 #                                       ('index', int)])
 # HamiltonState = RecordClass('HamiltonState', [('permutation', List[int]),
 #                                               ('unvisited', Set[int])])
-
-# TODO: buggy pip install - RecordClass not in package?? quick hack
+# NOTE: buggy pip install or something - RecordClass not in package?? quick hacky solution:
+#       removed import of RecordClass above for readability.
 Candidate = recordclass('Candidate', ['cost',
                                       'edges',
                                       'vertex',
@@ -43,13 +42,13 @@ class Hamilton:
 
     def __init__(self, coordinates: np.ndarray, cable_cost: float, partitions: int) -> None:
         """
-        :param coordinates: coordinates vertices
-        :param cable: cost for hamiltonian path
+        :param coordinates: coordinates of all heliostats and the solar tower
+        :param cable_cost: for hamiltonian path
         :param partitions: number of partitions
         """
         self.coordinates = coordinates
         self.cable_cost = cable_cost
-        self.edge_costs = cdist(self.coordinates, self.coordinates) * cable_cost # only consider glass fiber cables!
+        self.edge_costs = cdist(self.coordinates, self.coordinates) * cable_cost  # only consider glass fiber cables!
         self.partitions = partitions
         self.solution = DataCableSolution(self.coordinates.shape[0], partitions)
         self.current_state = HamiltonState(None, None)
