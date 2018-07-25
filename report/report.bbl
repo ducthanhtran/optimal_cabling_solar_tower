@@ -1,0 +1,80 @@
+\begin{thebibliography}{11}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Aarts et~al.(2003)Aarts, Aarts, and Lenstra]{aarts_2003}
+Emile Aarts, Emile~HL Aarts, and Jan~Karel Lenstra.
+\newblock \emph{Local search in combinatorial optimization}.
+\newblock Princeton University Press, 2003.
+
+\bibitem[Bauer and Lysgaard(2015)]{bauer_2015}
+Joanna Bauer and Jens Lysgaard.
+\newblock The offshore wind farm array cable layout problem: a planar open
+  vehicle routing problem.
+\newblock \emph{Journal of the Operational Research Society}, 66\penalty0
+  (3):\penalty0 360--368, 2015.
+
+\bibitem[Cormen et~al.(2009)Cormen, Leiserson, Rivest, and Stein]{cormen_2009}
+Thomas~H Cormen, Charles~E Leiserson, Ronald~L Rivest, and Clifford Stein.
+\newblock \emph{Introduction to algorithms}.
+\newblock MIT press, 2009.
+
+\bibitem[Fischetti and Pisinger(2018)]{fischetti_2018}
+Martina Fischetti and David Pisinger.
+\newblock Mathematical optimization and algorithms for offshore wind farm
+  design: An overview.
+\newblock \emph{Business \& Information Systems Engineering}, pages 1--17,
+  2018.
+
+\bibitem[Gonzalez-Longatt et~al.(2012)Gonzalez-Longatt, Wall, Regulski, and
+  Terzija]{gonzales_2012}
+Francisco~M Gonzalez-Longatt, Peter Wall, Pawel Regulski, and Vladimir Terzija.
+\newblock Optimal electric network design for a large offshore wind farm based
+  on a modified genetic algorithm approach.
+\newblock \emph{IEEE Systems Journal}, 6\penalty0 (1):\penalty0 164--172, 2012.
+
+\bibitem[Ossenbrink(2017)]{franziska_2017}
+Franziska~Freya Ossenbrink.
+\newblock Shortest cable routing of heliostats in solar tower power plants.,
+  September 2017.
+\newblock Bachelor's Thesis.
+
+\bibitem[Osuna et~al.(2001)Osuna, Fernandez, Romero, and Marcos]{osuna_2001}
+Rafael Osuna, Valeric Fernandez, Manuel Romero, and M{\textordfeminine}~Jesus
+  Marcos.
+\newblock Ps10, a 10 mw solar tower power plant for southern spain, 2001.
+
+\bibitem[Osuna et~al.(2006)Osuna, Olavarr{\i}a, Morillo, S{\'a}nchez, Cantero,
+  Fern{\'a}ndez-Quero, Robles, L{\'o}pez, Esteban, C{\'e}ron,
+  et~al.]{osuna_2006}
+Rafael Osuna, Rafael Olavarr{\i}a, Rafael Morillo, Marcelino S{\'a}nchez,
+  Felipe Cantero, Valerio Fern{\'a}ndez-Quero, Pedro Robles, T~L{\'o}pez,
+  Antonio Esteban, Francisco C{\'e}ron, et~al.
+\newblock Ps10, construction of a 11mw solar thermal tower plant in seville,
+  spain.
+\newblock In \emph{Solar-PACES Conference, Seville, Spain, June}, pages 20--23,
+  2006.
+
+\bibitem[Prim(1957)]{prim_1957}
+Robert~Clay Prim.
+\newblock Shortest connection networks and some generalizations.
+\newblock \emph{Bell system technical journal}, 36\penalty0 (6):\penalty0
+  1389--1401, 1957.
+
+\bibitem[von Platen(2018)]{tanja_2018}
+Tanja von Platen.
+\newblock Optimal cable routing of heliostats in solar tower power plants using
+  integer linear programming, März 2018.
+\newblock Bachelor's Thesis.
+
+\bibitem[Vo{\ss} et~al.(2012)Vo{\ss}, Martello, Osman, and
+  Roucairol]{voss_2012}
+Stefan Vo{\ss}, Silvano Martello, Ibrahim~H Osman, and Catherine Roucairol.
+\newblock \emph{Meta-heuristics: Advances and trends in local search paradigms
+  for optimization}.
+\newblock Springer Science \& Business Media, 2012.
+
+\end{thebibliography}

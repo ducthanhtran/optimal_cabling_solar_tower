@@ -1,0 +1,35 @@
+\newcommand*{\trenchcost}{c^\text{trench}}
+% DATA CABLE
+\newcommand*{\datacost}{c_d^\text{data}}
+\newcommand*{\datatotalcost}{c_{d,vw}^\text{data}}
+\newcommand*{\datalength}{L_d^\text{data}}
+\newcommand*{\datacapacity}{M_d^\text{data}}
+% SWITCHES
+\newcommand*{\switchcosts}{c_{s}^\text{lcu}}
+
+\section{Problem statement}
+Formally, we are given an undirected graph $G=(V,E)$ where $V=\{T\} \cup V_H$ with $T$ being our solar tower and $V_H:=\{v_1,\ldots,v_{n}\}$ denotes the set of heliostats. Note that we work in a metric space $(\mathbb{R}^2,d)$, thus we denote with $v_x\in\mathbb{R}$ and $v_y \in\mathbb{R}$ both coordinates for each vertex $v\in V$. Moreover, the metric is simply the euclidean distance 
+\begin{equation}
+  d(v,w) := \sqrt{(v_x-w_x)^2 + (v_y-w_y)^2} \nonumber
+\end{equation}
+between nodes $v,w\in V$. In other words, each vertex $v\in V$ has a specified position in a 2D plane.
+\emptyline
+\noindent
+Before a cable can be installed a trench has to be constructed by workers for which we have to pay installation costs. Let us denote these costs per meter with $\trenchcost\in\mathbb{R}^+$. In other words, the total costs of providing a trench between $v,w\in V$ is $c_{vw}^\text{trench} := d(v,w)\cdot\trenchcost$.
+
+
+\subsection{Data cable and local control units}
+  We can install different types of cables which have length and connection restrictions depending on its type. For this matter let $D$ be the set of data cables with costs $\datacost\in\mathbb{R}^+$ per meter for each cable $d\in D$. We further define for readability the costs $\datatotalcost:=d(v,w)\cdot \datacost$ of installing a cable of type $d$ on the edge $vw\in E$. Furthermore, each data cable $d\in D$ has a length restriction $\datalength\in\mathbb{R}^+$ and a restriction on how many heliostats it can connect to, that is, $\datacapacity\in\mathbb{N}$ for $d\in D$.
+  \emptyline
+  Aside from the cables we have to build \emph{local control units} (LCU) at each heliostat. These LCUs are used for communication processing and may allow branching by e.g. installing an 8- or 16-port LCU at an heliostat. Each of these LCU has connectivity-restrictions for each cable type $d\in D$. For this matter, let $S$ the set of all LCUs where each $s\in S$ has installation costs $\switchcosts\in\mathbb{R}^+$. The connectivity or vertex-degree restrictions are given by $l_{s,d}, u_{s,d}\in\mathbb{N}$ for each LCU $s\in S$ and cable type $d\in D$. Both restrictions state that the LCU $s\in S$ has to connect at least $l_{s,d}$ cables of type $d\in D$, whereas $u_{s,d}$ is the upper bound of incident cables of type $d\in D$ at an heliosat that installed LCU $s\in S$.
+
+  
+
+\subsection{Power cables}
+\ToDo{formal definition}
+
+\subsection{Cabling problem}
+\ToDo{tbox with formal problem and optimization criterion}
+
+\ToDo{capacity constraint}
+

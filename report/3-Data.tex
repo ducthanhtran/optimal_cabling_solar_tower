@@ -1,0 +1,66 @@
+\section{Data}
+We present real world data regardings costs per meter for various data and power cables. Moreover, many different LCUs as well as trench costs are provided for which we can test our heuristics on. In particular we have also coordinates of heliostats from the PS10 solar tower power plant \cite{osuna_2001,osuna_2006}, a sketch of this instance can be seen in \cref{fig:ps10}.
+
+\begin{figure}
+%\includegraphics[width=\linewidth]{imagefile}
+\caption{PS10 instance with its heliostats and the solar tower at coordinate $(0,0)$.}
+\label{fig:ps10}
+\end{figure}
+
+\subsection{Trench costs}
+  We consider four different countries that are possible locations for our solar tower plant. Each trench has to be constructed by workers and has a depth of 1m as well as 1m in width and length.
+  \begin{table}[H]
+    \caption{Trench costs for different countries}
+    \label{tab:data:trench}
+    \begin{center}
+    \begin{tabular}{l|c}
+      Country & Costs [\euro/m] \\
+      \midrule
+      Australia & 50 \\
+      Spain & 25 \\
+      South Africa & 10 \\
+      United Arab Emirates & 10
+    \end{tabular}
+    \end{center}
+  \end{table}
+
+\subsection{Data Cable}
+  Regarding the data cable we are able to install either a copper or fiberglass cable.
+  \begin{table}[H]
+  \caption{The copper cable is much cheaper however it has harsh restrictions regarding its usage. The fiberglass cable has actually no maximum connection count restriction. We use a restriction of 128 heliostats in order to comply to certain protocol usage.}
+  \label{tab:data:cable}
+  \begin{center}
+    \begin{tabular}{lccc}
+      Data cable type & Costs [\euro/m] & Length restriction [m] & Max. connection count \\
+      \midrule
+      Copper & 0.7 & 100 & 2 \\
+      Fiberglass & 2 & $\infty$ & 128
+    \end{tabular}
+  \end{center}
+\end{table}
+\ToDo{large constant for length restriction for fiberglass?}
+
+\subsubsection{Local Control Units}
+  Exactly one local control units is installed at every heliostat so that communication is enabled.
+  \begin{table}[H]
+  \caption{Local control units with their degree and cable restrictions for both cable types.}
+  \label{tab:data:lcu}
+  \begin{center}
+    \begin{tabular}{lc|cc|cc}
+      LCU type $s$ & Costs [\euro] & \multicolumn{2}{c|}{Copper} & \multicolumn{2}{c}{Fiberglass} \\
+      && $l_{s,\text{COP}}$ & $u_{s,\text{COP}}$ & $l_{s,\text{FIG}}$ & $u_{s,\text{FIG}}$\\
+      \midrule
+      Endpoint & 10 & 1 & 1 & 0 & 0 \\
+      Conductor & 100 & 0 & 0 & 2 & 2 \\
+      8-port copper & 800 & 0 & 7 & 1 & 2 \\
+      8-port fiberglass & 800 & 0 & 0 & 1 & 9 \\
+      16-port copper & 1500 & 0 & 15 & 1 & 2 \\
+      16-port fiberglass & 1500 & 0 & 0 & 1 & 17 \\
+    \end{tabular}
+  \end{center}
+  \end{table}
+
+  \ToDo{image of some example LCUs}
+
+\subsection{Power Cable}
+  \ToDo{data; protective foil are simply added to costs}

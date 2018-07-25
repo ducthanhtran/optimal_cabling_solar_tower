@@ -1,0 +1,11 @@
+\section{Introduction}
+In this work we present two heuristics that compute valid solutions to an optimization problem regarding a cabling problem in solar tower power plants. Such a plant focuses sunlight with the help of heliostats onto a receiver that is installed at the top of the solar tower. This energy heats up a medium like oil or sodium in order to power a turbine which generates electric energy in return.
+Such a plant consists of a solar tower and heliostats that have to be connected to the solar tower with two types of cables, namely a power and data cable. Both cables are needed at each heliostat as the sun's position has to be taken into account for an efficient exploitation of solar energy. Regarding the cabling we have several limitations with respect to connectivity and planarity constraints. First, cables have restrictions regarding their maximum lengths between heliostats. Moreover, there are capacity constraints for each cable, namely that cables can only connect so many heliostats. Second, the planarity constraint is enforced in order to have a low maintenance cost when digging up trenches.
+\emptyline
+\noindent
+Another source of energy is utilized in offshore wind farms for which the cabling problem has been studied in \cite{gonzales_2012,bauer_2015,fischetti_2018}. The same constraints like planarity are also present in their cabling problem. Our work builds up on two bachelor's theses that studied the solar tower power plants \cite{franziska_2017,tanja_2018}.
+\emptyline
+\noindent
+In the following we will give a formal definition of our problem and present two heuristics that apply the local search optimization method \cite{aarts_2003,voss_2012}. This approach was chosen due to the high complexity of the cabling problem, which is especially difficult to solve for large instances that inhibit a lot of heliostats. Then, an evaluation part is followed where we have applied both heuristics onto the PS10 solar tower power plant \cite{osuna_2001,osuna_2006}. Afterwards we give a short summary and possible future work.
+
+

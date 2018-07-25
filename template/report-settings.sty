@@ -1,0 +1,68 @@
+% -- Packages --------------------------------------------------------%
+\usepackage{amsfonts,amssymb,amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{ae}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{bm,wasysym}
+\usepackage{url}
+\usepackage{calc}
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usepackage{listings}
+\usepackage{color}
+\usepackage[absolute]{textpos}
+\usepackage[nice]{units}
+\usepackage{listings}
+\usepackage{array}
+\usepackage[hidelinks]{hyperref}
+\usepackage[section]{placeins}
+
+
+% -- Colors --------------------------------------------------------%
+\definecolor{darkblue}{HTML}{00549F}
+\definecolor{lightblue}{HTML}{407FB7}
+\colorlet{titlegray}{gray!70!black}
+
+
+% -- Settings --------------------------------------------------------%
+\usetikzlibrary{calc}
+\pgfplotsset{compat=1.5}
+%
+\setlength{\TPHorizModule}{1mm}
+\setlength{\TPVertModule}{1mm}
+\textblockorigin{0mm}{0mm}
+\setlength{\unitlength}{1mm}
+%
+\setcounter{secnumdepth}{3}			
+\addtokomafont{section}{\normalfont\Large\bfseries\sffamily\color{darkblue}}
+\addtokomafont{subsection}{\normalfont\large\sffamily\bfseries\color{darkblue}}
+\addtokomafont{subsubsection}{\normalfont\normalsize\sffamily\bfseries\color{darkblue}}
+\addtokomafont{paragraph}{\normalfont\normalsize\sffamily\bfseries}
+
+
+% -- Bibliography --------------------------------------------------------%
+\usepackage[numbers]{natbib}
+\bibliographystyle{plainnat}
+%\bibliographystyle{unsrt}
+
+
+% -- Commands --------------------------------------------------------%
+\newcommand{\ToDo}[1]{{\footnotesize \color{red}  $\blacktriangleright$ \big[#1\big]}}
+\DeclareRobustCommand{\citeext}[1]{\citeauthor{#1}~\cite{#1}}
+\def\setLogo#1{\def\@logo{#1}}\setLogo{../template/mathccesText}
+\def\setLogoExternal#1{\def\@logoExternal{#1}}\setLogoExternal{}
+
+
+% -- Front page --------------------------------------------------------%
+%\pagestyle{rwthpage}
+\AtBeginDocument{%
+	\begin{textblock}{210}[1,1](205,32)%
+		\hfill%
+		\IfFileExists{\@logoExternal}{\raisebox{4mm}{\includegraphics[height=24mm]{\@logoExternal}}\hspace*{5mm}}{}%
+		\includegraphics[height=32mm]{\@logo}
+	\end{textblock}
+}%
+
+

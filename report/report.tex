@@ -1,0 +1,63 @@
+\documentclass[12pt,a4paper,oneside,
+	listof=totoc, % list of figures and list of tables in table of contents
+	bibliography=totoc, % bibliography in table of contents
+	%parskip=half, % half line between paragraphs instead of indentation
+	BCOR=4mm,
+	DIV=12,
+]{scrartcl}
+
+
+% -- Packages --------------------------------------------------------%
+\usepackage{../template/report-settings}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{multirow,tabu} % tabular stuff like rowfont
+\usepackage{algorithm,algpseudocode}
+\usepackage{graphicx}
+\usepackage{cleveref}
+\usepackage{eurosym}
+%\usepackage[left=5cm]{geometry}
+
+
+% -- Settings --------------------------------------------------------%
+\setLogo{../template/logo_i2ths}
+\allowdisplaybreaks
+
+% -- Shortcuts -------------------------------------------------------%
+\newcommand*{\tb}[1]{\textbf{#1}}
+\newcommand*{\ti}[1]{\textit{#1}}
+
+% -- Own commands ----------------------------------------------------%
+\newcommand*{\jquote}[1]{$\lceil$#1$\rfloor$}
+\newcommand*{\myhline}{\bigskip\noindent\hrulefill\bigskip}
+\newcommand*{\emptyline}{\vspace{\baselineskip} \\ \noindent}
+
+% -- Cleveref specials -----------------------------------------------%
+\crefname{constr}{constraint}{constaints}
+\creflabelformat{constr}{#2{\upshape(#1)}#3}
+
+
+% -- Document --------------------------------------------------------%
+\begin{document}
+	
+	% Title page and Lists
+	\pagenumbering{Roman}
+	\input{0-Title}
+	\tableofcontents\clearpage
+	
+	% Sections
+	\pagenumbering{arabic}
+  	\input{1-Intro}
+  	\input{2-Problem-statement-and-formulations}
+    \input{3-Data}
+    \input{4-Heuristics}
+    \input{5-Evaluation}
+    \input{6-Conclusion}
+	
+	% Bibliography
+	\clearpage
+	\bibliography{literature}
+	
+\end{document}
+%---------------------------------------------------------------------------%

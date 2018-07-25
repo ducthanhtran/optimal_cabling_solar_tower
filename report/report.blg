@@ -1,0 +1,51 @@
+This is BibTeX, Version 0.99d (TeX Live 2017/Debian)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: report.aux
+The style file: plainnat.bst
+Database file #1: literature.bib
+Warning--entry type for "franziska_2017" isn't style-file defined
+--line 79 of file literature.bib
+Warning--entry type for "tanja_2018" isn't style-file defined
+--line 88 of file literature.bib
+You've used 11 entries,
+            2773 wiz_defined-function locations,
+            656 strings with 6881 characters,
+and the built_in function-call counts, 5265 in all, are:
+= -- 436
+> -- 359
+< -- 7
++ -- 122
+- -- 111
+* -- 427
+:= -- 819
+add.period$ -- 32
+call.type$ -- 11
+change.case$ -- 66
+chr.to.int$ -- 11
+cite$ -- 22
+duplicate$ -- 226
+empty$ -- 411
+format.name$ -- 126
+if$ -- 1089
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 11
+newline$ -- 62
+num.names$ -- 44
+pop$ -- 159
+preamble$ -- 1
+purify$ -- 58
+quote$ -- 0
+skip$ -- 186
+stack$ -- 0
+substring$ -- 146
+swap$ -- 26
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 106
+warning$ -- 0
+while$ -- 45
+width$ -- 0
+write$ -- 142
+(There were 2 warnings)
