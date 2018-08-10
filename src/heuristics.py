@@ -7,6 +7,8 @@ from scipy.spatial.distance import cdist
 
 from local_search_hamilton import run_local_search_hamilton
 
+from initial_mst import MSTPrim
+
 
 def int_greater_or_equal(i: int):
     def _check_valid(arg: str):
@@ -25,15 +27,15 @@ def create_parser() -> argparse.ArgumentParser:
                         help='Local search algorithm.')
 
     costs = parser.add_argument_group('Costs')
-    costs.add_argument('--edge-cost-data', type=float, help='Trench cost + glass fiber cable cost + '
-                                                            'protective foil cost.')
+    costs.add_argument('--edge-cost-data', type=float, required=True,
+                       help='Trench cost + glass fiber cable cost + protective foil cost.')
     costs.add_argument('--trench-cost', type=float, required=True, help='Trench costs only.')
 
     outputs = parser.add_argument_group('Output files')
-    outputs.add_argument('--output-graph', type=str, required=True)
-    outputs.add_argument('--output-pkl', type=str, required=True)
-    outputs.add_argument('--output-init-graph', type=str, required=True)
-    outputs.add_argument('--output-init-pkl', type=str, required=True)
+    outputs.add_argument('--output-graph', type=str, default='')
+    outputs.add_argument('--output-pkl', type=str, default='')
+    outputs.add_argument('--output-init-graph', type=str, default='')
+    outputs.add_argument('--output-init-pkl', type=str, default='')
 
     restrictions = parser.add_argument_group('Size Restrictions')
     restrictions.add_argument('--max-connections-data-subnetwork', type=int_greater_or_equal(1), default=999999,
@@ -64,3 +66,5 @@ if __name__ == '__main__':
                                   pkl_output=args.output_pkl,
                                   min_improvement=args.hamilton_min_improvement,
                                   upper_cap=args.max_connections_data_subnetwork)
+    elif args.alg == 'mst':
+        pass
