@@ -17,7 +17,7 @@ def plot_solution(coordinates: np.ndarray,
                   value: float,
                   edge_cost: float,
                   partitions: int) -> None:
-    plt.figure(figsize=(16,16), dpi=350)
+    plt.figure(figsize=(16, 16), dpi=350)
     plt.axis('equal')
 
     coordinates_arr = np.array([tuple(x) for x in coordinates])
