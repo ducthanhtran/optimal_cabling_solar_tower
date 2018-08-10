@@ -36,14 +36,16 @@ def run_local_search_hamilton(coordinates: np.ndarray,
     init_sol_cost = solution_value(edge_cost=edge_cost, edges=ham.solution.edges, degrees=ham.solution.degrees, distances=distances)
     assert init_sol_cost == ham.solution.cost(distances)
 
-    plot_solution(coordinates=coordinates,
-                  output=initial_graph_output,
-                  edges=ham.solution.edges,
-                  value=init_sol_cost,
-                  edge_cost=edge_cost,
-                  partitions=partitions)
-    with open(initial_pkl_output, 'wb') as init_pkl:
-        dump(obj=ham.solution, file=init_pkl, protocol=HIGHEST_PROTOCOL)
+    if initial_graph_output != '':
+        plot_solution(coordinates=coordinates,
+                      output=initial_graph_output,
+                      edges=ham.solution.edges,
+                      value=init_sol_cost,
+                      edge_cost=edge_cost,
+                      partitions=partitions)
+    if initial_pkl_output != '':
+        with open(initial_pkl_output, 'wb') as init_pkl:
+            dump(obj=ham.solution, file=init_pkl, protocol=HIGHEST_PROTOCOL)
     print("Initial solution cost: {}".format(init_sol_cost))
     print("Cable length: {}".format(cable_length(ham.solution.edges, cdist(coordinates, coordinates))))
 
@@ -52,24 +54,34 @@ def run_local_search_hamilton(coordinates: np.ndarray,
 
     # plot local optimal solution and save it with pickle
     sol_cost = solution_value(edge_cost=edge_cost, edges=solution_edges, degrees=degrees, distances=distances)
-    plot_solution(coordinates=coordinates,
-                  output=graph_output,
-                  edges=solution_edges,
-                  value=sol_cost,
-                  edge_cost=edge_cost,
-                  partitions=partitions)
-    with open(pkl_output, 'wb') as pkl:
-        dump(obj=[solution_edges,degrees], file=pkl, protocol=HIGHEST_PROTOCOL)
+
+    if graph_output != '':
+        plot_solution(coordinates=coordinates,
+                      output=graph_output,
+                      edges=solution_edges,
+                      value=sol_cost,
+                      edge_cost=edge_cost,
+                      partitions=partitions)
+    if pkl_output != '':
+        with open(pkl_output, 'wb') as pkl:
+            dump(obj=[solution_edges, degrees], file=pkl, protocol=HIGHEST_PROTOCOL)
     print("After local search, solution cost: {}".format(sol_cost))
     print("After local search, cable length: {}".format(cable_length(solution_edges, cdist(coordinates, coordinates))))
-    print()
     print("Local search improved cost by {}".format(init_sol_cost-sol_cost))
 
 
 def perform_local_search_hamilton(initial_solution: DataCableSolution,
-                                  coords,
+                                  coords: np.ndarray,
                                   min_improvement: float,
-                                  upper_cap: float):
+                                  upper_cap: float) -> Tuple[List[Edge], Dict[int, int]]:
+    """
+
+    :param initial_solution: initial hamilton solution
+    :param coords: coordinates of heliostats and solar tower
+    :param min_improvement: minimum threshold for performing an improvement step during local search.
+    :param upper_cap: upper capacity of heliostats within one network
+    :return: edges and their respective degrees that denote a local optimum with respect to the local search procedure
+    """
     # perform local search onto initial Hamilton solution
     degrees = copy.deepcopy(initial_solution.degrees)
     edges = copy.deepcopy(initial_solution.edges)
@@ -87,14 +99,40 @@ def perform_local_search_hamilton(initial_solution: DataCableSolution,
     return solution_edges, degrees
 
 
-def improve(edges: List[List[Edge]], degrees, d, incident, edge_coords, T, coordinates, distance, min_improvement, upper_cap):
+def improve(edges: List[List[Edge]],
+            degrees,
+            d,
+            incident,
+            edge_coords,
+            T,
+            coordinates,
+            distance,
+            min_improvement,
+            upper_cap):
+    """
+    Performs local search onto an initial solution.
+
+    :param edges: contains list of edges for each partition
+    :param degrees: degrees of vertices
+    :param d:
+    :param incident:
+    :param edge_coords: edge coordinates
+    :param T:
+    :param coordinates: coordinates of vertices
+    :param distance: euclidean distance matrix
+    :param min_improvement: minimum improvement in cost per step
+    :param upper_cap: upper capacity of heliostats per partition
+    :return:
+    """
     while True:
         edges_copy = edges[:]
-        was_improved=False
         a = False
         for e in chain.from_iterable(edges_copy):
             if e.v != 0:
-                was_improved, edges, degrees, d, incident, edge_coords, T= improve_edge(e, edges, degrees, d, incident, edge_coords, T, coordinates, distance, min_improvement, upper_cap)
+                was_improved, edges, degrees, d, incident, edge_coords, T = improve_edge(e, edges, degrees, d,
+                                                                                         incident, edge_coords,
+                                                                                         T, coordinates, distance,
+                                                                                         min_improvement, upper_cap)
                 if was_improved:
                     a = True
                     break
@@ -103,8 +141,8 @@ def improve(edges: List[List[Edge]], degrees, d, incident, edge_coords, T, coord
 
 
 def improve_edge(e, edges, degrees, d, incident, edge_coords, T, coordinates, distance, min_improvement, upper_cap):
-    for new_cost,t in get_candidates(edges, d, incident, T, coordinates, distance, min_improvement, upper_cap):
-        tmp_coords = remove_coords(t.remove, edge_coords, coordinates) # remove t.remove temporarily
+    for new_cost, t in get_candidates(edges, d, incident, T, coordinates, distance, min_improvement, upper_cap):
+        tmp_coords = remove_coords(t.remove, edge_coords, coordinates)  # remove t.remove temporarily
         if not is_edge_intersecting_single(t.add, tmp_coords, coordinates):
             for f in t.remove:
                 remove_edge(f, edges, degrees, d, incident, edge_coords, T, coordinates)
@@ -116,19 +154,19 @@ def improve_edge(e, edges, degrees, d, incident, edge_coords, T, coordinates, di
     return False, edges, degrees, d, incident, edge_coords, T
 
 
-def obtain_initial_partition(edges: List[List[Edge]]) -> Dict[Edge,int]:
+def obtain_initial_partition(edges: List[List[Edge]]) -> Dict[Edge, int]:
     d = {}
-    for i,partition_edges in enumerate(edges):
+    for i, partition_edges in enumerate(edges):
         for e in partition_edges:
             if e.v == 0 or e.w == 0:
-                d[e] = -1 # ignore starting edges from solar tower
+                d[e] = -1  # ignore starting edges from solar tower
             else:
                 d[e] = i
     return d
 
 
-def compute_incident_edges(edges: List[List[Edge]], coordinates: np.ndarray) -> Dict[int,List[Edge]]:
-    incident = {i:[] for i in range(coordinates.shape[0])}
+def compute_incident_edges(edges: List[List[Edge]], coordinates: np.ndarray) -> Dict[int, List[Edge]]:
+    incident = {i: [] for i in range(coordinates.shape[0])}
     for e in chain.from_iterable(edges):
         if e.v == 0 or e.w == 0:
             continue
@@ -137,8 +175,8 @@ def compute_incident_edges(edges: List[List[Edge]], coordinates: np.ndarray) -> 
     return incident
 
 
-def compute_incident_vertices(edges: List[List[Edge]], coordinates: np.ndarray) -> Dict[int,List[Edge]]:
-    incident = {i:[] for i in range(coordinates.shape[0])}
+def compute_incident_vertices(edges: List[List[Edge]], coordinates: np.ndarray) -> Dict[int, List[Edge]]:
+    incident = {i: [] for i in range(coordinates.shape[0])}
     for e in chain.from_iterable(edges):
         if e.v == 0 or e.w == 0:
             continue
@@ -147,14 +185,18 @@ def compute_incident_vertices(edges: List[List[Edge]], coordinates: np.ndarray) 
     return incident
 
 
-def partition_size(edge: Edge, d: Dict[int,int], coordinates) -> int:
+def partition_size(edge: Edge, d: Dict[int, int], coordinates: np.ndarray) -> int:
     if edge in d.keys():
         return sum([d[edge] == j for j in d.values()])
     else:
-        return coordinates.shape[0]+1
+        return coordinates.shape[0] + 1
 
 
-def compute_triangulation_edges(e: Edge, vertex: int, incident, d, T) -> TriangulationEdges:
+def compute_triangulation_edges(e: Edge,
+                                vertex: int,
+                                incident: Dict[int, List[Edge]],
+                                d: Dict[Edge, int],
+                                T: Dict[int, List[Edge]]) -> TriangulationEdges:
     add = [Edge(e.v, vertex), Edge(e.w, vertex)]
     remove = [e]
     indices = [d[e]] * 2
@@ -162,7 +204,7 @@ def compute_triangulation_edges(e: Edge, vertex: int, incident, d, T) -> Triangu
     remove.extend(incident[vertex])
     if len(T[vertex]) == 2:
         add.append(Edge(T[vertex][0], T[vertex][1]))
-        indices.append(d[incident[vertex][0]]) # always exists!
+        indices.append(d[incident[vertex][0]])  # always exists!
     return TriangulationEdges(add, remove, indices)
 
 
@@ -173,9 +215,13 @@ def cost_triangulation(te: TriangulationEdges, distances: np.ndarray):
 
 
 def get_candidates(edges: List[List[Edge]],
-                   d, incident,
-                   T, coordinates,
-                   distances, min_improvement, upper_cap) -> Tuple[float, TriangulationEdges]:
+                   d: Dict[Edge, int],
+                   incident: Dict[int, List[Edge]],
+                   T: Dict[int, List[Edge]],
+                   coordinates: np.ndarray,
+                   distances: np.ndarray,
+                   min_improvement: float,
+                   upper_cap: int) -> List[Tuple[float, TriangulationEdges]]:
     result = []
     for e in chain.from_iterable(edges):
         if partition_size(e, d, coordinates) < upper_cap:
@@ -188,12 +234,20 @@ def get_candidates(edges: List[List[Edge]],
     return sorted(result, key=lambda x: x[0])
 
 
-def get_coords(e: Edge, coordinates):
+def get_coords(e: Edge, coordinates: np.ndarray) -> np.ndarray:
     return np.array([[coordinates[e.v][0], coordinates[e.v][1],
                       coordinates[e.w][0], coordinates[e.w][1]]])
 
 
-def add_edge(e: Edge, partition_index: int, edges, degrees, d, incident, edge_coords, T, coordinates):
+def add_edge(e: Edge,
+             partition_index: int,
+             edges: List[List[Edge]],
+             degrees: Dict[int, int],
+             d: Dict[Edge, int],
+             incident: Dict[int, List[Edge]],
+             edge_coords: np.ndarray,
+             T: Dict[int, List[Edge]],
+             coordinates) -> None:
     edges[partition_index].append(e)
     for v in e:
         degrees[v] += 1
@@ -206,7 +260,14 @@ def add_edge(e: Edge, partition_index: int, edges, degrees, d, incident, edge_co
     edge_coords = np.vstack((edge_coords, get_coords(e, coordinates)))
 
 
-def remove_edge(e: Edge, edges, degrees, d, incident, edge_coords, T, coordinates):
+def remove_edge(e: Edge,
+                edges: List[List[Edge]],
+                degrees: Dict[int, int],
+                d: Dict[Edge, int],
+                incident: Dict[int, List[Edge]],
+                edge_coords,
+                T: Dict[int, List[Edge]],
+                coordinates: np.ndarray):
     partition_index = d[e]
     edges[partition_index].remove(e)
     for v in e:
@@ -221,7 +282,7 @@ def remove_edge(e: Edge, edges, degrees, d, incident, edge_coords, T, coordinate
     edge_coords = np.delete(edge_coords, index, axis=0)
 
 
-def is_edge_intersecting_single(edge_list: List[Edge], edge_coords: np.ndarray, coordinates):
+def is_edge_intersecting_single(edge_list: List[Edge], edge_coords: np.ndarray, coordinates: np.ndarray) -> bool:
     for e in edge_list:
         # add other edges
         tmp_coords = edge_coords.copy()
@@ -234,7 +295,7 @@ def is_edge_intersecting_single(edge_list: List[Edge], edge_coords: np.ndarray, 
     return False
 
 
-def remove_coords(edge_list: List[Edge], edge_coords: np.ndarray, coordinates):
+def remove_coords(edge_list: List[Edge], edge_coords: np.ndarray, coordinates) -> np.ndarray:
     res = edge_coords.copy()
     for e in edge_list:
         index = np.where(np.all(get_coords(e,coordinates) == res, axis=1))
