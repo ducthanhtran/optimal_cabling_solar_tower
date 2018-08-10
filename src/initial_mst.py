@@ -39,7 +39,7 @@ class MSTPrim:
         costs to the edge costs. We use Prim's algorithm as a baseline.
         :param partition_indices:
         """
-        self.visited_heliostats = set([0])
+        self.visited_heliostats = {0}
         self.unvisited_heliostats = {int(i) for i in partition_indices}
 
         partition_edges = []  # forming an MST
@@ -48,10 +48,7 @@ class MSTPrim:
         while len(partition_edges) < partition_indices.shape[0]:
             # select min cost edge
             edges = self._next_cut_edges()
-            if not edges:
-                raise RuntimeError('empty edge candidates list. WEIRD ERROR')
 
-            updated = False
             for e in edges:
                 e_coords = np.array([[self.coordinates[e.v][0],
                                      self.coordinates[e.v][1],
@@ -66,10 +63,7 @@ class MSTPrim:
                     self.predecessor[e.w].append(e.v)
 
                     self._update(e)
-                    updated = True
                     break
-            if not updated:
-                raise RuntimeError('SHOULD NOT HAPPEN')
         self.edge_coords.append(partition_edges_coords)
         return partition_edges
 
