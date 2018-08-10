@@ -5,9 +5,11 @@ from typing import Dict, List, NamedTuple
 
 import numpy as np
 
+
 CABLE_COSTS = np.array([0.58, 0.87, 1.24, 1.95, 3.13, 5.19, 6.9])
 CABLE_LENGTHS = np.array([38.36, 47.08, 56.04, 69.3, 84.87, 102.79, 120.31])
 CABLE_CAPACITIES = np.array([56, 73, 92, 124, 162, 209, 250])
+
 
 Cables = NamedTuple('Cables', [('costs', np.ndarray),
                                ('lengths', np.ndarray),
@@ -35,7 +37,7 @@ def compute_partitions(coordinates: np.ndarray, partitions: int) -> List[np.ndar
     return [np.delete(a, np.where(a == -1)) + 1 for a in lst]
 
 
-def solution_value(distances: np.ndarray, edges, edge_cost: float, degrees):
+def solution_value(distances: np.ndarray, edges: List[List[Edge]], edge_cost: float, degrees) -> float:
     cost = sum(distances[e.v, e.w] * edge_cost for e in chain.from_iterable(edges))
     # subtract switch costs of solar tower at the end
     return cost + sum(switch_cost(d) for d in degrees.values()) - switch_cost(degrees[0])
