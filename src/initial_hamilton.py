@@ -26,7 +26,7 @@ HamiltonState = recordclass('HamiltonState', ['permutation',
                                               'unvisited'])
 
 
-def shift_left(lst: List[int]):
+def shift_left(lst: List[int]) -> List[int]:
     """
     Works faster than np.roll(L, -1)
     """
