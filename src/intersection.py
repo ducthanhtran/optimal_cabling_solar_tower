@@ -65,7 +65,7 @@ def disjoint_region(matrix: np.ndarray,
     return np.all(np.maximum(matrix[:, i], matrix[:, j]) < np.minimum(matrix[:, k], matrix[:, l]))
 
 
-def orientation(matrix: np.ndaray,
+def orientation(matrix: np.ndarray,
                 px: int,
                 py: int,
                 qx: int,
