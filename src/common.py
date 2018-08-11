@@ -62,7 +62,7 @@ def cable_length(edges: List[Edge], distance: np.ndarray) -> float:
 def total_cost(edges: List[Edge],
                degrees: Dict[int, int],
                data_cable_cost: float,
-               power_cable_assignment: Dict[Edge, int],
+               power_cable_assignment: np.ndarray,
                distance: np.ndarray) -> float:
     data_costs = sum(
             distance[e.v, e.w] * data_cable_cost for e in chain.from_iterable(edges))  # incl. trench cost + foil
