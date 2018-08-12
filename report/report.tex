@@ -15,9 +15,17 @@
 \usepackage{multirow,tabu} % tabular stuff like rowfont
 \usepackage{algorithm,algpseudocode}
 \usepackage{graphicx}
-\usepackage{cleveref}
+\usepackage{tcolorbox}
 \usepackage{eurosym}
-%\usepackage[left=5cm]{geometry}
+\usepackage{adjustbox}
+\usepackage{tikz}
+\usepackage{cleveref}
+
+
+% -- Tikz ------------------------------------------------------------%
+\usetikzlibrary{positioning} %allow below of etc
+\usetikzlibrary{shapes.misc} %strike out
+\usetikzlibrary{angles} %draw angles
 
 
 % -- Settings --------------------------------------------------------%
@@ -36,6 +44,9 @@
 % -- Cleveref specials -----------------------------------------------%
 \crefname{constr}{constraint}{constaints}
 \creflabelformat{constr}{#2{\upshape(#1)}#3}
+
+\crefname{problem}{problem}{Problems}
+\newtheorem{problem}{Problem}
 
 
 % -- Document --------------------------------------------------------%

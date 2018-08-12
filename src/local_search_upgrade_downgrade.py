@@ -1,7 +1,6 @@
-from itertools import chain, product
-from typing import Dict, List
+from itertools import product
 
-from assign_power_cables import *
+from assign_power_cable import *
 from common import Cables
 from intersection import is_edge_intersecting
 
@@ -72,8 +71,7 @@ class LocalSearchUpgradeDowngrade:
 
         index = np.where(np.all(self._coordinates(old_edge) == self.edges_coordinates[p], axis=1))
         self.edges_coordinates[p] = np.delete(self.edges_coordinates[p], index, axis=0)
-        self.predecessor[edge.w] = edge.v # new predecessor relation
-
+        self.predecessor[edge.w] = edge.v  # new predecessor relation
 
         for q in self.parents[edge.w]:
             self.all_successors[q] = list(set(self.all_successors[q]) - set(self.all_successors[edge.w]))
@@ -119,7 +117,6 @@ class LocalSearchUpgradeDowngrade:
             assert len(self.parents[v]) < self.coordinates.shape[0]
             assert len(self.all_successors[v]) < self.coordinates.shape[0]
 
-
     def _next_candidate(self):
         for v,w in product(self.heliostats, self.heliostats):
             if v != w and self._valid_edge(v,w):
@@ -156,7 +153,7 @@ class LocalSearchUpgradeDowngrade:
                 Edge(w,v) not in self.edge_set and \
                 w not in self.parents[v]
 
-    ### NEW EDGE #########################
+    # NEW EDGE ---------------------------------------
     def _new_edge(self, v, w):
         # get cable for v-> w s.t. capacity of w can be covered + length restriction
         cap = self.capacities[w] < self.cables.capacities
@@ -170,7 +167,7 @@ class LocalSearchUpgradeDowngrade:
         data_dable_cost = self.distance[v,w] * self.data_cable_cost
         return power_cable_cost+data_dable_cost, res[0]
 
-    ### DELETED EDGE #########################
+    # DELETED EDGE ---------------------------------------
     def _delete_edge(self, w):
         power_cable_cost = self.distance[self.predecessor[w],w] * self.cables.costs[self.cable_assignment[w]] * 2
         data_cable_cost = self.distance[self.predecessor[w],w] * self.data_cable_cost
@@ -179,7 +176,7 @@ class LocalSearchUpgradeDowngrade:
 
         return power_cable_cost + data_cable_cost
 
-    ### UPGRADE COST #########################
+    # UPGRADE COST ---------------------------------------
     def _upgrade_switch(self, v):
         if self.degrees[v] == 2 or self.degrees[v] == 9:
             return 700
@@ -212,10 +209,9 @@ class LocalSearchUpgradeDowngrade:
     def _cable_cost_difference_upgrade(self, parent, new_cable):
         cost_difference = self.cables.costs[new_cable] - self.cables.costs[self.cable_assignment[parent]]
         return self.distance[self.predecessor[parent], parent] * cost_difference * 2
-    #########################
 
-    ### DOWNGRADE PROFIT #########################
-    def _downgrade_power_cables(self, w):
+    # DOWNGRADE PROFIT ---------------------------------------
+    def _downgrade_power_cables(self, w: int):
         profit = 0
         cables_downgrade = []
         for parent in self.parents[w]:
@@ -237,9 +233,8 @@ class LocalSearchUpgradeDowngrade:
     def _cable_cost_difference_downgrade(self, parent, new_cable):
         cost_difference = self.cables.costs[self.cable_assignment[parent]] - self.cables.costs[new_cable]
         return self.distance[self.predecessor[parent], parent] * cost_difference * 2
-    #########################
 
-    def _coordinates(self, edge: Edge):
+    def _coordinates(self, edge: Edge) -> np.ndarray:
         return np.array([[self.coordinates[edge.v][0],
                           self.coordinates[edge.v][1],
                           self.coordinates[edge.w][0],

@@ -25,10 +25,117 @@ One may interpret this by jumping from one point in the valid solution search sp
   \label{fig:local_search_illustration}
 \end{figure}
 
-\ToDo{both cable in one, assign power automatically}
+\subsection{Partitioning}\label{sec:partitioning}
+Because the largest power cable has a capacity of 250 heliostats and instances like the PS10 have more heliostats we have to use more than one power cable in order to connect all heliostats, hence a partioning of the heliosats has to be considered additionally. We perform a simple heuristic for this problem by computing the angles $\alpha_h$ between the reference vector $(1, 0)^T$ and an heliostat $h\in V_H$ like in \cref{fig:partioning}. Afterwards, the partioning is the result of sorting the angles. All in all, this procedure has a time complexity of $\mathcal{O}\left(|V_H|^2\log\left(|V_H|\right)\right)$.
 
-\subsection{Minimum Spanning Tree Approach}
-The fact that each heliostat has to be connected to the solar tower $T$ with minimal costs infers utilizing a minimum spanning tree approach. We just need to consider the additional constraints of planarity as well as connectivity constraints. We thus choose Prim's algorithm \cite{prim_1957,cormen_2009} to compute an initial, valid solution to our problem. For the local search improvement steps we choose the \emph{cycle-neighborhood} function
+We can compute initial solutions for the local search procedure independently on each partition, therefore obtaining $k\in\mathbb{N}$ initial solutions for $k$ partitions.
+\begin{figure}[H]
+    \begin{center}
+    \begin{tikzpicture}
+    \tikzstyle{vertex}=[draw,shape=circle, fill, inner sep=0pt, minimum size=0.2cm];
+    \node[vertex, label=below:T, purple] (tower){};
+    \node[node distance=2cm] (x) [right= of tower]{};
+    \node[node distance=2cm] (y) [left= of tower]{};
+    \node[vertex] (a) [above right=1cm and 2cm of tower]{};
+    \node[vertex] (b) [above right=2cm and 0.5cm of a]{};
+    \node[vertex] (c) [below left=0.5cm and 2cm of b]{};
+    \node[vertex] (d) [below left=1cm and 1.5cm of c]{};
+    \node[vertex] (e) [above left=2cm and 0.2cm of d]{};
+    
+    \draw pic[ fill=blue!30, angle radius=1.75cm] {angle=x--tower--c};
+    \draw[shorten >= -2cm, line width=0.33mm, black] (tower.center) -- (c.center);
+    
+    \draw pic[ fill=green!30, angle radius=1.5cm] {angle=x--tower--b};
+    \draw[shorten >= -2cm, line width=0.33mm, black] (tower.center) -- (b.center);
+    
+    \draw pic[ fill=red!30, angle radius=1.25cm] {angle=x--tower--a};
+    \draw[shorten >= -2cm, line width=0.33mm, black] (tower.center) -- (a.center);
+    
+    \draw[shorten >= -3cm, line width=0.55mm, black] (tower.center) -- (x);
+    \draw[shorten >= -3cm, line width=0.55mm, black] (tower.center) -- (y);
+    
+    \node[vertex, purple] (fill) {};
+    \end{tikzpicture}
+  \end{center}
+  \caption{Sort heliostats by computed angles. For $k\in\mathbb{N}$ partitions we obtain $\left\lceil \frac{|V_H|}{k}\right\rceil$ heliostats in each partition.}
+  \label{fig:partioning}
+\end{figure}
+Because this heuristic is a hard assignment of the heliostats to their respective partition we have to consider exchange-operations in the local search algorithms so that non-convex partitions are able to arise. Otherwise we limit ourselves to the hard-assignments and local search solutions are poor with regards to their quality.
+
+
+\subsection{Greedy Power Cable Assignment}\label{sec:assign_power}
+
+\subsection{Minimum Spanning Tree Approach}\label{sec:mst}
+The fact that each heliostat has to be connected to the solar tower $T$ with minimal costs infers utilizing a minimum spanning tree approach. We just need to consider the additional constraints of planarity as well as connectivity constraints. We thus choose Prim's algorithm \cite{prim_1957,cormen_2009} to compute an initial, valid solution to our problem. Afterwards we compute a greedy power cable assignment which yields a valid solution to \cref{prob:cabling_problem}.
+
+For the local search improvement steps we choose the \emph{cycle-neighborhood}
 \begin{equation*}
-  N(T) := \{\tilde{T}\in\mathcal{T}|\}
+  N(T) := \{\tilde{T}\in\mathcal{T}\ |\ c(\tilde{T}) < c(T) \land |E(\tilde{T})\setminus E(T)| = 1 \}
 \end{equation*}
+for a spanning tree $T\subset G$ and $\mathcal{T}$ denotes the set of all spanning trees in $G$.
+
+For an update step we thus delete an edge $e\in E(T)$ in our current tree $T$ and reconnect the disconnected partition by a new edge $f\in E\setminus{(E(T)\cup\{e\})}$ which yields $\tilde{T}$. By doing this we effectively move from $T$ to another spanning tree $\tilde{T}$. In order to improve our current solution we always choose an edge $f$ with $c(f) < c(e)$. If no such edge exists, we can terminate the local search procedure as the neighborhood $N(T)$ is empty, hence $T$ is a locally optimal solution. Such an update step is sketched in \cref{fig:local_search_mst_step}.
+\begin{figure}[H]
+  \center
+    \begin{tikzpicture}[node distance=1cm]
+    \tikzstyle{vertex}=[draw,shape=circle, minimum size=1cm];
+    \tikzstyle{partition}=[draw, minimum width=4cm, minimum height=1.5cm, shape=rectangle];
+    \node[vertex] (T){T};
+    \node[partition] (P1) [above=of T] {$P_1$};
+    \node[partition] (P2) [above=of P1] {$P_2$};
+    
+    \draw[line width=0.55mm,black] (T) -- (P1);
+    \draw[line width=0.55mm,black, transform canvas={xshift=-1cm}] (P1) -- node[strike out,draw, red]{} node[right] {\small e} (P2);
+    \draw[line width=0.55mm,blue, transform canvas={xshift=1cm}] (P1) -- node[right] {\small f} (P2);
+    \end{tikzpicture}
+  \caption{Consider the cycle neighborhood $N(T)$, that is, delete edge $e$ and reconnect the resulting partitions $P_1$ and $P_2$ by adding an edge $f$ with $c(f) < c(e)$.}
+  \label{fig:local_search_mst_step}
+\end{figure}
+
+Mor
+\ToDo{Upgrade-Downgrade}
+
+
+\subsection{Hamiltonian Path Approach}
+If every heliostat is incident to maximal two cable connections we are able to use Conductors only, which reduces the amount of switch costs we are installing (see \cref{tab:data:cable}). Therefore we consider a Hamiltonian path as a basis for the second heuristic.
+
+\subsubsection{Initial Solution}
+
+The initial solution is built greedily by starting from the solar tower $T$ and extending the hamiltonian path step by step. For this matter we consider a \emph{partial path} of vertices of length $i\in\mathbb{N}$, that is, $p =(v_0, v_1, v_2, \ldots, v_i)$, for heliostats $v_j\in V_H,1\leq j \leq i \leq |V_H|$, $v_0:=T$. For arbitrary partial paths we define the distance as the sum of euclidean distances, that is
+\begin{equation*}
+  Dist\left((v_0,v_1,v_2,\ldots,v_i)\right) := \sum\limits_{k=0}^{i-1} d(v_k,v_{k+1})
+\end{equation*}
+Given a partial path $p=(v_0,v_1,\ldots,v_i)$, $0 \leq i \leq |V_H|$ we additionally introduce the \emph{extended path} for an unvisited heliostat $v\in V_H\setminus V(p)$ that is placed after the $m$-th vertex in the partial path $p$:
+\begin{equation*}
+  ExtPath(p,v,m) := (v_0,v_1,\ldots,v_{m},v,v_{m+1},\ldots,v_i)
+\end{equation*}
+for $1\leq m \leq i$. In other words we may append a heliostat at the end of $p$ or insert it into the path directly, effectively adding edges $\{v_{m-1},v\}$, $\{v,v_{m+1}\}$ and deleting the existing edge $\{v_{m-1},v_{m+1}\}$.
+
+Therefore, given a partial path $p=(v_0,v_1,\ldots,v_i)$ we can extend it by computing the minimal distance of all possible extended paths, in other words
+\begin{equation*}
+\forall m\in\{1,\ldots,i\} \ \forall v\in V_H\setminus V(p) \ :\  \min
+\left\{
+  Dist(ExtPath(p,v,m))
+\right\}
+\end{equation*}
+This search procedure can be computed in $\mathcal{O}(|V_H|^2)$ time in each step until all heliostat are visited. Note that we do not need to check intersections of edges for the partial paths because the initial solutions are computed independently for each partition and form a convex polygon. Further we only consider euclidean distances as opposed to the initial minimum spanning tree solution in \cref{sec:mst} because installations of LCUs were included in edge costs.
+
+\begin{algorithm}[H]
+  \caption{Greedy construction of a hamiltonian path.}
+  \label{alg:init_hamilton}
+  \begin{algorithmic}[1]
+    \Procedure{Init-Hamilton}{$G=(V,E)$}
+    \State $p := (T)$
+    \While{$|p| < |V_H|$}
+      \For{$m=1,\ldots,i$}
+        \For{$v\in\ V_H\setminus V(p)$}
+          \State compute $Dist(ExtPath(p,v,m))$
+        \EndFor
+      \EndFor
+      \State $p^\ast := \min\{Dist(ExtPath(p,))\}$
+    \EndWhile
+    \EndProcedure
+  \end{algorithmic}
+\end{algorithm}
+
+

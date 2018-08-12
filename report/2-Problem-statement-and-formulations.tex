@@ -15,7 +15,8 @@ Formally, we are given an undirected graph $G=(V,E)$ where $V=\{T\} \cup V_H$ wi
 between nodes $v,w\in V$. In other words, each vertex $v\in V$ has a specified position in a 2D plane.
 \emptyline
 \noindent
-Before a cable can be installed a trench has to be constructed by workers for which we have to pay installation costs. Let us denote these costs per meter with $\trenchcost\in\mathbb{R}^+$. In other words, the total costs of providing a trench between $v,w\in V$ is $c_{vw}^\text{trench} := d(v,w)\cdot\trenchcost$.
+Before a cable can be installed a trench has to be constructed by workers for which we have to pay installation costs. Let us denote these costs per meter with $\trenchcost\in\mathbb{R}^+$. In other words, the total costs of providing a trench between $v,w\in V$ is \\ 
+$c_{vw}^\text{trench} := d(v,w)\cdot\trenchcost$.
 
 
 \subsection{Data cable and local control units}
@@ -29,7 +30,12 @@ Before a cable can be installed a trench has to be constructed by workers for wh
 \ToDo{formal definition}
 
 \subsection{Cabling problem}
-\ToDo{tbox with formal problem and optimization criterion}
+\begin{tcolorbox}
+\label{prob:cabling_problem}
+\begin{problem}[Cabling Problem]
+  Given a complete, undirected graph $G=(V,E)$.
+\end{problem}
+\end{tcolorbox}
 
 \ToDo{capacity constraint}
 

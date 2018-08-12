@@ -6,8 +6,7 @@ import numpy as np
 from scipy.spatial.distance import cdist
 
 from local_search_hamilton import run_local_search_hamilton
-
-from initial_mst import MSTPrim
+from local_search_upgrade_downgrade import run_local_search_mst
 
 
 def int_greater_or_equal(i: int):
