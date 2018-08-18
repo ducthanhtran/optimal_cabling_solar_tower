@@ -26,9 +26,10 @@ One may interpret this by jumping from one point in the valid solution search sp
 \end{figure}
 
 \subsection{Partitioning}\label{sec:partitioning}
-Because the largest power cable has a capacity of 250 heliostats and instances like the PS10 have more heliostats we have to use more than one power cable in order to connect all heliostats, hence a partioning of the heliosats has to be considered additionally. We perform a simple heuristic for this problem by computing the angles $\alpha_h$ between the reference vector $(1, 0)^T$ and an heliostat $h\in V_H$ like in \cref{fig:partioning}. Afterwards, the partioning is the result of sorting the angles. All in all, this procedure has a time complexity of $\mathcal{O}\left(|V_H|^2\log\left(|V_H|\right)\right)$.
+Because the largest power cable has a capacity of 250 heliostats and instances like the PS10 have more heliostats we have to use more than one power cable in order to connect all heliostats, hence a partioning of the heliosats has to be considered additionally. We perform a simple heuristic for this problem by computing the angles $\alpha_h$ between the reference vector $(1, 0)^T$ and a heliostat $h\in V_H$ like in \cref{fig:partioning}. Afterwards, the partioning is the result of sorting the angles. All in all, this procedure has a time complexity of $\mathcal{O}\left(|V_H|^2\log\left(|V_H|\right)\right)$.
 
-We can compute initial solutions for the local search procedure independently on each partition, therefore obtaining $k\in\mathbb{N}$ initial solutions for $k$ partitions.
+We can compute initial solutions for the local search procedure independently on each partition, therefore obtaining $K\in\mathbb{N}$ initial solutions for $K$ partitions.
+\vspace*{1.8cm}
 \begin{figure}[H]
     \begin{center}
     \begin{tikzpicture}
@@ -57,10 +58,18 @@ We can compute initial solutions for the local search procedure independently on
     \node[vertex, purple] (fill) {};
     \end{tikzpicture}
   \end{center}
-  \caption{Sort heliostats by computed angles. For $k\in\mathbb{N}$ partitions we obtain $\left\lceil \frac{|V_H|}{k}\right\rceil$ heliostats in each partition.}
+  \caption{Sort heliostats by computed angles. For $K\in\mathbb{N}$ partitions we obtain $\left\lceil \frac{|V_H|}{K}\right\rceil$ heliostats in each partition.}
   \label{fig:partioning}
 \end{figure}
 Because this heuristic is a hard assignment of the heliostats to their respective partition we have to consider exchange-operations in the local search algorithms so that non-convex partitions are able to arise. Otherwise we limit ourselves to the hard-assignments and local search solutions are poor with regards to their quality.
+
+\noindent
+More formally we compute \emph{partitions} $G_k:=(V_k,E_k)$ with
+\begin{itemize}
+  \item $V_k := \{T\} \cup V_{H,k}$
+  \item $E_k := \{\{vw\}|v,w\in V_k\}$
+\end{itemize}
+where $V_{H,k}\subseteq V_H$ is the set of heliostats belonging to partition $k\in\{1,\ldots,K\}$ that is the result of sorting the angles. Note that $V_{H,i}\cap V_{H,j} = \emptyset$ for $i\neq j$, $1\leq i,j \leq K$ and $\bigcup\limits_{k=1}^K V_{H,k} = V_H$.
 
 
 \subsection{Greedy Power Cable Assignment}\label{sec:assign_power}
@@ -68,11 +77,11 @@ Because this heuristic is a hard assignment of the heliostats to their respectiv
 \subsection{Minimum Spanning Tree Approach}\label{sec:mst}
 The fact that each heliostat has to be connected to the solar tower $T$ with minimal costs infers utilizing a minimum spanning tree approach. We just need to consider the additional constraints of planarity as well as connectivity constraints. We thus choose Prim's algorithm \cite{prim_1957,cormen_2009} to compute an initial, valid solution to our problem. Afterwards we compute a greedy power cable assignment which yields a valid solution to \cref{prob:cabling_problem}.
 
-For the local search improvement steps we choose the \emph{cycle-neighborhood}
+Let us fix an arbitrary partition $G_k$, $k\in\mathbb{N}$ for which we want to perform the local search procedure. For the local neighborhood improvement steps we choose the \emph{cycle-neighborhood}
 \begin{equation*}
   N(T) := \{\tilde{T}\in\mathcal{T}\ |\ c(\tilde{T}) < c(T) \land |E(\tilde{T})\setminus E(T)| = 1 \}
 \end{equation*}
-for a spanning tree $T\subset G$ and $\mathcal{T}$ denotes the set of all spanning trees in $G$.
+for a spanning tree $T\subset G_k$ and $\mathcal{T}$ denotes the set of all spanning trees in $G_k$.
 
 For an update step we thus delete an edge $e\in E(T)$ in our current tree $T$ and reconnect the disconnected partition by a new edge $f\in E\setminus{(E(T)\cup\{e\})}$ which yields $\tilde{T}$. By doing this we effectively move from $T$ to another spanning tree $\tilde{T}$. In order to improve our current solution we always choose an edge $f$ with $c(f) < c(e)$. If no such edge exists, we can terminate the local search procedure as the neighborhood $N(T)$ is empty, hence $T$ is a locally optimal solution. Such an update step is sketched in \cref{fig:local_search_mst_step}.
 \begin{figure}[H]
@@ -97,11 +106,11 @@ Mor
 
 
 \subsection{Hamiltonian Path Approach}
-If every heliostat is incident to maximal two cable connections we are able to use Conductors only, which reduces the amount of switch costs we are installing (see \cref{tab:data:cable}). Therefore we consider a Hamiltonian path as a basis for the second heuristic.
+If every heliostat is incident to maximal two cable connections we are able to use conductors only, which reduces the amount of LCU costs we are installing (see \cref{tab:data:cable}). Therefore we consider a Hamiltonian path as a basis for the second heuristic.
 
 \subsubsection{Initial Solution}
 
-The initial solution is built greedily by starting from the solar tower $T$ and extending the hamiltonian path step by step. For this matter we consider a \emph{partial path} of vertices of length $i\in\mathbb{N}$, that is, $p =(v_0, v_1, v_2, \ldots, v_i)$, for heliostats $v_j\in V_H,1\leq j \leq i \leq |V_H|$, $v_0:=T$. For arbitrary partial paths we define the distance as the sum of euclidean distances, that is
+The initial solution is built greedily by starting from the solar tower $T$ and extending the hamiltonian path step by step. For this matter we consider a \emph{partial path} $p$ of vertices of length $i\in\mathbb{N}$, that is, $p =(v_0, v_1, v_2, \ldots, v_i)$, for heliostats $v_j\in V_H,1\leq j \leq i \leq |V_H|$, $v_0:=T$. For arbitrary partial paths we define the distance as the sum of euclidean distances, that is
 \begin{equation*}
   Dist\left((v_0,v_1,v_2,\ldots,v_i)\right) := \sum\limits_{k=0}^{i-1} d(v_k,v_{k+1})
 \end{equation*}
@@ -111,31 +120,137 @@ Given a partial path $p=(v_0,v_1,\ldots,v_i)$, $0 \leq i \leq |V_H|$ we addition
 \end{equation*}
 for $1\leq m \leq i$. In other words we may append a heliostat at the end of $p$ or insert it into the path directly, effectively adding edges $\{v_{m-1},v\}$, $\{v,v_{m+1}\}$ and deleting the existing edge $\{v_{m-1},v_{m+1}\}$.
 
-Therefore, given a partial path $p=(v_0,v_1,\ldots,v_i)$ we can extend it by computing the minimal distance of all possible extended paths, in other words
+Therefore, given a partial path $p=(v_0,v_1,\ldots,v_i)$ we can extend it by computing the minimal distance of all possible extended paths:
 \begin{equation*}
 \forall m\in\{1,\ldots,i\} \ \forall v\in V_H\setminus V(p) \ :\  \min
 \left\{
   Dist(ExtPath(p,v,m))
 \right\}
 \end{equation*}
-This search procedure can be computed in $\mathcal{O}(|V_H|^2)$ time in each step until all heliostat are visited. Note that we do not need to check intersections of edges for the partial paths because the initial solutions are computed independently for each partition and form a convex polygon. Further we only consider euclidean distances as opposed to the initial minimum spanning tree solution in \cref{sec:mst} because installations of LCUs were included in edge costs.
+This search procedure can be computed in $\mathcal{O}(|V_H|^2)$ time in each step until all heliostat are visited. We also simply add a constant of 100 to the edge weights, thus effectively taking the costs of conductors into account. As opposed to the initial minimum spanning tree computation in \cref{sec:mst} we do not need to explicitly check for intersections during the computation because the partitions form a convex polygon and the edge weights are still metric.
 
+For a partition $G_k\subset G$ we can compute an initial hamiltonian path by using \cref{alg:init_hamilton}.
 \begin{algorithm}[H]
-  \caption{Greedy construction of a hamiltonian path.}
+  \caption{Greedy construction of a hamiltonian path for a partition $k$.}
   \label{alg:init_hamilton}
   \begin{algorithmic}[1]
-    \Procedure{Init-Hamilton}{$G=(V,E)$}
+    \Procedure{Init-Hamilton}{$G_k=(V_k,E_k)$}
     \State $p := (T)$
-    \While{$|p| < |V_H|$}
+    \While{$|p| < |V_{H,k}|$}
+      \State $M[v,m] := \infty\qquad\qquad m=1,\ldots,i, \ \ v\in V_{H,k}\setminus V(p)$ \Comment{init. value matrix}
       \For{$m=1,\ldots,i$}
-        \For{$v\in\ V_H\setminus V(p)$}
-          \State compute $Dist(ExtPath(p,v,m))$
+        \For{$v\in\ V_{H,k}\setminus V(p)$}
+          \State $M[v,m] :=Dist(ExtPath(p,v,m))$
         \EndFor
       \EndFor
-      \State $p^\ast := \min\{Dist(ExtPath(p,))\}$
+      \State $v^\ast,m^\ast := \argmin\limits_{v,m} \left\{M[v,m]\right\}$
+      \State $p:=ExtPath(p,v^\ast,m^\ast)$
     \EndWhile
     \EndProcedure
   \end{algorithmic}
 \end{algorithm}
 
+\subsubsection{Local Neighborhood Search}
+For each partition $k=1,\ldots,K$ we obtain a hamiltonian path $H_k\subset G_k$. Now, consider moving a vertex from a hamiltonian path $H_i$ to another path $H_j$ for $i\neq j$, $1\leq i,j\leq K$. In particular consider the graph construct in \cref{fig:hamiltonian_path_local_search_start} where $v,w\in V(H_i)$ and $x,y,z \in V(H_j)$.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=3cm]
+  \tikzstyle{vertex}=[draw,shape=circle, minimum size=1cm];
+  
+  \node[vertex] (w) {w};
+  \node[vertex] (v) [below=3cm of w] {v};
+  \coordinate (center) at ($(w)!0.5!(v)$);
+  \node[vertex] (i) [right=2cm of center] {x};
+  \node[vertex] (i+) [above right=0.5cm and 4cm of i] {y};
+  \node[vertex] (i-) [below right=0.5cm and 4cm of i] {z};
+  \node[node distance=0.5cm] (up) [above= of w]{};
+  \node[node distance=0.5cm] (down) [below= of v]{};
+  \node[node distance=0.5cm] (up_i) [above= of i+]{};
+  \node[node distance=0.5cm] (down_i) [below= of i-]{};
+  
+  \draw[line width=0.55mm,black] (w) -- (up);
+  \draw[line width=0.55mm,black] (v) -- (down);
+  \draw[line width=0.55mm,black] (i+) -- (up_i);
+  \draw[line width=0.55mm,black] (i-) -- (down_i);
+  
+  \draw[line width=0.55mm, black] (w) -- (v);
+  \draw[line width=0.55mm, black] (i) -- (i+);
+  \draw[line width=0.55mm, black] (i) -- (i-);
+  %\draw[line width=0.55mm, dashed, purple] (w) -- (i);
+  %\draw[line width=0.55mm, dashed, purple] (v) -- (i);
+  %\draw[line width=0.55mm, dashed, purple] (i+) -- (i-);
+\end{tikzpicture}
+\caption{Starting point of the local search step. We denote the left hamiltonian path that contains the vertices $v$ and $w$ as $H_i$.}
+\label{fig:hamiltonian_path_local_search_start}
+\end{figure}
+\noindent
+In order to move the vertex $x\in V(H_j)$ to the hamiltonian path $H_i$ we have to delete the edges $\{x,y\},\{x,z\}\in E(H_j)$ to isolate the vertex $x$ and $\{v,w\}\in E(H_i)$. If $x$ is a leaf then we only have to remove one edge in $H_j$.
+Afterwards, we connect $x$ to the hamiltonian path $H_i$ by constructing the edges $\{v,x\}$ and $\{w,x\}$. Further, we might have to add the edge $\{y,z\}$ to $E(H_j)$ if $x$ was not a leaf, therefore having two neighbors $y,z\in V(H_j)$. This procedure is sketched in \cref{fig:hamiltonian_path_local_search_move}.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=3cm]
+\tikzstyle{vertex}=[draw,shape=circle, minimum size=1cm];
+\node[vertex] (w) {w};
+\node[vertex] (v) [below=3cm of w] {v};
+\coordinate (center) at ($(w)!0.5!(v)$);
+\node[vertex] (i) [right=2cm of center] {x};
+\node[vertex] (i+) [above right=0.5cm and 4cm of i] {y};
+\node[vertex] (i-) [below right=0.5cm and 4cm of i] {z};
+\node (legend1) [above right=2cm and 1cm of i] {added edges};
+\node (legend2) [right=1cm of legend1] {};
+\node (l1) [above=0.1cm of legend1] {deleted edges};
+\node (l2) [right=1cm of l1] {};
 
+\node[node distance=0.5cm] (up) [above= of w]{};
+\node[node distance=0.5cm] (down) [below= of v]{};
+\node[node distance=0.5cm] (up_i) [above= of i+]{};
+\node[node distance=0.5cm] (down_i) [below= of i-]{};
+
+\draw[line width=0.55mm,blue, dashed] (legend1) -- (legend2); 
+\draw[line width=0.55mm,black] (l1) -- node[strike out,draw, red]{} (l2); 
+
+\draw[line width=0.55mm,black] (w) -- (up);
+\draw[line width=0.55mm,black] (v) -- (down);
+\draw[line width=0.55mm,black] (i+) -- (up_i);
+\draw[line width=0.55mm,black] (i-) -- (down_i);
+
+\draw[line width=0.55mm, black] (w) -- node[strike out,draw, red]{} (v);
+\draw[line width=0.55mm, black] (i) -- node[sloped, strike out,draw, red]{} (i+);
+\draw[line width=0.55mm, black] (i) -- node[sloped, strike out,draw, red]{} (i-);
+\draw[line width=0.55mm, dashed, blue] (w) -- (i);
+\draw[line width=0.55mm, dashed, blue] (v) -- (i);
+\draw[line width=0.55mm, dashed, blue] (i+) -- (i-);
+\end{tikzpicture}
+\caption{Moving $x\in V(H_j)$ requires deletion and creating edges in both hamiltonian paths $H_i$ and $H_j$.}
+\label{fig:hamiltonian_path_local_search_move}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=3cm]
+\tikzstyle{vertex}=[draw,shape=circle,minimum size=1cm];
+\tikzstyle{cross}=[draw,shape=cross,red];
+
+\node[vertex] (w) {w};
+\node[vertex] (v) [below=3cm of w] {v};
+\coordinate (center) at ($(w)!0.5!(v)$);
+\node[vertex] (i) [right=2cm of center] {x};
+\node[vertex] (i+) [above right=0.5cm and 4cm of i] {y};
+\node[vertex] (i-) [below right=0.5cm and 4cm of i] {z};
+\node[node distance=0.5cm] (up) [above= of w]{};
+\node[node distance=0.5cm] (down) [below= of v]{};
+\node[node distance=0.5cm] (up_i) [above= of i+]{};
+\node[node distance=0.5cm] (down_i) [below= of i-]{};
+
+\draw[line width=0.55mm,black] (w) -- (up);
+\draw[line width=0.55mm,black] (v) -- (down);
+\draw[line width=0.55mm,black] (i+) -- (up_i);
+\draw[line width=0.55mm,black] (i-) -- (down_i);
+
+\draw[line width=0.55mm, black] (w) -- (i);
+\draw[line width=0.55mm, black] (v) -- (i);
+\draw[line width=0.55mm, black] (i+) -- (i-);
+\end{tikzpicture}
+\caption{After moving vertex $x\in V(H_j)$ to hamiltonian path $H_i$.}
+\label{fig:hamiltonian_path_local_search_end}
+\end{figure}
