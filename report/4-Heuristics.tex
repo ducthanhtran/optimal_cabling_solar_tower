@@ -184,7 +184,8 @@ For each partition $k=1,\ldots,K$ we obtain a hamiltonian path $H_k\subset G_k$.
 \label{fig:hamiltonian_path_local_search_start}
 \end{figure}
 \noindent
-In order to move the vertex $x\in V(H_j)$ to the hamiltonian path $H_i$ we have to delete the edges $\{x,y\},\{x,z\}\in E(H_j)$ to isolate the vertex $x$ and $\{v,w\}\in E(H_i)$. If $x$ is a leaf then we only have to remove one edge in $H_j$.
+In order to move the vertex $x\in V(H_j)$ to the hamiltonian path $H_i$ we have to delete the edges $\{x,y\},\{x,z\}\in E(H_j)$ to isolate the vertex $x$ as well as $\{v,w\}\in E(H_i)$. If $x$ is a leaf then we only have to remove one edge in $H_j$.
+
 Afterwards, we connect $x$ to the hamiltonian path $H_i$ by constructing the edges $\{v,x\}$ and $\{w,x\}$. Further, we might have to add the edge $\{y,z\}$ to $E(H_j)$ if $x$ was not a leaf, therefore having two neighbors $y,z\in V(H_j)$. This procedure is sketched in \cref{fig:hamiltonian_path_local_search_move}.
 \begin{figure}[H]
 \centering
@@ -224,7 +225,14 @@ Afterwards, we connect $x$ to the hamiltonian path $H_i$ by constructing the edg
 \caption{Moving $x\in V(H_j)$ requires deletion and creating edges in both hamiltonian paths $H_i$ and $H_j$.}
 \label{fig:hamiltonian_path_local_search_move}
 \end{figure}
-
+\noindent
+This improvement step is checked for all configurations of vertices $v,w\in V(H_i)$ and $x,y,z\in V(H_j)$ where $z$ might be non-existent. In particular, we check for every configuration the cost difference
+\begin{align*}
+  R:=&c(x,w) + c(x,v) + c(y,z) \\
+  -&c(v,w) - c(x,y) - c(x,z)
+\end{align*}
+In the case of $z$ being non-existent we leave out the terms $c(y,z)$ and $c(x,z)$. We further introduce a threshold $Q\in\mathbb{Q}^{-}$ and perform the local search in a first-improvement fashion. That is, if we encounter a configuration with $R \leq Q$ then we update our solution by moving $x$ to the respective hamitonian path.
+This step is repeated until no configuration exists for which the threshold $Q$ is not fullfilled, therefore having a locally optimal solution. The threshold $R$ is introduced to accelerate termination of the algorithm and is set $Q:=-1.0$ in our work, in other words we only perform the improvement if a newly found configuration is at least 1\euro\ better in terms of cost.
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}[node distance=3cm]
