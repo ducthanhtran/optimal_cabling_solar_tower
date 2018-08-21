@@ -26,9 +26,9 @@ One may interpret this by jumping from one point in the valid solution search sp
 \end{figure}
 
 \subsection{Partitioning}\label{sec:partitioning}
-Because the largest power cable has a capacity of 250 heliostats and instances like the PS10 have more heliostats we have to use more than one power cable in order to connect all heliostats, hence a partioning of the heliosats has to be considered additionally. We perform a simple heuristic for this problem by computing the angles $\alpha_h$ between the reference vector $(1, 0)^T$ and a heliostat $h\in V_H$ like in \cref{fig:partioning}. Afterwards, the partioning is the result of sorting the angles. All in all, this procedure has a time complexity of $\mathcal{O}\left(|V_H|^2\log\left(|V_H|\right)\right)$.
+Because the largest power cable has a capacity of 250 heliostats and instances like the PS10 have more heliostats we have to use additional power cables in order to connect all heliostats, hence a partioning of the heliosats has to be considered in addition. We perform a simple heuristic for this problem by computing the angles $\alpha_h$ between the reference vector $(1, 0)^T$ and a heliostat $h\in V_H$ like in \cref{fig:partioning}. Afterwards, the partioning is the result of sorting the angles and splitting them according to a parameter $K\in\mathbb{N}$. All in all, this procedure has a time complexity of $\mathcal{O}\left(|V_H|^2\log\left(|V_H|\right)\right)$.
 
-We can compute initial solutions for the local search procedure independently on each partition, therefore obtaining $K\in\mathbb{N}$ initial solutions for $K$ partitions.
+Important to note is that we can compute initial solutions for the local search procedures independently on each partition, therefore obtaining $K$ initial solutions for $K$ partitions.
 \vspace*{1.8cm}
 \begin{figure}[H]
     \begin{center}
@@ -79,11 +79,11 @@ The fact that each heliostat has to be connected to the solar tower $T$ with min
 
 Let us fix an arbitrary partition $G_k$, $k\in\mathbb{N}$ for which we want to perform the local search procedure. For the local neighborhood improvement steps we choose the \emph{cycle-neighborhood}
 \begin{equation*}
-  N(T) := \{\tilde{T}\in\mathcal{T}\ |\ c(\tilde{T}) < c(T) \land |E(\tilde{T})\setminus E(T)| = 1 \}
+  N(B) := \{\tilde{B}\in\mathcal{B}\ |\ c(\tilde{B}) < c(B) \land |E(\tilde{B})\setminus E(B)| = 1 \}
 \end{equation*}
-for a spanning tree $T\subset G_k$ and $\mathcal{T}$ denotes the set of all spanning trees in $G_k$.
+for a spanning tree $B\subset G_k$ and $\mathcal{B}$ denotes the set of all spanning trees in $G_k$.
 
-For an update step we thus delete an edge $e\in E(T)$ in our current tree $T$ and reconnect the disconnected partition by a new edge $f\in E\setminus{(E(T)\cup\{e\})}$ which yields $\tilde{T}$. By doing this we effectively move from $T$ to another spanning tree $\tilde{T}$. In order to improve our current solution we always choose an edge $f$ with $c(f) < c(e)$. If no such edge exists, we can terminate the local search procedure as the neighborhood $N(T)$ is empty, hence $T$ is a locally optimal solution. Such an update step is sketched in \cref{fig:local_search_mst_step}.
+For an update step we thus delete an edge $e\in E(B)$ in our current tree $B$ and reconnect the disconnected partition by a new edge $f\in E\setminus{(E(B)\cup\{e\})}$ which yields $\tilde{B}$. By doing this we effectively move from $B$ to another spanning tree $\tilde{B}$ in the search space. In order to improve our current solution we always choose an edge $f$ with $c(f) < c(e)$. If no such edge exists, we can terminate the local search procedure as the neighborhood $N(B)$ is empty, hence $B$ is a locally optimal solution. Such an update step is sketched in \cref{fig:local_search_mst_step}.
 \begin{figure}[H]
   \center
     \begin{tikzpicture}[node distance=1cm]
@@ -151,7 +151,7 @@ For a partition $G_k\subset G$ we can compute an initial hamiltonian path by usi
 \end{algorithm}
 
 \subsubsection{Local Neighborhood Search}
-For each partition $k=1,\ldots,K$ we obtain a hamiltonian path $H_k\subset G_k$. Now, consider moving a vertex from a hamiltonian path $H_i$ to another path $H_j$ for $i\neq j$, $1\leq i,j\leq K$. In particular consider the graph construct in \cref{fig:hamiltonian_path_local_search_start} where $v,w\in V(H_i)$ and $x,y,z \in V(H_j)$.
+For each partition $k=1,\ldots,K$ we obtain a hamiltonian path $H_k\subset G_k$. Now, consider moving a vertex from a hamiltonian path $H_i$ to a path $H_j$ for $1\leq i,j\leq K$. In particular consider the graph construct in \cref{fig:hamiltonian_path_local_search_start} where $v,w\in V(H_i)$ and $x,y,z \in V(H_j)$.
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}[node distance=3cm]
@@ -180,7 +180,7 @@ For each partition $k=1,\ldots,K$ we obtain a hamiltonian path $H_k\subset G_k$.
   %\draw[line width=0.55mm, dashed, purple] (v) -- (i);
   %\draw[line width=0.55mm, dashed, purple] (i+) -- (i-);
 \end{tikzpicture}
-\caption{Starting point of the local search step. We denote the left hamiltonian path that contains the vertices $v$ and $w$ as $H_i$.}
+\caption{Starting point of the local search step. We denote the left hamiltonian path that contains the vertices $v$ and $w$ as $H_i$, the right one with $H_j$.}
 \label{fig:hamiltonian_path_local_search_start}
 \end{figure}
 \noindent
