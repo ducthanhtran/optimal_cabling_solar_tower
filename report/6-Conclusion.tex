@@ -1,2 +1,15 @@
 \section{Conclusion}
-\ToDo{Conclusion}
+The cabling problem asks the question of finding two spanning trees with length as well as capacity constraints onto the data and power cables. In particular, this problem has its origins from the cabling of solar tower power plants. Due to these additional constraints we are not able to solve the cabling problem in reasonable time, especially for big instances. Therefore we have designed two local search heuristic approaches that compute valid solutions within several hours for the instance PS10 that inhibits around 600 heliostats.
+
+Besides, a partitioning problem arises due to capacity restrictions of power cables, that is, we have to install multiple power cables if the highest capacity is not sufficient to connect all heliostats. This problem is circumvented by computing a heuristic partition-solution, namely sorting angles of the solar tower and a respective heliostat and splitting the heliostat into equal-sized fields.
+\emptyline
+The first one has its basis from the minimum spanning tree, that is, the initial solution is computed by a modified version of Prim's algorithm, which takes switch installation costs into account. The local search utilizes the cycle neighborhood in addition to possible down-/upgrades of the power cables which beforehand have been computed greedily by considering capacities and length restrictions.
+
+The second approach exploits the fact that switch costs are the main cost-factor, therefore Hamiltonian paths are considered. We first construct Hamiltonian paths greedily that is afterwards improved by a local search procedure which takes a triangulation-neighborhood into account.
+
+\ToDo{evaluation results}
+The Hamiltonian path achieves a total cost of xxxx \ToDo{cost} \euro compared 
+\emptyline
+In future work, one may consider multiple initial solutions, that are for example randomly generated, thereby enlarging the total search space of our procedure. Moreover, we have left out the copper cables completely in order to simplify the heuristics because glasfiber cables do not inhibit any length or capacity restrictrions.
+\ToDo{extend future work}
+
