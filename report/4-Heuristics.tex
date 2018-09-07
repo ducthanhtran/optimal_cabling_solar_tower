@@ -154,8 +154,24 @@ Moreover, due to changes in capacities we also need to consider the power cablin
   \label{fig:upgrade_downgrade}
 \end{figure}
 \noindent
-Each power cable on $path(T,v)$ has to be checked for a downgrade, on the other hand it may be necessary to upgrade power cables on $path(T,u)$ in order to cope with the additional capacity of $w\in V_H$ and its descendants.
+Each power cable on $path(T,v)$ has to be checked for a downgrade, on the other hand it may be necessary to upgrade power cables on $path(T,u)$ in order to cope with the additional capacity of $w\in V_H$ and its descendants. 
+\subsubsection{Downgrade}
+For each edge $(r,s)\in path(T,u)$ we check whether we can switch from $\assignPower((r,s))\in P$ to a cheaper power cable $p'\in P$ such that
+\begin{itemize}
+  \item $|descendants(s)| + 1 \leq maxCapacity(p')$
+  \item $d(r,s) \leq maxLength(p')$
+\end{itemize}
 
+\subsubsection{Upgrade}
+If the additional capacity cannot be satisfied by the current power cable $\assignPower((r,s))$ for an edge $(r,s)\in path(T,v)$ we need to upgrade to a higher-capacity cable $p'\in P$ such that
+\begin{itemize}
+  \item $|descendants(s)| + 1 \leq maxCapacity(p')$
+  \item $d(r,s) \leq maxLength(p')$
+\end{itemize}
+\noindent
+Therefore, we need to compute these additional cost differences of re-installing power cables during the local search improvement step.
+
+If these capacity or length constraints cannot be satisfied for any power cable in down- or upgrades that are necessary to have a valid solution, then the local search move of adding $(v,w)$ and deleting $(u,w)$ is not feasible and thus omitted.
 
 \subsection{Hamiltonian Path Approach}
 If every heliostat is incident to maximal two cable connections we are able to use conductors only, which reduces the amount of LCU costs we are installing (see \cref{tab:data:cable}). Therefore we consider a Hamiltonian path as a basis for the second heuristic.

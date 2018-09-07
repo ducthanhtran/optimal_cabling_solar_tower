@@ -39,7 +39,7 @@ In contrast to the data cables we do not to consider any type of switches for th
 For a directed tree $D(T)=(V,A)$ with root $T\in V$ we denote the unique path from the root $T$ and a vertex $v\in V$ by $path(T,v)$. Moreover, we define the following sets for $v\in V$:
 \begin{itemize}
   \item $ancestors(v) := path(T,v)\setminus\{v\}$
-  \item $descendants(v) := \{v\in V | \exists path(v,w)\text{ in } G\}$
+  \item $descendants(v) := \{w\in V | \exists path(v,w)\text{ in } G\}$
 \end{itemize}
 \newcommand*{\treeData}{B_{\text{data}}}
 \newcommand*{\treePower}{B_{\text{power}}}
@@ -50,7 +50,7 @@ For a directed tree $D(T)=(V,A)$ with root $T\in V$ we denote the unique path fr
   Given a complete, directed graph $G=(V,A)$, a set of data cables $D$ and power cables $P$. Two directed, rooted trees $\treeData(T),\treePower(T)\subseteq G$ with cable assignments $\assignData:A(\treeData)\to D$ and \\
   $\assignPower: A(\treePower)\to P$, where the root is the solar tower $T\in V$, are to be constructed such that the following properties are fulfilled:
   \begin{description}
-    \item[Data cable] 
+    \item[Data cable] asd
     \item[Power cable] for all $a:=(u,v)\in A(\treePower)$: $\text{capacity}(\assignPower(a))$
     \item[Intersection] $\nexists e,f\in A(\treeData)\cup A(\treePower)$ that intersect with each other.
   \end{description}
