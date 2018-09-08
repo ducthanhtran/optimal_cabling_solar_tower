@@ -1,4 +1,6 @@
 \section{Heuristics}
+We only consider fiberglass cables for the data connections for simplicity due to their nature of being unrestricted in both length and capacity. Moreover, we compute solutions for which both data and power cable are installed 
+\emptyline
 In the following both sections we present our heuristics that are based on the local-search optimization method \cite{aarts_2003,voss_2012}. The basic structure of such an algorithm is shown in \cref{alg:local_search}. Basically we first compute an initial solution from the input and afterwards improve it stepwise until some stopping criterion is met. In principle the stepwise improvements are performed locally to $sol$ such that each step yields a valid solution to our optimization problem. 
 \begin{algorithm}[H]
 \caption{A general framework of a local search heuristic.}

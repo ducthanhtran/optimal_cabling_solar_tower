@@ -24,7 +24,7 @@ $\trenchtotalcost := d(v,w)\cdot\trenchcost$.
 \subsection{Data cable and local control units}
   We can install different types of cables which have length and connection restrictions depending on its type. For this matter let $D$ be the set of data cables with costs $\datacost\in\mathbb{R}^+$ per meter for each cable $d\in D$. We further define for readability the costs $\datatotalcost:=d(v,w)\cdot \datacost$ of installing a cable of type $d$ on the edge $(vw)\in A$. Furthermore, each data cable $d\in D$ has a length restriction $\datalength\in\mathbb{R}^+$ and a restriction on how many heliostats it can connect to, that is, $\datacapacity\in\mathbb{N}$ for $d\in D$. We denote this property by \emph{capacity restriction}.
   \emptyline
-  Aside from the cables we have to build \emph{local control units} (LCU) at each heliostat. These LCUs are used for communication processing and may allow branching by e.g. installing an 8- or 16-port LCU at an heliostat. Each of these LCU has connectivity-restrictions for each cable type $d\in D$. For this matter, let $S$ the set of all LCUs where each $s\in S$ has installation costs $\switchcosts\in\mathbb{R}^+$. The connectivity or vertex-degree restrictions are given by $l_{s,d}, u_{s,d}\in\mathbb{N}$ for each LCU $s\in S$ and cable type $d\in D$. Both restrictions state that the LCU $s\in S$ has to connect at least $l_{s,d}$ cables of type $d\in D$, whereas $u_{s,d}$ is the upper bound of incident cables of type $d\in D$ at an heliosat that installed LCU $s\in S$.
+  Aside from the cables we have to build \emph{local control units} (LCU) at each heliostat. These LCUs are used for communication processing and may allow branching by e.g. installing an 8- or 16-port LCU at an heliostat. Each of these LCU has connectivity-restrictions for each cable type $d\in D$. For this matter, let $S$ be the set of all LCUs where each $s\in S$ has installation costs $\switchcosts\in\mathbb{R}^+$. The connectivity or vertex-degree restrictions are given by $l^-_{s,d}, u^-_{s,d}\in\mathbb{N}$ and $l^+_{s,d}, u^+_{s,d}\in\mathbb{N}$ for each LCU $s\in S$ and cable type $d\in D$, where the superscript $-$ denotes in-going and $+$ out-going cables, respectively. Both type of restrictions state that the LCU $s\in S$ has to connect at least $l^-_{s,d}$ in-going cables of type $d\in D$, whereas $u^+_{s,d}$ is the upper bound of outgoing cables of type $d\in D$ at an heliostat that installed LCU $s\in S$.
 
 \newcommand*{\powercost}{c_p^\text{power}}
 \newcommand*{\powertotalcost}{c_{p,\{vw\}}^\text{power}}
@@ -38,20 +38,35 @@ In contrast to the data cables we do not to consider any type of switches for th
 \subsection{Cabling problem}
 For a directed tree $D(T)=(V,A)$ with root $T\in V$ we denote the unique path from the root $T$ and a vertex $v\in V$ by $path(T,v)$. Moreover, we define the following sets for $v\in V$:
 \begin{itemize}
-  \item $ancestors(v) := path(T,v)\setminus\{v\}$
+  \item $ancestors(v) := V(path(T,v))\setminus\{v\}$
   \item $descendants(v) := \{w\in V | \exists path(v,w)\text{ in } G\}$
 \end{itemize}
 \newcommand*{\treeData}{B_{\text{data}}}
 \newcommand*{\treePower}{B_{\text{power}}}
 \newcommand*{\assignData}{assign_{\text{data}}}
 \newcommand*{\assignPower}{assign_{\text{power}}}
+\newcommand*{\assignSwitch}{assign_{\text{lcu}}}
 \begin{tcolorbox}
 \begin{problem}[Cabling Problem]\label{prob:cabling_problem}
   Given a complete, directed graph $G=(V,A)$, a set of data cables $D$ and power cables $P$. Two directed, rooted trees $\treeData(T),\treePower(T)\subseteq G$ with cable assignments $\assignData:A(\treeData)\to D$ and \\
-  $\assignPower: A(\treePower)\to P$, where the root is the solar tower $T\in V$, are to be constructed such that the following properties are fulfilled:
+  $\assignPower: A(\treePower)\to P$ as well as the LCU assignment $\assignSwitch: V(\treeData)\to S$, where the root is the solar tower $T\in V$ for both trees, are to be constructed such that the following properties are fulfilled:
   \begin{description}
-    \item[Data cable] asd
-    \item[Power cable] for all $a:=(u,v)\in A(\treePower)$: $\text{capacity}(\assignPower(a))$
+    \item[Data cable] $\forall a=:(u,v)\in A(\treeData)$: let $d_a := \assignData(a)$
+    \begin{itemize}
+      \item $|descendants(v)| + 1 \leq maxCapacity(d_a)$
+      \item $d(u,v) \leq maxLength(d_a)$
+    \end{itemize}
+    
+    \item[LCU] $\forall h\in V_H$ :
+    \begin{itemize}
+      \item 
+    \end{itemize}
+      
+    \item[Power cable] for all $a':=(u,v)\in A(\treePower)$:
+    \begin{itemize}
+      \item $|descendants(v)| + 1 \leq maxCapacity(\assignData(a'))$
+      \item $d(u,v) \leq maxLength(a')$
+    \end{itemize}
     \item[Intersection] $\nexists e,f\in A(\treeData)\cup A(\treePower)$ that intersect with each other.
   \end{description}
   with the objective of minimizing the total cost:

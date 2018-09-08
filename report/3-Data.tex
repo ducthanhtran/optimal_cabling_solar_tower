@@ -42,19 +42,20 @@ For the trench costs we are considering four different costs, each depending on 
 \subsubsection{Local Control Units}
   Exactly one local control units is installed at every heliostat so that communication is enabled. All LCUs with the exception of an endpoint has exactly one ingoing fiberglass cable. The endpoint has exactly one ingoing copper cable.
   \begin{table}[H]
-  \caption{Local control units with their degree and cable restrictions for both cable types.}
+  \caption{Local control units with their degree and cable restrictions for both cable types and direction.}
   \label{tab:data:lcu}
   \begin{center}
     \begin{tabular}{lc|cc|cc}
+      & & \multicolumn{4}{c}{Data cable $d$} \\
       LCU type $s$ & Price [\euro/piece] & \multicolumn{2}{c|}{Copper} & \multicolumn{2}{c}{Fiberglass} \\
-      && $l_{s,\text{COPPER}}$ & $u_{s,\text{COPPER}}$ & $l_{s,\text{FIBER}}$ & $u_{s,\text{FIBER}}$\\
+      && $[l^-_{s,d},u^-_{s,d}]$ & $[l^+_{s,d},u^+_{s,d}]$ & $[l^-_{s,d},u^-_{s,d}]$ & $[l^+_{s,d},u^+_{s,d}]$\\
       \midrule
-      Endpoint & 10 & 1 & 1 & 0 & 0 \\
-      Conductor & 100 & 0 & 0 & 1 & 2 \\
-      8-port copper & 800 & 0 & 7 & 1 & 2 \\
-      8-port fiberglass & 800 & 0 & 0 & 1 & 9 \\
-      16-port copper & 1500 & 0 & 15 & 1 & 2 \\
-      16-port fiberglass & 1500 & 0 & 0 & 1 & 17 \\
+      Endpoint & 10 & $[1,1]$ & $[0,0]$ & $[0,0]$ & $[0,0]$ \\
+      Conductor & 100 & $[0,0]$ & $[0,0]$ & $[1,1]$ & $[0,1]$ \\
+      8-port copper & 800 & $[0,0]$ & $[0,7]$ & $[1,1]$ & $[0,1]$ \\
+      8-port fiberglass & 800 & $[0,0]$ & $[0,0]$ & $[1,1]$ & $[0,8]$ \\
+      16-port copper & 1500 & $[0,0]$ & $[0,15]$ & $[1,1]$ & $[0,1]$ \\
+      16-port fiberglass & 1500 & $[0,0]$ & $[0,0]$ & $[1,1]$ & $[0,16]$ \\
     \end{tabular}
   \end{center}
   \end{table}
