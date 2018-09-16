@@ -51,15 +51,26 @@ For a directed tree $D(T)=(V,A)$ with root $T\in V$ we denote the unique path fr
   Given a complete, directed graph $G=(V,A)$, a set of data cables $D$ and power cables $P$. Two directed, rooted trees $\treeData(T),\treePower(T)\subseteq G$ with cable assignments $\assignData:A(\treeData)\to D$ and \\
   $\assignPower: A(\treePower)\to P$ as well as the LCU assignment $\assignSwitch: V(\treeData)\to S$, where the root is the solar tower $T\in V$ for both trees, are to be constructed such that the following properties are fulfilled:
   \begin{description}
-    \item[Data cable] $\forall a=:(u,v)\in A(\treeData)$: let $d_a := \assignData(a)$
+    \item[Data cable] $\forall a=:(uv)\in A(\treeData)$: let $d_a := \assignData(a)$
     \begin{itemize}
       \item $|descendants(v)| + 1 \leq maxCapacity(d_a)$
       \item $d(u,v) \leq maxLength(d_a)$
     \end{itemize}
     
-    \item[LCU] $\forall h\in V_H$ :
+    \item[LCU] $\forall h\in V_H$ : let $lcu_h := \assignSwitch(h)$
     \begin{itemize}
-      \item 
+      \item $\forall d\in D$: 
+      $l_{lcu_h,d}^-
+      \leq
+      \sum\limits_{a\in\delta^-(h):\assignData(a)=d} 1
+      \leq
+      u_{lcu_h,d}^-$
+      \item $\forall d\in D$: 
+      $l_{lcu_h,d}^+
+      \leq
+      \sum\limits_{a\in\delta^+(h):\assignData(a)=d} 1
+      \leq
+      u_{lcu_h,d}^+$
     \end{itemize}
       
     \item[Power cable] for all $a':=(u,v)\in A(\treePower)$:
